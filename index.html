@@ -1,0 +1,1595 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projekthandbuch – AuS Nutzungsänderung</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#f8fafc;--nav:#0f172a;--nav2:#1e293b;--accent:#3b82f6;--text:#0f172a;--text2:#334155;--text3:#64748b;--text4:#94a3b8;--border:#e2e8f0;--row1:#f8fafc;--row2:white;--head:#1e3a5f;--green:#16a34a;--amber:#d97706;--red:#dc2626}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);display:flex;min-height:100vh}
+nav{width:230px;background:white;padding:0;flex-shrink:0;position:fixed;top:0;left:0;height:100vh;overflow-y:auto;z-index:10;border-right:4px solid #3b82f6}
+nav .brand{padding:18px 14px 14px;position:relative;overflow:hidden}
+nav .brand::after{content:'';position:absolute;top:-30px;right:-30px;width:80px;height:80px;border-radius:50%;background:rgba(59,130,246,.06)}
+nav .brand h1{font-size:14px;font-weight:500;color:#0f172a;margin:0}
+nav .brand p{font-size:10px;color:#64748b;margin:3px 0 0}
+nav .brand small{font-size:9px;color:#94a3b8;display:block;margin-top:4px}
+nav .metrics{display:flex;gap:6px;margin-top:10px}
+nav .met{flex:1;padding:6px;background:#f8fafc;border-radius:6px;text-align:center}
+nav .met .mv{font-size:13px;font-weight:500;color:#0f172a}
+nav .met .ml{font-size:7px;color:#94a3b8;letter-spacing:.5px}
+nav .ng{font-size:8px;color:#94a3b8;padding:12px 14px 4px;letter-spacing:1.5px;font-weight:500;text-transform:uppercase}
+nav button{display:flex;align-items:center;gap:10px;width:100%;padding:7px 14px;border:none;cursor:pointer;font-size:12px;background:transparent;color:#64748b;text-align:left;border-radius:0 6px 6px 0;margin-right:6px;transition:all .12s;font-family:inherit}
+nav button:hover{background:#f1f5f9;color:#1e293b}
+nav button.active{background:linear-gradient(135deg,rgba(59,130,246,.08),rgba(99,102,241,.06));color:#1e293b;font-weight:500}
+nav .ico{width:26px;height:26px;border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+nav .ico svg{width:14px;height:14px}
+nav .hint{padding:12px 14px;font-size:9px;color:#94a3b8;line-height:1.5}
+nav .nav-foot{margin-top:auto;padding:10px 14px;border-top:.5px solid #e2e8f0;display:flex;gap:6px}
+nav .nav-foot button{flex:1;padding:8px;border:none;border-radius:8px;font-size:10px;cursor:pointer;font-weight:500;font-family:inherit}
+nav .nav-foot .nb1{background:linear-gradient(135deg,#3b82f6,#6366f1);color:white}
+nav .nav-foot .nb2{background:#f1f5f9;color:#64748b}
+main{flex:1;margin-left:230px;padding:28px 36px;max-width:980px}
+main h2{font-size:19px;font-weight:700;color:var(--text);margin-bottom:3px}
+.bar{height:3px;width:40px;background:var(--accent);border-radius:2px;margin-bottom:20px}
+h3{font-size:15px;font-weight:600;color:var(--text);margin:18px 0 10px}
+table{width:100%;border-collapse:collapse}
+th{padding:8px 6px;color:white;font-size:11px;text-align:left;font-weight:500}
+td{padding:6px;font-size:12px}
+.tbl-head{background:var(--head)}
+.badge{padding:2px 7px;border-radius:3px;font-size:10px;font-weight:500;white-space:nowrap;display:inline-block}
+.b-blue{background:#dbeafe;color:#1e40af}.b-green{background:#dcfce7;color:#166534}
+.b-amber{background:#fef3c7;color:#92400e}.b-red{background:#fee2e2;color:#991b1b}
+.b-gray{background:#f3f4f6;color:#374151}.b-purple{background:#ede9fe;color:#5b21b6}
+.kpi{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.kpi-card{background:white;border:1px solid var(--border);border-radius:8px;padding:14px;text-align:center}
+.kpi-card .val{font-size:22px;font-weight:700;color:var(--accent)}
+.kpi-card .lbl{font-size:11px;color:var(--text3);margin-top:3px}
+.stacked-bar{height:28px;border-radius:4px;overflow:hidden;display:flex;margin:8px 0 4px}
+.stacked-seg{display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;color:white;transition:width .3s}
+.bar-chart{margin-bottom:6px}
+.bar-chart .row{display:flex;justify-content:space-between;font-size:12px;margin-bottom:2px}
+.bar-chart .track{height:14px;background:#f1f5f9;border-radius:3px;overflow:hidden}
+.bar-chart .fill{height:100%;background:linear-gradient(90deg,#3b82f6,#6366f1);border-radius:3px}
+.heatmap-cell{width:36px;height:28px;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:600;border-radius:3px;margin:1px}
+.gantt-row{display:flex;align-items:center;margin-bottom:3px}
+.gantt-label{width:200px;flex-shrink:0;font-size:11px;color:var(--text2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding-right:6px}
+.gantt-label .psp{color:var(--text4);margin-right:3px}
+.gantt-track{flex:1;position:relative;height:20px}
+.gantt-bar{position:absolute;height:18px;border-radius:3px;display:flex;align-items:center;padding-left:4px;font-size:9px;color:white;font-weight:500;overflow:hidden;white-space:nowrap}
+.legend{display:flex;gap:12px;margin-top:10px;margin-left:200px}
+.legend span{display:flex;align-items:center;gap:3px;font-size:10px;color:var(--text3)}
+.legend .dot{width:10px;height:10px;border-radius:2px}
+.raci-letter{font-weight:700;font-size:12px}
+.r-R{color:#2563eb}.r-A{color:#dc2626}.r-C{color:#f59e0b}.r-I{color:#6b7280}
+.btn{padding:6px 14px;background:var(--accent);color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;font-family:inherit;margin-right:6px;margin-top:10px}
+.btn:hover{opacity:.9}
+.btn-sec{background:#64748b}
+.btn-sm{padding:4px 10px;font-size:11px;margin:0}
+.btn-danger{background:var(--red)}
+.editable{cursor:pointer;border-bottom:1px dashed var(--border);transition:background .15s}
+.editable:hover{background:#eef2ff}
+.org-node{border:1px solid var(--border);border-radius:6px;padding:8px 12px;background:white;text-align:center;min-width:120px;font-size:12px}
+.org-node .oname{font-weight:600}.org-node .orole{font-size:10px;color:var(--text3);margin-top:1px}
+.org-ext{border-left:3px solid #f59e0b}
+.role-card{border:1px solid var(--border);border-radius:6px;padding:12px;margin-bottom:10px;background:white}
+.role-card h4{font-size:13px;font-weight:600;margin-bottom:2px}
+.role-card .rp{font-size:12px;color:var(--accent);font-weight:500}
+.role-card .rd{font-size:12px;color:var(--text2);margin-top:6px;line-height:1.5}
+.comm-cell{text-align:center;font-size:10px;padding:4px 3px !important}
+.comm-yes{background:#dcfce7;color:#166534;font-weight:600}
+.comm-no{background:#fafafa;color:#e2e8f0}
+.scatter{position:relative;width:100%;aspect-ratio:1;max-width:400px;border:1px solid var(--border);border-radius:6px;background:white}
+.scatter-dot{position:absolute;width:10px;height:10px;border-radius:50%;transform:translate(-50%,-50%);cursor:pointer}
+.scatter-label{position:absolute;font-size:9px;color:var(--text3);transform:translate(-50%,0)}
+.ms-timeline{display:flex;flex-direction:column;gap:0}
+.ms-item{display:flex;align-items:flex-start;gap:10px;padding:8px 0}
+.ms-dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:3px}
+.ms-line{width:2px;background:var(--border);min-height:20px;margin-left:4px}
+.ms-date{font-size:11px;color:var(--text3);min-width:80px}
+.ms-name{font-size:12px;font-weight:500}
+.modal-bg{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.4);z-index:100;display:flex;align-items:center;justify-content:center}
+.modal{background:white;border-radius:10px;padding:24px;max-width:620px;width:90%;max-height:80vh;overflow-y:auto}
+.modal h3{margin-top:0}
+.modal label{display:block;font-size:12px;font-weight:600;margin:10px 0 3px;color:var(--text2)}
+.modal input,.modal textarea,.modal select{width:100%;padding:6px 8px;border:1px solid var(--border);border-radius:4px;font-size:12px;font-family:inherit}
+.modal textarea{min-height:60px;resize:vertical}
+.psp-row{cursor:pointer}.psp-row:hover{background:#eef2ff !important}
+.psp-parent td{font-weight:600;background:#eef2ff !important}
+.toast{position:fixed;bottom:20px;right:20px;background:#166534;color:white;padding:10px 20px;border-radius:6px;font-size:13px;z-index:200;opacity:0;transition:opacity .3s;pointer-events:none}
+.toast.show{opacity:1}
+.btn-green{background:var(--green)}
+.btn-row{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px;align-items:center}
+@media(max-width:768px){nav{width:56px;border-right:3px solid #3b82f6}nav .brand,nav .ng,nav .hint,nav .metrics,nav .nav-foot{display:none}nav button{padding:10px 0;justify-content:center;margin:0;border-radius:0}nav button span.nlbl{display:none}main{margin-left:56px;padding:16px 12px}.kpi{grid-template-columns:1fr 1fr}}
+.view-badge{position:fixed;top:8px;right:8px;background:#0f172a;color:white;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:500;z-index:20;letter-spacing:.5px}
+body.view-mode .btn,body.view-mode .btn-sm{pointer-events:none}
+body.view-mode .btn-danger{display:none !important}
+body.view-mode .btn-row{display:none !important}
+body.view-mode .editable{border-bottom:none;cursor:default}
+body.view-mode .editable:hover{background:transparent}
+body.view-mode .psp-row{cursor:default}
+body.view-mode .psp-row:hover{background:inherit !important}
+body.view-mode #grundriss-drop{display:none}
+body.view-mode .hint{display:none}
+body.view-mode .nav-foot .nb1{display:none}
+</style>
+</head>
+<body>
+<div id="view-badge" class="view-badge" style="display:none">Ansichtsmodus</div>
+<nav>
+<div class="brand">
+<h1>Arbeiten unter Spannung</h1>
+<p>Projekthandbuch</p>
+<small>600 m² → Schulungszentrum</small>
+<div class="metrics" id="nav-metrics"></div>
+</div>
+<div id="nav-buttons"></div>
+<div class="hint">Daten werden lokal gespeichert. Texte und Tabellen sind editierbar.</div>
+<div class="nav-foot">
+<button class="nb1" onclick="exportFullHTML()">HTML speichern</button>
+<button class="nb2" onclick="exportPDF()">PDF export</button>
+</div>
+</nav>
+<main>
+<h2 id="page-title"></h2>
+<div class="bar"></div>
+<div id="content"></div>
+<div id="modal-container"></div>
+<div id="toast" class="toast"></div>
+</main>
+<script>
+const VER="v14";
+const SK={data:"psp_"+VER,contacts:"contacts_"+VER,texts:"texts_"+VER,risks:"risks_"+VER,roles:"roles_"+VER,team:"team_"+VER};
+
+// ── DEFAULT DATA ──
+//__PROJDATA_START__
+const defData=[{"id": "1", "psp": "1", "name": "Projektmanagement", "parent": "", "lph": "übergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-01", "end": "2028-06-30", "dauer": "", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "läuft über gesamte Laufzeit", "ziele": "Sicherstellung eines strukturierten Projektablaufs", "aufgaben": "Projektsteuerung, Berichterstattung, Dokumentation", "beteiligte": "Thomas Berger, Dr. Markus Schreiber", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "1.1", "psp": "1.1", "name": "Projektstart und -organisation", "parent": "1", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-01", "end": "2026-04-15", "dauer": "11", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "Betriebsrat", "status": "offen", "ms": true, "note": "Kickoff", "ziele": "Klare Projektstruktur und Verantwortlichkeiten schaffen", "aufgaben": "Kickoff-Meeting durchfuehren, Projektorganisation festlegen, Rollen zuweisen", "beteiligte": "Thomas Berger, Dr. Markus Schreiber, Monika Fischer", "ergebnis": "Kickoff-Protokoll, Projektorganigramm", "ressource": "Thomas Berger", "aufwand_h": 16, "auslastung": 50, "kritisch": true}, {"id": "1.2", "psp": "1.2", "name": "Projekthandbuch erstellen", "parent": "1", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-16", "end": "2026-04-30", "dauer": "11", "vorg": "1.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Arbeitssicherheit", "rI": "", "status": "offen", "ms": false, "note": "nach AHO-Logik", "ziele": "Zentrale Steuerungsgrundlage fuer das Projektteam", "aufgaben": "Projektgrundlagen dokumentieren, Ziele definieren, Organisation beschreiben", "beteiligte": "Thomas Berger, Claudia Roth", "ergebnis": "Projekthandbuch (Dokument)", "ressource": "Thomas Berger", "aufwand_h": 24, "auslastung": 30, "kritisch": false}, {"id": "1.3", "psp": "1.3", "name": "Stakeholdermanagement aufsetzen", "parent": "1", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-16", "end": "2026-04-25", "dauer": "8", "vorg": "1.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Alle Stakeholder identifiziert und eingebunden", "aufgaben": "Stakeholder-Register erstellen, Kommunikationsplan aufsetzen", "beteiligte": "Thomas Berger", "ergebnis": "Stakeholder-Register, Kommunikationsplan", "ressource": "Martin Huber", "aufwand_h": 12, "auslastung": 20, "kritisch": false}, {"id": "2", "psp": "2", "name": "Grundlagenermittlung", "parent": "", "lph": "LPH 0/1", "bereich": "Planung", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "", "end": "", "dauer": "", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Belastbare Entscheidungsgrundlage fuer Projektfreigabe", "aufgaben": "Bestand analysieren, Anforderungen erheben, Machbarkeit pruefen", "beteiligte": "Thomas Berger, alle Planer", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "2.1", "psp": "2.1", "name": "Bestandsaufnahme / Aufmaß", "parent": "2", "lph": "LPH 1", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-05-01", "end": "2026-05-15", "dauer": "11", "vorg": "1.1", "kosten": 3500, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "Facility Management", "status": "offen", "ms": false, "note": "", "ziele": "Dokumentierter Ist-Zustand der Bestandsflaeche", "aufgaben": "Aufmass vor Ort, Grundrissaufnahme, Installationen dokumentieren", "beteiligte": "Sandra Meier, Stefan Braun", "ergebnis": "Bestandsplaene (Grundriss, Schnitte)", "ressource": "Sandra Meier", "aufwand_h": 40, "auslastung": 50, "kritisch": true}, {"id": "2.2", "psp": "2.2", "name": "Bestandsanalyse Schadstoffe", "parent": "2", "lph": "LPH 0", "bereich": "Gutachter", "verantw": "Gutachter", "person": "Peter Lenz", "ext": "extern", "start": "2026-05-01", "end": "2026-05-22", "dauer": "16", "vorg": "1.1", "kosten": 4000, "rR": "Gutachter", "rA": "Projektleitung", "rC": "", "rI": "Arbeitssicherheit", "status": "offen", "ms": false, "note": "ehem. Druckerei", "ziele": "Klarheit ueber moegliche Schadstoffbelastung", "aufgaben": "Probenentnahme, Laboranalyse, Bewertung der Ergebnisse", "beteiligte": "Peter Lenz, Claudia Roth", "ergebnis": "Schadstoffgutachten", "ressource": "Peter Lenz", "aufwand_h": 48, "auslastung": 40, "kritisch": false}, {"id": "2.3", "psp": "2.3", "name": "Nutzeranforderungen AuS", "parent": "2", "lph": "LPH 0", "bereich": "AuS-Fachbereich", "verantw": "Fachabteilung AuS", "person": "Andreas Kempf", "ext": "intern", "start": "2026-04-16", "end": "2026-04-30", "dauer": "11", "vorg": "1.1", "kosten": 0, "rR": "Fachabteilung AuS", "rA": "Projektleitung", "rC": "Arbeitssicherheit", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Vollstaendige Nutzeranforderungen fuer AuS-Bereiche", "aufgaben": "Interviews mit Ausbildern, Anforderungskatalog erstellen, Raumbedarfe definieren", "beteiligte": "Andreas Kempf, Claudia Roth", "ergebnis": "Anforderungskatalog AuS", "ressource": "Andreas Kempf", "aufwand_h": 32, "auslastung": 40, "kritisch": false}, {"id": "2.4", "psp": "2.4", "name": "Arbeitssicherheitsanforderungen", "parent": "2", "lph": "LPH 0", "bereich": "Arbeitssicherheit", "verantw": "Fachkraft f. Arbeitssicherheit", "person": "Claudia Roth", "ext": "intern", "start": "2026-04-16", "end": "2026-05-07", "dauer": "16", "vorg": "1.1", "kosten": 0, "rR": "Fachkraft f. Arbeitssicherheit", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "Behörden", "status": "offen", "ms": false, "note": "", "ziele": "Alle sicherheitsrelevanten Anforderungen definiert", "aufgaben": "Regelwerke pruefen, Sicherheitsabstaende definieren, Not-Aus-Konzept erstellen", "beteiligte": "Claudia Roth, Andreas Kempf", "ergebnis": "Sicherheitsanforderungskatalog", "ressource": "Claudia Roth", "aufwand_h": 40, "auslastung": 30, "kritisch": false}, {"id": "2.5", "psp": "2.5", "name": "Brandschutz-Voruntersuchung", "parent": "2", "lph": "LPH 0", "bereich": "Brandschutz", "verantw": "Brandschutzsachverständiger", "person": "Dr. Frank Noll", "ext": "extern", "start": "2026-05-01", "end": "2026-05-29", "dauer": "21", "vorg": "1.1", "kosten": 5000, "rR": "Brandschutzsachverständiger", "rA": "Projektleitung", "rC": "Architekt", "rI": "Bauordnungsamt", "status": "offen", "ms": false, "note": "", "ziele": "Erste Bewertung der brandschutztechnischen Situation", "aufgaben": "Begehung, Brandlasten bewerten, Flucht-/Rettungswege pruefen", "beteiligte": "Dr. Frank Noll, Sandra Meier", "ergebnis": "Brandschutz-Vorbericht", "ressource": "Dr. Frank Noll", "aufwand_h": 56, "auslastung": 35, "kritisch": true}, {"id": "2.6", "psp": "2.6", "name": "TGA-Vorprüfung Bestand", "parent": "2", "lph": "LPH 1", "bereich": "TGA", "verantw": "TGA-Planer", "person": "Jürgen Winkler", "ext": "extern", "start": "2026-05-15", "end": "2026-05-29", "dauer": "11", "vorg": "2.1", "kosten": 2500, "rR": "TGA-Planer", "rA": "Projektleitung", "rC": "Architekt", "rI": "Facility Management", "status": "offen", "ms": false, "note": "", "ziele": "Ist-Zustand der technischen Anlagen dokumentiert", "aufgaben": "Elektro, Lueftung, Heizung pruefen und dokumentieren", "beteiligte": "Jürgen Winkler, Stefan Braun", "ergebnis": "TGA-Bestandsbericht", "ressource": "Jürgen Winkler", "aufwand_h": 32, "auslastung": 40, "kritisch": false}, {"id": "2.7", "psp": "2.7", "name": "Barrierefreiheitskonzept", "parent": "2", "lph": "LPH 0", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-05-15", "end": "2026-05-29", "dauer": "11", "vorg": "2.1", "kosten": 1500, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "Bauordnungsamt", "status": "offen", "ms": false, "note": "", "ziele": "Barrierefreiheitskonzept mit Abweichungsbegruendung", "aufgaben": "Erschliessung pruefen, Abweichungsantrag vorbereiten, Wegenachweise erstellen", "beteiligte": "Sandra Meier", "ergebnis": "Barrierefreiheitskonzept, Abweichungsantrag", "ressource": "Sandra Meier", "aufwand_h": 24, "auslastung": 30, "kritisch": false}, {"id": "2.8", "psp": "2.8", "name": "Machbarkeitsprüfung abschließen", "parent": "2", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-06-01", "end": "2026-06-05", "dauer": "5", "vorg": "2.5", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "alle Planer", "rI": "", "status": "offen", "ms": true, "note": "Entscheidungsgrundlage", "ziele": "Entscheidungsgrundlage fuer Projektfreigabe", "aufgaben": "Ergebnisse zusammenfuehren, Machbarkeitsbericht erstellen, Praesentation fuer Bauherrn", "beteiligte": "Thomas Berger, alle Planer", "ergebnis": "Machbarkeitsbericht", "ressource": "Thomas Berger", "aufwand_h": 16, "auslastung": 40, "kritisch": true}, {"id": "3", "psp": "3", "name": "Vorplanung", "parent": "", "lph": "LPH 2", "bereich": "Planung", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "", "end": "", "dauer": "", "vorg": "", "kosten": 0, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Abgestimmtes Planungskonzept fuer alle Bereiche", "aufgaben": "Grundriss entwickeln, TGA vorplanen, Brandschutz konzipieren", "beteiligte": "Sandra Meier, Jürgen Winkler, Dr. Frank Noll", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "3.1", "psp": "3.1", "name": "Flächenkonzept / Grundrisse", "parent": "3", "lph": "LPH 2", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-06-08", "end": "2026-06-26", "dauer": "15", "vorg": "2.8", "kosten": 6000, "rR": "Architekt", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Funktionales Flaechenkonzept mit Variantenvergleich", "aufgaben": "Grundrissvarianten entwickeln, Nutzerabstimmung, Vorzugsvariante waehlen", "beteiligte": "Sandra Meier, Andreas Kempf, Thomas Berger", "ergebnis": "Grundrissvarianten, Vorzugsvariante", "ressource": "Sandra Meier", "aufwand_h": 60, "auslastung": 50, "kritisch": false}, {"id": "3.2", "psp": "3.2", "name": "TGA-Vorplanung", "parent": "3", "lph": "LPH 2", "bereich": "TGA", "verantw": "TGA-Planer", "person": "Jürgen Winkler", "ext": "extern", "start": "2026-06-22", "end": "2026-07-10", "dauer": "15", "vorg": "3.1", "kosten": 4500, "rR": "TGA-Planer", "rA": "Projektleitung", "rC": "Architekt", "rI": "Fachabteilung AuS", "status": "offen", "ms": false, "note": "", "ziele": "Abgestimmte TGA-Vorplanung inkl. AuS-Versorgung", "aufgaben": "Elektrokonzept, Lueftungskonzept, Heizungskonzept, AuS-Energieversorgung planen", "beteiligte": "Jürgen Winkler, Sandra Meier, Andreas Kempf", "ergebnis": "TGA-Vorplanungsbericht", "ressource": "Jürgen Winkler", "aufwand_h": 48, "auslastung": 40, "kritisch": false}, {"id": "3.3", "psp": "3.3", "name": "Brandschutzkonzept Vorplanung", "parent": "3", "lph": "LPH 2", "bereich": "Brandschutz", "verantw": "Brandschutzsachverständiger", "person": "Dr. Frank Noll", "ext": "extern", "start": "2026-06-22", "end": "2026-07-10", "dauer": "15", "vorg": "3.1", "kosten": 4000, "rR": "Brandschutzsachverständiger", "rA": "Projektleitung", "rC": "Architekt", "rI": "Bauordnungsamt", "status": "offen", "ms": false, "note": "", "ziele": "Genehmigungsfaehiges Brandschutzkonzept", "aufgaben": "Brandabschnitte definieren, Flucht-/Rettungswege planen, Brandlasten bewerten", "beteiligte": "Dr. Frank Noll, Sandra Meier", "ergebnis": "Brandschutzkonzept (Entwurf)", "ressource": "Dr. Frank Noll", "aufwand_h": 48, "auslastung": 40, "kritisch": false}, {"id": "3.4", "psp": "3.4", "name": "Schallschutzkonzept", "parent": "3", "lph": "LPH 2", "bereich": "Schallschutz", "verantw": "TGA-Planer", "person": "Jürgen Winkler", "ext": "extern", "start": "2026-06-22", "end": "2026-07-03", "dauer": "10", "vorg": "3.1", "kosten": 2000, "rR": "TGA-Planer", "rA": "Projektleitung", "rC": "Architekt", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Schallschutznachweis fuer Uebungsflaechen", "aufgaben": "Laermemissionen bewerten, Schallschutzmassnahmen definieren", "beteiligte": "Jürgen Winkler, Sandra Meier", "ergebnis": "Schallschutzkonzept", "ressource": "Jürgen Winkler", "aufwand_h": 24, "auslastung": 30, "kritisch": false}, {"id": "3.5", "psp": "3.5", "name": "Kostenschätzung DIN 276", "parent": "3", "lph": "LPH 2", "bereich": "Kosten", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-07-13", "end": "2026-07-17", "dauer": "5", "vorg": "3.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "", "status": "offen", "ms": false, "note": "KG 300-700", "ziele": "Belastbare Kostenschaetzung nach DIN 276", "aufgaben": "Mengen ermitteln, Einheitspreise ansetzen, Kostenschaetzung erstellen", "beteiligte": "Thomas Berger, Sandra Meier", "ergebnis": "Kostenschaetzung DIN 276", "ressource": "Thomas Berger", "aufwand_h": 16, "auslastung": 40, "kritisch": false}, {"id": "3.6", "psp": "3.6", "name": "Freigabe Vorplanung", "parent": "3", "lph": "LPH 2", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-07-20", "end": "2026-07-20", "dauer": "1", "vorg": "3.5", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": true, "note": "", "ziele": "Freigabe des Planungskonzepts durch Bauherrn", "aufgaben": "Ergebnisse praesentieren, Freigabe einholen", "beteiligte": "Thomas Berger, Dr. Markus Schreiber", "ergebnis": "Freigabeprotokoll", "ressource": "Thomas Berger", "aufwand_h": 4, "auslastung": 50, "kritisch": true}, {"id": "4", "psp": "4", "name": "Genehmigungen und Rahmenbedingungen", "parent": "", "lph": "", "bereich": "", "verantw": "", "person": "Thomas Berger", "ext": "intern", "start": "2026-06-08", "end": "2026-08-03", "dauer": "", "vorg": "", "kosten": 0, "rR": "", "rA": "", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Alle genehmigungsrechtlichen Voraussetzungen geklaert und Bauantrag eingereicht", "aufgaben": "Nutzungsaenderung pruefen, Brandschutzkonzept erstellen, Barrierefreiheit nachweisen, Bauantrag einreichen", "beteiligte": "", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "4.1", "psp": "4.1", "name": "Bauplanungsrechtliche Zulaessigkeit pruefen", "parent": "4", "lph": "LPH 0", "bereich": "Genehmigung", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-06-08", "end": "2026-06-12", "dauer": "5", "vorg": "2.8", "kosten": 1500, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Klarheit ob Nutzungsaenderung genehmigungsfaehig ist", "aufgaben": "Bauplanungsrechtliche Zulaessigkeit der neuen Nutzung pruefen, BauNVO und Bebauungsplan abgleichen, Voranfrage beim Bauordnungsamt vorbereiten", "beteiligte": "Sandra Meier, Thomas Berger", "ergebnis": "Schriftliche Bestaetigung der Voranfrage", "ressource": "Sandra Meier", "aufwand_h": 16, "auslastung": 40, "kritisch": true}, {"id": "4.2", "psp": "4.2", "name": "Vorabstimmung Bauordnungsamt", "parent": "4", "lph": "LPH 0", "bereich": "Genehmigung", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-06-15", "end": "2026-06-19", "dauer": "5", "vorg": "4.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Fruehzeitige Klaerung kritischer Genehmigungsfragen", "aufgaben": "Termin mit Bauordnungsamt vereinbaren, Nutzungskonzept vorstellen, AuS-spezifische Anforderungen erlaeutern, Auflagen und Anforderungen dokumentieren", "beteiligte": "Thomas Berger, Sandra Meier", "ergebnis": "Gespraechsprotokoll mit Auflagenliste", "ressource": "Thomas Berger", "aufwand_h": 8, "auslastung": 30, "kritisch": true}, {"id": "4.3", "psp": "4.3", "name": "Brandschutzkonzept beauftragen", "parent": "4", "lph": "LPH 0", "bereich": "Brandschutz", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-06-08", "end": "2026-06-12", "dauer": "5", "vorg": "2.5", "kosten": 500, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Brandschutzsachverständiger", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Brandschutzsachverstaendiger beauftragt und eingebunden", "aufgaben": "Leistungsbild abstimmen, Honorarangebot einholen, Vertrag schliessen, Bestandsunterlagen uebergeben", "beteiligte": "Thomas Berger, Dr. Frank Noll", "ergebnis": "Beauftragung Brandschutzsachverstaendiger", "ressource": "Martin Huber", "aufwand_h": 6, "auslastung": 20, "kritisch": false}, {"id": "4.4", "psp": "4.4", "name": "Brandlasten bewerten", "parent": "4", "lph": "LPH 0", "bereich": "Brandschutz", "verantw": "Brandschutzsachverständiger", "person": "Dr. Frank Noll", "ext": "extern", "start": "2026-06-15", "end": "2026-06-26", "dauer": "10", "vorg": "4.3", "kosten": 3000, "rR": "Brandschutzsachverständiger", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "", "status": "offen", "ms": false, "note": "AuS-Pruefaufbauten haben erhoehte Brandlasten", "ziele": "Brandlasten vollstaendig bewertet inkl. AuS-Pruefaufbauten", "aufgaben": "Brandlasten durch AuS-Pruefaufbauten, Kabelmassen und elektrische Betriebsmittel bewerten, Brandabschnitte festlegen, erforderliche Brandschutzbauteile (Tueren, Waende, Decken) definieren", "beteiligte": "Dr. Frank Noll, Andreas Kempf, Jürgen Winkler", "ergebnis": "Brandlastberechnung, Brandabschnittsplan", "ressource": "Dr. Frank Noll", "aufwand_h": 32, "auslastung": 40, "kritisch": false}, {"id": "4.5", "psp": "4.5", "name": "Flucht- und Rettungswege planen", "parent": "4", "lph": "LPH 0", "bereich": "Brandschutz", "verantw": "Brandschutzsachverständiger", "person": "Dr. Frank Noll", "ext": "extern", "start": "2026-06-22", "end": "2026-07-03", "dauer": "10", "vorg": "4.4", "kosten": 2000, "rR": "Brandschutzsachverständiger", "rA": "Projektleitung", "rC": "Architekt", "rI": "Arbeitssicherheit", "status": "offen", "ms": false, "note": "nach ASR A2.3 und LBO", "ziele": "Normkonforme Flucht- und Rettungswege geplant und nachgewiesen", "aufgaben": "Fluchtwegelaengen berechnen und nachweisen, Rettungswegbreiten pruefen, Notausgaenge festlegen, Flucht- und Rettungswegplaene erstellen", "beteiligte": "Dr. Frank Noll, Sandra Meier, Claudia Roth", "ergebnis": "Flucht- und Rettungswegplaene", "ressource": "Dr. Frank Noll", "aufwand_h": 24, "auslastung": 30, "kritisch": true}, {"id": "4.6", "psp": "4.6", "name": "Brandschutzkonzept fertigstellen", "parent": "4", "lph": "LPH 0", "bereich": "Brandschutz", "verantw": "Brandschutzsachverständiger", "person": "Dr. Frank Noll", "ext": "extern", "start": "2026-07-06", "end": "2026-07-17", "dauer": "10", "vorg": "4.5", "kosten": 2500, "rR": "Brandschutzsachverständiger", "rA": "Projektleitung", "rC": "Architekt", "rI": "Bauordnungsamt", "status": "offen", "ms": true, "note": "Grundlage fuer Genehmigungsverfahren", "ziele": "Genehmigungsfaehiges Brandschutzkonzept liegt vor", "aufgaben": "Brandschutzkonzept zusammenfuehren, technische Brandschutzeinrichtungen definieren (BMA, Handfeuerloescher, Wandhydranten), Konzept mit Bauaufsichtsbehoerde abstimmen, Freigabe einholen", "beteiligte": "Dr. Frank Noll, Sandra Meier, Thomas Berger", "ergebnis": "Freigegebenes Brandschutzkonzept", "ressource": "Dr. Frank Noll", "aufwand_h": 24, "auslastung": 40, "kritisch": true}, {"id": "4.7", "psp": "4.7", "name": "Barrierefreiheit pruefen", "parent": "4", "lph": "LPH 0", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-06-15", "end": "2026-06-26", "dauer": "10", "vorg": "2.7", "kosten": 1000, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "Bauordnungsamt", "status": "offen", "ms": false, "note": "", "ziele": "Barrierefreiheitsstatus vollstaendig dokumentiert", "aufgaben": "Tuerbreiten und Schwellenhoehen pruefen, Rampensteigungen dokumentieren, Zugaenglichkeit aller Funktionsbereiche nachweisen, Defizite bei Sanitaereinrichtungen dokumentieren", "beteiligte": "Sandra Meier", "ergebnis": "Barrierefreiheits-Pruefbericht", "ressource": "Sandra Meier", "aufwand_h": 16, "auslastung": 20, "kritisch": false}, {"id": "4.8", "psp": "4.8", "name": "Abweichungsantrag Barrierefreiheit", "parent": "4", "lph": "LPH 0", "bereich": "Genehmigung", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-06-29", "end": "2026-07-03", "dauer": "5", "vorg": "4.7", "kosten": 1000, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "Bauherr", "status": "offen", "ms": false, "note": "Verweis auf vorhandene barrierefreie WC im Gebaeude", "ziele": "Begruendeter Abweichungsantrag bei der Bauaufsicht eingereicht", "aufgaben": "Begruendung formulieren (barrierefreie Sanitaeranlagen in Gebaeudenaaehe vorhanden), Wegeführung zu vorhandenen Einrichtungen dokumentieren und nachweisen, Antrag fuer Bauaufsicht erstellen", "beteiligte": "Sandra Meier, Thomas Berger", "ergebnis": "Abweichungsantrag (eingereicht)", "ressource": "Sandra Meier", "aufwand_h": 12, "auslastung": 30, "kritisch": false}, {"id": "4.9", "psp": "4.9", "name": "Genehmigungsunterlagen zusammenstellen", "parent": "4", "lph": "LPH 0", "bereich": "Genehmigung", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-07-20", "end": "2026-07-31", "dauer": "10", "vorg": "4.6", "kosten": 2000, "rR": "Architekt", "rA": "Projektleitung", "rC": "Brandschutzsachverständiger", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Vollstaendiger Genehmigungsantrag zusammengestellt", "aufgaben": "Alle Fachbeitraege (Brandschutz, TGA, Barrierefreiheit) einsammeln, Bauantragsformulare ausfuellen, Plaene und Nachweise zusammenstellen, Vollstaendigkeitspruefung durchfuehren", "beteiligte": "Sandra Meier, Dr. Frank Noll, Jürgen Winkler, Thomas Berger", "ergebnis": "Vollstaendiger Genehmigungsantrag", "ressource": "Sandra Meier", "aufwand_h": 24, "auslastung": 30, "kritisch": true}, {"id": "4.10", "psp": "4.10", "name": "Bauantrag einreichen", "parent": "4", "lph": "LPH 0", "bereich": "Genehmigung", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-08-03", "end": "2026-08-03", "dauer": "1", "vorg": "4.9", "kosten": 500, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": true, "note": "", "ziele": "Bauantrag fristgerecht eingereicht", "aufgaben": "Bauantrag beim Bauordnungsamt einreichen, Eingangsbestaetigung sichern, Bearbeitungszeit erfragen", "beteiligte": "Thomas Berger, Sandra Meier", "ergebnis": "Eingereichten Bauantrag mit Eingangsbestaetigung", "ressource": "Thomas Berger", "aufwand_h": 4, "auslastung": 100, "kritisch": true}, {"id": "5", "psp": "5", "name": "Nutzer- und Funktionsanforderungen", "parent": "", "lph": "LPH 0", "bereich": "Anforderungen", "verantw": "Fachabteilung AuS", "person": "Andreas Kempf", "ext": "intern", "start": "", "end": "", "dauer": "", "vorg": "", "kosten": 0, "rR": "Fachabteilung AuS", "rA": "Projektleitung", "rC": "Arbeitssicherheit", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Vollstaendige Nutzer- und Funktionsanforderungen als Planungsgrundlage", "aufgaben": "Nutzeranforderungen erfassen, Sicherheitsanforderungen definieren, Funktionskonzept erstellen", "beteiligte": "Andreas Kempf, Claudia Roth, Sandra Meier", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "5.1", "psp": "5.1", "name": "Nutzeranforderungen erfassen", "parent": "5", "lph": "LPH 0", "bereich": "Anforderungen", "verantw": "Fachabteilung AuS", "person": "Andreas Kempf", "ext": "intern", "start": "2026-04-16", "end": "2026-05-02", "dauer": "13", "vorg": "1.1", "kosten": 0, "rR": "Fachabteilung AuS", "rA": "Projektleitung", "rC": "Arbeitssicherheit", "rI": "Facility Management", "status": "offen", "ms": false, "note": "", "ziele": "Systematische Erfassung aller Nutzeranforderungen", "aufgaben": "Nutzergruppen identifizieren, Anforderungen an Schulung/Buero/Uebungsflaechen erfassen, Zielkonflikte dokumentieren", "beteiligte": "Andreas Kempf, Claudia Roth, Thomas Berger", "ergebnis": "Nutzeranforderungskatalog", "ressource": "Andreas Kempf", "aufwand_h": 40, "auslastung": 40, "kritisch": true}, {"id": "5.2", "psp": "5.2", "name": "Sicherheitsanforderungen AuS", "parent": "5", "lph": "LPH 0", "bereich": "Arbeitssicherheit", "verantw": "Fachkraft f. Arbeitssicherheit", "person": "Claudia Roth", "ext": "intern", "start": "2026-05-05", "end": "2026-05-16", "dauer": "10", "vorg": "5.1", "kosten": 0, "rR": "Fachkraft f. Arbeitssicherheit", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "Brandschutzsachverständiger", "status": "offen", "ms": false, "note": "", "ziele": "Alle AuS-Sicherheitsanforderungen verbindlich definiert", "aufgaben": "Regelwerke sichten, Gefaehrdungsszenarien analysieren, Sicherheitsabstaende/Not-Aus/PSA definieren", "beteiligte": "Claudia Roth, Andreas Kempf, Dr. Frank Noll", "ergebnis": "Sicherheitsanforderungskatalog", "ressource": "Claudia Roth", "aufwand_h": 32, "auslastung": 40, "kritisch": true}, {"id": "5.3", "psp": "5.3", "name": "Funktionales Raum-/Nutzungskonzept", "parent": "5", "lph": "LPH 0", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-05-19", "end": "2026-05-30", "dauer": "10", "vorg": "5.2", "kosten": 2000, "rR": "Architekt", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Funktionsanforderungen in Raum-/Nutzungskonzept ueberfuehrt", "aufgaben": "Funktionsbereiche definieren, Raumbeziehungen analysieren, Wegebeziehungen festlegen", "beteiligte": "Sandra Meier, Andreas Kempf, Claudia Roth", "ergebnis": "Funktionales Raum- und Nutzungskonzept", "ressource": "Sandra Meier", "aufwand_h": 32, "auslastung": 40, "kritisch": true}, {"id": "6", "psp": "6", "name": "Planungsvorbereitung Konzeptansaetze", "parent": "", "lph": "LPH 1/2", "bereich": "Planung", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "", "end": "", "dauer": "", "vorg": "", "kosten": 0, "rR": "Architekt", "rA": "Projektleitung", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Belastbare Konzeptansaetze als Planungsgrundlage", "aufgaben": "Grundrisskonzept, TGA-Konzepte, Sicherheitskonzept, Wirtschaftlichkeit", "beteiligte": "Sandra Meier, Jürgen Winkler, Claudia Roth", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "6.1", "psp": "6.1", "name": "Grundrisskonzept und Funktionszuordnung", "parent": "6", "lph": "LPH 2", "bereich": "Architektur", "verantw": "Architekt", "person": "Sandra Meier", "ext": "extern", "start": "2026-06-08", "end": "2026-06-19", "dauer": "10", "vorg": "5.3", "kosten": 3000, "rR": "Architekt", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Abgestimmtes Grundrisskonzept mit Funktionszuordnung", "aufgaben": "Raumprogramm analysieren, Grundrissvarianten skizzieren, Erschliessung pruefen, Nutzerabstimmung", "beteiligte": "Sandra Meier, Andreas Kempf, Thomas Berger", "ergebnis": "Grundrissvarianten mit Vorzugsvariante", "ressource": "Sandra Meier", "aufwand_h": 40, "auslastung": 50, "kritisch": true}, {"id": "6.2", "psp": "6.2", "name": "Elektro- und AuS-Versorgungskonzept", "parent": "6", "lph": "LPH 2", "bereich": "TGA", "verantw": "TGA-Planer", "person": "Jürgen Winkler", "ext": "extern", "start": "2026-06-16", "end": "2026-06-27", "dauer": "10", "vorg": "6.1", "kosten": 2500, "rR": "TGA-Planer", "rA": "Projektleitung", "rC": "Fachabteilung AuS", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Elektro- und AuS-spezifisches Versorgungskonzept", "aufgaben": "Energiebedarf ermitteln, Stromversorgung planen, Gebaeudeautomation festlegen", "beteiligte": "Jürgen Winkler, Sandra Meier, Andreas Kempf", "ergebnis": "Elektro- und Automationskonzept", "ressource": "Jürgen Winkler", "aufwand_h": 32, "auslastung": 40, "kritisch": false}, {"id": "6.3", "psp": "6.3", "name": "Sicherheits- und Not-Aus-Konzept", "parent": "6", "lph": "LPH 2", "bereich": "Arbeitssicherheit", "verantw": "Fachkraft f. Arbeitssicherheit", "person": "Claudia Roth", "ext": "intern", "start": "2026-06-16", "end": "2026-06-27", "dauer": "10", "vorg": "5.2", "kosten": 0, "rR": "Fachkraft f. Arbeitssicherheit", "rA": "Projektleitung", "rC": "TGA-Planer", "rI": "Bauherr", "status": "offen", "ms": false, "note": "", "ziele": "Ganzheitliches Sicherheits- und Notfallkonzept", "aufgaben": "Gefaehrdungen analysieren, Flucht-/Rettungswege planen, Not-Aus definieren, Brandschutz abstimmen", "beteiligte": "Claudia Roth, Jürgen Winkler, Dr. Frank Noll", "ergebnis": "Sicherheits-/Notfallkonzept, Flucht-/Rettungswegplaene", "ressource": "Claudia Roth", "aufwand_h": 32, "auslastung": 40, "kritisch": false}, {"id": "6.4", "psp": "6.4", "name": "Lueftungs- und Beleuchtungskonzept", "parent": "6", "lph": "LPH 2", "bereich": "TGA", "verantw": "TGA-Planer", "person": "Jürgen Winkler", "ext": "extern", "start": "2026-06-23", "end": "2026-07-04", "dauer": "10", "vorg": "6.1", "kosten": 2000, "rR": "TGA-Planer", "rA": "Projektleitung", "rC": "Architekt", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Integriertes Lueftungs- und Beleuchtungskonzept", "aufgaben": "Raumklima analysieren, Lueftungsbedarf ermitteln, Beleuchtung planen", "beteiligte": "Jürgen Winkler, Sandra Meier", "ergebnis": "Lueftungs- und Beleuchtungskonzept", "ressource": "Jürgen Winkler", "aufwand_h": 24, "auslastung": 30, "kritisch": false}, {"id": "6.5", "psp": "6.5", "name": "Kostenschaetzung und Variantenvergleich", "parent": "6", "lph": "LPH 2", "bereich": "Kosten", "verantw": "Architekt", "person": "Sandra Meier", "ext": "intern", "start": "2026-07-06", "end": "2026-07-17", "dauer": "10", "vorg": "6.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Belastbare Kostenschaetzung und Variantenentscheidung", "aufgaben": "Kostenkennwerte ermitteln, Varianten gegenueberstellen, Vorzugsvariante empfehlen", "beteiligte": "Thomas Berger, Sandra Meier", "ergebnis": "Kostenschaetzung DIN 276, Variantenvergleich", "ressource": "Sandra Meier", "aufwand_h": 24, "auslastung": 40, "kritisch": true}, {"id": "7", "psp": "7", "name": "Projektfreigabe", "parent": "", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "", "end": "", "dauer": "", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "Gesammelte Unterlagen vom Bauherrn absegnen lassen", "ziele": "Vollstaendige, rechtssichere und versionierte Projektfreigabe durch den Bauherrn", "aufgaben": "Dokumentenmanagement, Freigabeprozess, Uebergabe an naechste LPH", "beteiligte": "Thomas Berger, Dr. Markus Schreiber, alle Planer", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "7.1", "psp": "7.1", "name": "Dokumentenarchivierung (revisionssicher)", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-07-21", "end": "2026-07-23", "dauer": "3", "vorg": "3.6", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Ablagestruktur, Dateibenennungskonvention, Schreibschutz", "ziele": "Alle Projektdokumente sicher und unveraenderbar gespeichert", "aufgaben": "Ablagestruktur festlegen, Dokumente zusammenfuehren, Schreibschutz setzen, PDF/A-Archivierung, Pruefung auf Vollstaendigkeit der Dateibezeichnungen", "beteiligte": "Thomas Berger", "ergebnis": "Revisionssicheres Dokumentenarchiv", "ressource": "Martin Huber", "aufwand_h": 12, "auslastung": 50, "kritisch": true}, {"id": "7.2", "psp": "7.2", "name": "Rechtssichere Unterschriften einholen", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-07-24", "end": "2026-07-28", "dauer": "3", "vorg": "7.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "Arbeitssicherheit", "status": "offen", "ms": false, "note": "Digitale oder analoge Unterschrift je nach Anforderung", "ziele": "Alle relevanten Dokumente rechtssicher vom Bauherrn und Beteiligten unterschrieben", "aufgaben": "Unterschriftenrelevante Dokumente identifizieren, Unterschriftenrunde organisieren, digitale Signaturen oder physische Unterschriften einholen, Unterschriebene Versionen archivieren", "beteiligte": "Thomas Berger, Dr. Markus Schreiber, Claudia Roth", "ergebnis": "Unterschriebene Freigabedokumente", "ressource": "Thomas Berger", "aufwand_h": 8, "auslastung": 30, "kritisch": false}, {"id": "7.3", "psp": "7.3", "name": "Aenderungsmanagement und Versionierung", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-07-24", "end": "2026-07-30", "dauer": "5", "vorg": "7.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Parallele Bearbeitung mit 7.2 moeglich", "ziele": "Aenderungen nachvollziehbar dokumentiert, eindeutige Versionierung aller Dokumente", "aufgaben": "Aenderungsprotokoll fuehren, Versionsnummern vergeben, alte Versionen kennzeichnen und archivieren, Aenderungsgruende dokumentieren, Freigabe geaenderter Versionen durch Bauherrn", "beteiligte": "Thomas Berger, Sandra Meier, alle Planer", "ergebnis": "Versionsverzeichnis, Aenderungsprotokoll", "ressource": "Martin Huber", "aufwand_h": 16, "auslastung": 40, "kritisch": false}, {"id": "7.4", "psp": "7.4", "name": "Dokumentenumlauf absichern", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-07-24", "end": "2026-07-28", "dauer": "3", "vorg": "7.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Verteilerlisten, Empfangsbestaetigungen", "ziele": "Sicherer und nachvollziehbarer Dokumentenaustausch zwischen allen Beteiligten", "aufgaben": "Verteilerliste erstellen, Uebermittlungswege festlegen (E-Mail, Cloud, physisch), Empfangsbestaetigungen einholen, Zugriffsrechte definieren, Datenschutz sicherstellen", "beteiligte": "Thomas Berger, alle Planer", "ergebnis": "Dokumentenverteilungsmatrix, Empfangsbestaetigungen", "ressource": "Martin Huber", "aufwand_h": 8, "auslastung": 30, "kritisch": false}, {"id": "7.5", "psp": "7.5", "name": "Vollstaendigkeitspruefung", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Architekt", "person": "Sandra Meier", "ext": "intern", "start": "2026-07-31", "end": "2026-08-04", "dauer": "3", "vorg": "7.3", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "Arbeitssicherheit", "status": "offen", "ms": false, "note": "Checkliste gegen Projekthandbuch pruefen", "ziele": "Sichergestellt, dass alle erforderlichen Unterlagen vollstaendig und aktuell vorliegen", "aufgaben": "Checkliste aller Pflichtdokumente erstellen, Ist-Abgleich gegen Soll, fehlende Dokumente nachfordern, Pruefvermerk je Dokument setzen, Vollstaendigkeitserklaerung erstellen", "beteiligte": "Thomas Berger, Sandra Meier, Dr. Frank Noll, Claudia Roth", "ergebnis": "Vollstaendigkeitsprotokoll, Pruefcheckliste", "ressource": "Sandra Meier", "aufwand_h": 12, "auslastung": 50, "kritisch": true}, {"id": "7.6", "psp": "7.6", "name": "Uebergabepaket zusammenstellen", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-08-05", "end": "2026-08-07", "dauer": "3", "vorg": "7.5", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Physisch und digital", "ziele": "Strukturiertes und vollstaendiges Uebergabepaket fuer die naechste Leistungsphase", "aufgaben": "Uebergabepaket definieren (Inhalt, Struktur, Format), alle freigegebenen Dokumente buendeln, Begleitschreiben mit Inhaltsverzeichnis erstellen, digitale und ggf. physische Ausfertigung vorbereiten", "beteiligte": "Thomas Berger", "ergebnis": "Uebergabepaket (digital/physisch), Inhaltsverzeichnis", "ressource": "Martin Huber", "aufwand_h": 12, "auslastung": 50, "kritisch": true}, {"id": "7.7", "psp": "7.7", "name": "Uebergabe an naechste Leistungsphase", "parent": "7", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-08-10", "end": "2026-08-10", "dauer": "1", "vorg": "7.6", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": true, "note": "Formale Uebergabe mit Protokoll", "ziele": "Nahtlose und dokumentierte Uebergabe aller Ergebnisse an die Entwurfsplanung (LPH 3)", "aufgaben": "Uebergabetermin organisieren, Uebergabepaket ueberreichen, offene Punkte dokumentieren, Uebergabeprotokoll erstellen und unterschreiben lassen, Naechste Schritte festlegen", "beteiligte": "Thomas Berger, Dr. Markus Schreiber, Sandra Meier, alle Planer", "ergebnis": "Uebergabeprotokoll (unterschrieben), Startfreigabe LPH 3", "ressource": "Thomas Berger", "aufwand_h": 8, "auslastung": 100, "kritisch": true}, {"id": "8", "psp": "8", "name": "Termine, Daten und Logistik", "parent": "", "lph": "uebergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-16", "end": "2026-05-29", "dauer": "", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "Aus Word-Dokument Abschnitt 5", "ziele": "Strukturiertes Termin-, Informations- und Berichtswesen", "aufgaben": "Terminplanung, Dokumentenlenkung, Berichterstattung", "beteiligte": "Thomas Berger, alle Planer", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "8.1", "psp": "8.1", "name": "Rahmenterminplan erstellen", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-16", "end": "2026-04-25", "dauer": "8", "vorg": "1.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Gesamtstruktur des Projekts", "ziele": "Zeitliche Gesamtstruktur des Projekts in Phasen abgebildet", "aufgaben": "Projektphasen definieren (Vorbereitung, Planung, Vergabe, Ausfuehrung, Abschluss), Phasendauern grob schaetzen, Abhaengigkeiten zwischen Phasen darstellen, Rahmenterminplan visualisieren (Balkenplan)", "beteiligte": "Thomas Berger", "ergebnis": "Rahmenterminplan (RTP)", "ressource": "Thomas Berger", "aufwand_h": 12, "auslastung": 20, "kritisch": false}, {"id": "8.2", "psp": "8.2", "name": "Meilensteine definieren", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-28", "end": "2026-04-30", "dauer": "3", "vorg": "8.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "", "ziele": "Zentrale Steuerungspunkte mit Terminen festgelegt", "aufgaben": "Meilensteine identifizieren (Projektfreigabe, Entwurfsfreigabe, Baugenehmigung, Baubeginn, Fertigstellung, Abnahme), Soll-Termine zuweisen, Verantwortliche je Meilenstein benennen, Meilensteinplan erstellen", "beteiligte": "Thomas Berger, Dr. Markus Schreiber", "ergebnis": "Meilensteinplan mit Soll-Terminen", "ressource": "Thomas Berger", "aufwand_h": 6, "auslastung": 25, "kritisch": false}, {"id": "8.3", "psp": "8.3", "name": "Steuerungsterminplan erstellen", "parent": "8", "lph": "LPH 0/1", "bereich": "PM", "verantw": "Architekt", "person": "Sandra Meier", "ext": "intern", "start": "2026-05-04", "end": "2026-05-15", "dauer": "10", "vorg": "8.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Detaillierter als RTP", "ziele": "Detaillierter Steuerungsterminplan mit allen Arbeitspaketen und Abhaengigkeiten", "aufgaben": "Alle Arbeitspakete aus PSP terminlich einplanen, Vorgaengerbeziehungen definieren, Kritischen Pfad berechnen, Pufferzeiten einplanen, Ressourcenverfuegbarkeit pruefen", "beteiligte": "Thomas Berger, Sandra Meier, alle Planer", "ergebnis": "Steuerungsterminplan (STP)", "ressource": "Sandra Meier", "aufwand_h": 20, "auslastung": 25, "kritisch": false}, {"id": "8.4", "psp": "8.4", "name": "Terminrisiken bewerten", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-05-18", "end": "2026-05-22", "dauer": "5", "vorg": "8.3", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Terminrisiken erkannt und mit Massnahmen hinterlegt", "aufgaben": "Typische Terminrisiken identifizieren (Genehmigungsverzoegerungen, Lieferengpaesse, Sicherheitsanforderungen), Eintrittswahrscheinlichkeit und Auswirkung bewerten, Pufferzeiten ableiten, Massnahmen je Risiko definieren", "beteiligte": "Thomas Berger", "ergebnis": "Terminrisikobewertung", "ressource": "Martin Huber", "aufwand_h": 8, "auslastung": 20, "kritisch": false}, {"id": "8.5", "psp": "8.5", "name": "Dokumentenlenkung einrichten", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-16", "end": "2026-04-25", "dauer": "8", "vorg": "1.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "", "ziele": "Einheitliche und verbindliche Dokumentenlenkung fuer alle Beteiligten", "aufgaben": "Ordnerstruktur und Ablagesystem definieren, Namenskonventionen fuer Dateien festlegen, Zugriffsrechte und Berechtigungen definieren, Planlauf (Planverteilung, Indexierung) regeln, Kollaborationstools auswaehlen und einrichten", "beteiligte": "Thomas Berger", "ergebnis": "Dokumentenlenkungsrichtlinie, eingerichtete Ablagestruktur", "ressource": "Martin Huber", "aufwand_h": 12, "auslastung": 20, "kritisch": false}, {"id": "8.6", "psp": "8.6", "name": "Berichtswesen definieren", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Fachabteilung AuS", "person": "Sabine Wolf", "ext": "intern", "start": "2026-04-28", "end": "2026-05-02", "dauer": "5", "vorg": "8.5", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "", "ziele": "Adressatengerechtes Berichtswesen etabliert", "aufgaben": "Berichtsarten definieren (Statusbericht, Kostenbericht, Meilensteinbericht), Berichtsfrequenz festlegen (monatlich/nach Meilensteinen), Berichtsempfaenger und Verteiler bestimmen, Berichtsvorlagen erstellen, Berichtsweg (Projektleitung -> Bauherr) festlegen", "beteiligte": "Thomas Berger, Dr. Markus Schreiber", "ergebnis": "Berichtswesenkonzept, Berichtsvorlagen", "ressource": "Sabine Wolf", "aufwand_h": 8, "auslastung": 15, "kritisch": false}, {"id": "8.7", "psp": "8.7", "name": "Besprechungswesen und Protokollierung", "parent": "8", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-28", "end": "2026-05-02", "dauer": "5", "vorg": "1.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Planer", "status": "offen", "ms": false, "note": "", "ziele": "Strukturiertes Besprechungswesen mit verbindlicher Protokollierung", "aufgaben": "Besprechungsarten festlegen (Lenkungsausschuss monatlich, Planerbesprechung 14-taegig, Nutzerbesprechung nach Bedarf), Teilnehmerkreis je Besprechungsart definieren, Protokollvorlage erstellen, Entscheidungs- und Massnahmentracking einrichten", "beteiligte": "Thomas Berger", "ergebnis": "Besprechungsplan, Protokollvorlage", "ressource": "Martin Huber", "aufwand_h": 8, "auslastung": 15, "kritisch": false}, {"id": "8.8", "psp": "8.8", "name": "Logistikkonzept Materialanlieferung", "parent": "8", "lph": "LPH 1", "bereich": "Logistik", "verantw": "Facility Management", "person": "Stefan Braun", "ext": "intern", "start": "2026-05-19", "end": "2026-05-29", "dauer": "9", "vorg": "2.1", "kosten": 0, "rR": "Facility Management", "rA": "Projektleitung", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "", "ziele": "Klaere Transportwege und Anlieferungssituation dokumentiert", "aufgaben": "Transportwege fuer Uebungsmaterialien und Werkzeuge pruefen, Aufzugskabinenmasse und Traglasten messen, Flurbreiten fuer Hubwageneinsatz pruefen, Andienungsmoeglichkeiten (LKW-Zufahrt, Ladezone) bewerten", "beteiligte": "Stefan Braun, Thomas Berger", "ergebnis": "Logistik-Steckbrief", "ressource": "Stefan Braun", "aufwand_h": 12, "auslastung": 15, "kritisch": false}, {"id": "9", "psp": "9", "name": "Qualitaet, Lernen und Teamkultur", "parent": "", "lph": "uebergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-20", "end": "2026-07-23", "dauer": "", "vorg": "", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "", "status": "offen", "ms": false, "note": "Schliesst Luecken aus der Analyse der 7 Wesenselemente und 7 Basisprozesse", "ziele": "Weiche Erfolgsfaktoren systematisch im Projekt verankern", "aufgaben": "Teamkultur gestalten, Lernprozesse etablieren, Qualitaet sichern", "beteiligte": "Thomas Berger, Martin Huber, alle Beteiligten", "ergebnis": "", "ressource": "", "aufwand_h": 0, "auslastung": 0, "kritisch": false}, {"id": "9.1", "psp": "9.1", "name": "Kickoff-Workshop durchfuehren", "parent": "9", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-04-20", "end": "2026-04-20", "dauer": "1", "vorg": "1.1", "kosten": 500, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Beteiligten", "status": "offen", "ms": true, "note": "Feierlicher Projektstart", "ziele": "Alle Beteiligten kennen sich, verstehen die Projektvision und fuehlen sich als Team", "aufgaben": "Kickoff-Workshop vorbereiten und moderieren, Projektvision gemeinsam schaerfen, gegenseitiges Kennenlernen ermoeglichen, Erwartungen und Bedenken sammeln, gemeinsames Projektverstaendnis dokumentieren", "beteiligte": "Thomas Berger, Dr. Markus Schreiber, alle Planer, Fachabteilung AuS, Arbeitssicherheit", "ergebnis": "Kickoff-Protokoll, Erwartungs-/Bedenkensammlung", "ressource": "Thomas Berger", "aufwand_h": 8, "auslastung": 100, "kritisch": false}, {"id": "9.2", "psp": "9.2", "name": "Zusammenarbeitsregeln definieren", "parent": "9", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-21", "end": "2026-04-25", "dauer": "5", "vorg": "9.1", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Beteiligten", "status": "offen", "ms": false, "note": "Spielregeln fuer die Zusammenarbeit", "ziele": "Verbindliche Spielregeln fuer Kommunikation, Erreichbarkeit und Umgang miteinander", "aufgaben": "Kommunikationsregeln festlegen (Reaktionszeiten, Erreichbarkeit, Kanaele), Umgangsregeln definieren (Feedback-Kultur, Konfliktvermeidung), Verbindlichkeit von Zusagen regeln, Spielregeln dokumentieren und von allen unterschreiben lassen", "beteiligte": "Martin Huber, Thomas Berger, alle Beteiligten", "ergebnis": "Zusammenarbeitsvereinbarung (unterschrieben)", "ressource": "Martin Huber", "aufwand_h": 8, "auslastung": 20, "kritisch": false}, {"id": "9.3", "psp": "9.3", "name": "Konfliktmanagement-Verfahren festlegen", "parent": "9", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-28", "end": "2026-04-30", "dauer": "3", "vorg": "9.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Betriebsrat", "rI": "alle Beteiligten", "status": "offen", "ms": false, "note": "", "ziele": "Klares Verfahren fuer den Umgang mit Konflikten im Projektteam", "aufgaben": "Konfliktstufen definieren (sachlich, persoenlich, eskaliert), Mediationsverfahren beschreiben, Ansprechpersonen fuer Konflikte benennen, Vertraulichkeitsregeln festlegen", "beteiligte": "Martin Huber, Monika Fischer, Thomas Berger", "ergebnis": "Konfliktmanagement-Leitfaden", "ressource": "Martin Huber", "aufwand_h": 6, "auslastung": 25, "kritisch": false}, {"id": "9.4", "psp": "9.4", "name": "Feedback-Zyklus einrichten", "parent": "9", "lph": "uebergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-05-04", "end": "2026-05-08", "dauer": "5", "vorg": "9.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "", "rI": "alle Beteiligten", "status": "offen", "ms": false, "note": "Laufender Prozess, hier nur Einrichtung", "ziele": "Regelmaessiges, strukturiertes Feedback als fester Bestandteil des Projekts", "aufgaben": "Feedback-Formate definieren (Retro nach jedem Meilenstein, kurze Blitzumfrage monatlich), Feedback-Vorlagen erstellen, Anonymes Feedback ermoeglichen, Ergebnisse in Verbesserungsmassnahmen umsetzen", "beteiligte": "Martin Huber, Thomas Berger", "ergebnis": "Feedback-Konzept, Vorlagen", "ressource": "Martin Huber", "aufwand_h": 8, "auslastung": 20, "kritisch": false}, {"id": "9.5", "psp": "9.5", "name": "Lessons Learned nach Meilensteinen", "parent": "9", "lph": "uebergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-07-21", "end": "2026-07-23", "dauer": "3", "vorg": "3.6", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "alle Planer", "rI": "", "status": "offen", "ms": false, "note": "Erste Durchfuehrung nach Freigabe Vorplanung, dann nach jedem Meilenstein", "ziele": "Systematische Rueckschau: Was lief gut, was nicht, was aendern wir?", "aufgaben": "Lessons-Learned-Workshop nach jedem Meilenstein durchfuehren, Erkenntnisse strukturiert dokumentieren (was lief gut / was lief schlecht / was aendern wir), Massnahmen ableiten und in PSP einpflegen, Wissensdatenbank aufbauen", "beteiligte": "Martin Huber, Thomas Berger, alle am Meilenstein Beteiligten", "ergebnis": "Lessons-Learned-Protokoll je Meilenstein", "ressource": "Martin Huber", "aufwand_h": 6, "auslastung": 30, "kritisch": false}, {"id": "9.6", "psp": "9.6", "name": "Meilensteinfeier planen", "parent": "9", "lph": "uebergreifend", "bereich": "PM", "verantw": "Projektleitung", "person": "Sabine Wolf", "ext": "intern", "start": "2026-07-20", "end": "2026-07-20", "dauer": "1", "vorg": "3.6", "kosten": 200, "rR": "Fachabteilung AuS", "rA": "Projektleitung", "rC": "", "rI": "alle Beteiligten", "status": "offen", "ms": false, "note": "Nach jedem grossen Meilenstein", "ziele": "Erfolge feiern, Teamzusammenhalt staerken, Wertschaetzung zeigen", "aufgaben": "Kleine Feier nach Meilensteinen organisieren (Freigabe Vorplanung, Baugenehmigung, Fertigstellung), Erfolge sichtbar machen, Dank an Beteiligte aussprechen", "beteiligte": "Sabine Wolf, Thomas Berger", "ergebnis": "Durchgefuehrte Meilensteinfeiern", "ressource": "Sabine Wolf", "aufwand_h": 4, "auslastung": 10, "kritisch": false}, {"id": "9.7", "psp": "9.7", "name": "IT- und Tool-Ausstattungsplanung", "parent": "9", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Martin Huber", "ext": "intern", "start": "2026-04-28", "end": "2026-05-09", "dauer": "10", "vorg": "1.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Architekt", "rI": "alle Planer", "status": "offen", "ms": false, "note": "Physische Mittel / Tools", "ziele": "Alle benoetigten Software-Tools und Arbeitsmittel identifiziert und bereitgestellt", "aufgaben": "Bestandsaufnahme vorhandener Lizenzen und Tools, Bedarf je Rolle ermitteln (BIM-Software, PM-Tool, Kollaboration), Fehlende Lizenzen beschaffen, Zugaenge einrichten und testen, Schulungsbedarf identifizieren", "beteiligte": "Martin Huber, Stefan Braun, alle Planer", "ergebnis": "IT-/Tool-Ausstattungsplan, eingerichtete Zugaenge", "ressource": "Martin Huber", "aufwand_h": 16, "auslastung": 20, "kritisch": false}, {"id": "9.8", "psp": "9.8", "name": "Qualitaetssicherungsplan erstellen", "parent": "9", "lph": "LPH 0", "bereich": "PM", "verantw": "Projektleitung", "person": "Thomas Berger", "ext": "intern", "start": "2026-05-04", "end": "2026-05-15", "dauer": "10", "vorg": "1.2", "kosten": 0, "rR": "Projektleitung", "rA": "Bauherr", "rC": "Fachkraft f. Arbeitssicherheit", "rI": "alle Planer", "status": "offen", "ms": false, "note": "", "ziele": "Qualitaetssicherung als systematischer Bestandteil aller Projektphasen", "aufgaben": "Qualitaetskriterien je Phase definieren, Pruefschritte und Freigaben festlegen, Verantwortliche fuer QS benennen, QS-Checklisten erstellen, Umgang mit Qualitaetsmaengeln regeln", "beteiligte": "Thomas Berger, Claudia Roth", "ergebnis": "Qualitaetssicherungsplan, QS-Checklisten", "ressource": "Thomas Berger", "aufwand_h": 16, "auslastung": 20, "kritisch": false}];
+
+const defContacts=[{"id": 1, "name": "Dr. Markus Schreiber", "rolle": "Bauherr", "org": "Geschäftsführung", "tel": "089 1234-100", "email": "schreiber@firma.de", "typ": "intern", "reportsTo": "", "informedBy": ["Projektleitung"], "stellvertreter": "Lisa Hartmann"}, {"id": 2, "name": "Thomas Berger", "rolle": "Projektleitung", "org": "Projektmanagement", "tel": "089 1234-201", "email": "berger@firma.de", "typ": "intern", "reportsTo": "Bauherr", "informedBy": ["Architekt", "TGA-Planer", "Brandschutzsachverständiger", "Fachkraft f. Arbeitssicherheit", "Fachabteilung AuS", "Gutachter"], "stellvertreter": "Martin Huber"}, {"id": 3, "name": "Andreas Kempf", "rolle": "Fachabteilung AuS", "org": "Abteilung AuS", "tel": "089 1234-310", "email": "kempf@firma.de", "typ": "intern", "reportsTo": "Projektleitung", "informedBy": [], "stellvertreter": "Sabine Wolf"}, {"id": 4, "name": "Claudia Roth", "rolle": "Fachkraft f. Arbeitssicherheit", "org": "Arbeitssicherheit", "tel": "089 1234-401", "email": "roth@firma.de", "typ": "intern", "reportsTo": "Projektleitung", "informedBy": ["Fachabteilung AuS"], "stellvertreter": "Dirk Seidel"}, {"id": 5, "name": "Stefan Braun", "rolle": "Facility Management", "org": "Gebäudemanagement", "tel": "089 1234-501", "email": "braun@firma.de", "typ": "intern", "reportsTo": "Projektleitung", "informedBy": [], "stellvertreter": "Petra Stein"}, {"id": 6, "name": "Monika Fischer", "rolle": "Betriebsrat", "org": "Betriebsrat", "tel": "089 1234-601", "email": "fischer@firma.de", "typ": "intern", "reportsTo": "", "informedBy": ["Projektleitung"], "stellvertreter": "Ralf Becker"}, {"id": 7, "name": "Sandra Meier", "rolle": "Architekt", "org": "Meier Architekten", "tel": "089 5678-100", "email": "meier@arch.de", "typ": "extern", "reportsTo": "Projektleitung", "informedBy": [], "stellvertreter": "Tobias Lang"}, {"id": 8, "name": "Jürgen Winkler", "rolle": "TGA-Planer", "org": "Winkler Ingenieure", "tel": "089 5678-200", "email": "winkler@tga.de", "typ": "extern", "reportsTo": "Projektleitung", "informedBy": ["Architekt"], "stellvertreter": "Nina Kraus"}, {"id": 9, "name": "Dr. Frank Noll", "rolle": "Brandschutzsachverständiger", "org": "BSV Noll", "tel": "089 5678-300", "email": "noll@bsv.de", "typ": "extern", "reportsTo": "Projektleitung", "informedBy": ["Architekt"], "stellvertreter": "Michael Baumann"}, {"id": 10, "name": "Peter Lenz", "rolle": "Gutachter", "org": "Umweltlabor Lenz", "tel": "089 5678-400", "email": "lenz@labor.de", "typ": "extern", "reportsTo": "Projektleitung", "informedBy": [], "stellvertreter": "Katrin Vogt"}, {"id": 11, "name": "Martin Huber", "rolle": "Stv. Projektleitung", "org": "Projektmanagement", "tel": "089 1234-202", "email": "huber@firma.de", "typ": "intern", "reportsTo": "Projektleitung", "informedBy": ["Architekt", "TGA-Planer"], "stellvertreter": "Thomas Berger"}, {"id": 13, "name": "Sabine Wolf", "rolle": "Stv. Fachabteilung AuS", "org": "Abteilung AuS", "tel": "089 1234-311", "email": "wolf@firma.de", "typ": "intern", "reportsTo": "Fachabteilung AuS", "informedBy": [], "stellvertreter": "Andreas Kempf"}];
+
+const defTexts={"anlass": "Im Zuge der strategischen Weiterentwicklung des Unternehmens wird eine bisher als Druckereifläche genutzte Einheit einer neuen Nutzung zugeführt. Die Fläche soll künftig für Schulungs- und Übungszwecke im Bereich „Arbeiten unter Spannung (AuS)“ genutzt werden. Hierfür sind umfangreiche Anpassungen des Innenausbaus, der TGA sowie der sicherheitsrelevanten Infrastruktur erforderlich.", "genehmigungen": "Die geplante Nutzung weicht wesentlich von der bisherigen Druckereinutzung ab. Ein Bauantrag auf Nutzungsänderung ist erforderlich. Ein Brandschutzsachverständiger ist frühzeitig einzubinden. Für die Sanitäranlagen wird ein Abweichungsantrag zur Barrierefreiheit gestellt.", "bereiche": "Schulungsraum|Büro (3 Arbeitsplätze)|Besprechungsraum|Sanitär + Umkleiden (D/H)|3× AuS-Übungsflächen|Lagerflächen (Werkzeug, PSA)|Putzmittelraum|Teeküche", "oberziele": "Voll funktionsfaehiges AuS-Schulungszentrum auf 600 m2, alle Normen erfuellt|Inbetriebnahme und Uebergabe bis Q2 2028|Budgetrahmen mit max. +/- 10% Abweichung einhalten|Rechtskraeftige Baugenehmigung fuer Nutzungsaenderung|Funktionale Trennung Schulung, Buero, Uebung", "nichtziele": "Keine statischen Eingriffe in die Tragkonstruktion|Keine Erweiterung der Gebäudehülle|Keine Kapazitätserweiterung über definierten Bedarf hinaus"};
+
+const defRisks=[{"id": 1, "name": "Verzögerungen Genehmigungsverfahren", "wahrsch": 3, "auswirk": 3, "massnahme": "Frühzeitige Behördenabstimmung"}, {"id": 2, "name": "Nachforderungen Brandschutz", "wahrsch": 3, "auswirk": 3, "massnahme": "Frühzeitige Einbindung Sachverständiger"}, {"id": 3, "name": "Altlasten / Schadstoffe", "wahrsch": 2, "auswirk": 3, "massnahme": "Bestandsanalyse in LPH 0, Gutachter"}, {"id": 4, "name": "Nachforderungen Arbeitsschutz", "wahrsch": 2, "auswirk": 2, "massnahme": "Fachkraft ab LPH 0 einbinden"}, {"id": 5, "name": "Terminliche Abhängigkeiten", "wahrsch": 2, "auswirk": 2, "massnahme": "Terminpuffer, regelmäßige Abstimmung"}, {"id": 6, "name": "Budgetüberschreitung", "wahrsch": 2, "auswirk": 3, "massnahme": "Kostenschätzung in LPH 2"}, {"id": 7, "name": "Abweichungsantrag Barrierefreiheit abgelehnt", "wahrsch": 1, "auswirk": 2, "massnahme": "Nachweis barrierefreier Sanitäranlagen"}, {"id": 8, "name": "Materialverzug Spezialmaterialien", "wahrsch": 2, "auswirk": 2, "massnahme": "Alternativlieferanten, fruehzeitig bestellen"}, {"id": 9, "name": "Koordinationsprobleme zwischen Gewerken", "wahrsch": 2, "auswirk": 2, "massnahme": "Detaillierte Ablaufplanung, Gewerke-Koordination"}, {"id": 10, "name": "Sicherheitsvorfall bei AuS-Uebungen", "wahrsch": 1, "auswirk": 3, "massnahme": "Sicherheitskonzepte, Schulung, Notfallplaene"}];
+
+const defRoles=[{"rolle": "Projektleitung", "aufgaben": "Steuerung von Kosten, Terminen und Qualität. Koordination aller Projektbeteiligten. Berichterstattung an den Bauherrn.", "kompetenzen": "Projektmanagement, Kommunikation, Bauwesen", "verantwortung": "Gesamte Zielerreichung", "entscheidung": "Operative Entscheidungen, Vergabevorschläge"}, {"rolle": "Bauherr", "aufgaben": "Strategische Entscheidungen und Freigaben. Budgetverantwortung.", "kompetenzen": "Unternehmensführung", "verantwortung": "Projektauftrag, Budget", "entscheidung": "Alle Freigaben, Grundsatzentscheidungen"}, {"rolle": "Fachabteilung AuS", "aufgaben": "Definition der Nutzeranforderungen. Festlegung AuS-spezifischer Sicherheitsanforderungen.", "kompetenzen": "Fachwissen AuS, Ausbildungsmethodik", "verantwortung": "Praxistauglichkeit", "entscheidung": "Fachliche Freigabe Übungsflächen"}, {"rolle": "Fachkraft f. Arbeitssicherheit", "aufgaben": "Prüfung auf AuS-Konformität. Sicherheitsabstände, Not-Aus, PSA-Bereiche.", "kompetenzen": "Arbeitsschutzrecht, AuS-Normen", "verantwortung": "Einhaltung Sicherheitsvorschriften", "entscheidung": "Veto bei Sicherheitsmängeln"}, {"rolle": "Architekt", "aufgaben": "Bestandsaufnahme, Entwurfs- und Ausführungsplanung. Bauantragsunterlagen.", "kompetenzen": "Architektur, Baurecht, BIM", "verantwortung": "Fachgerechte Planung", "entscheidung": "Gestalterische und bautechnische Fragen"}, {"rolle": "TGA-Planer", "aufgaben": "Planung Elektro, Lüftung, Heizung. AuS-spezifische Energieversorgung.", "kompetenzen": "TGA, Elektrotechnik", "verantwortung": "Fachgerechte TGA-Planung", "entscheidung": "Technische Auslegung TGA"}, {"rolle": "Brandschutzsachverständiger", "aufgaben": "Brandschutzkonzept. Stellungnahme für Genehmigung. Flucht-/Rettungswege.", "kompetenzen": "Brandschutzrecht und -technik", "verantwortung": "Normgerechtes Brandschutzkonzept", "entscheidung": "Brandschutztechnische Maßnahmen"}, {"rolle": "Facility Management", "aufgaben": "Bestandsinformationen. Mitwirkung bei Wartung und Betrieb.", "kompetenzen": "Gebäudemanagement", "verantwortung": "Betriebssicherheit nach Übergabe", "entscheidung": "Betriebstechnische Anforderungen"}, {"rolle": "Betriebsrat", "aufgaben": "Mitbestimmung bei Arbeitsbedingungen.", "kompetenzen": "Arbeitsrecht", "verantwortung": "Wahrung Arbeitnehmerinteressen", "entscheidung": "Mitbestimmungsrechte"}, {"rolle": "Gutachter", "aufgaben": "Schadstoff- und Altlastenuntersuchung der ehemaligen Druckereifläche.", "kompetenzen": "Umweltanalytik, Gebäudeschadstoffe", "verantwortung": "Bewertung Schadstoffbelastung", "entscheidung": "Sanierungsempfehlung"}, {"rolle": "Nutzerbedarfskoordinator", "aufgaben": "Abstimmungen mit Nutzern, Auswertung der Bedarfe, Dokumentation und Priorisierung.", "kompetenzen": "Anforderungsmanagement, Moderation", "verantwortung": "Vollstaendigkeit Nutzeranforderungskatalog", "entscheidung": "Priorisierung Nutzeranforderungen"}, {"rolle": "Sicherheits-/Compliance-Koordinator", "aufgaben": "Regelwerkspruefung, Gefaehrdungsbewertung, Sicherheitsmassnahmen formulieren.", "kompetenzen": "Arbeitssicherheit, Risikobewertung", "verantwortung": "Belastbarkeit Sicherheitsanforderungskatalog", "entscheidung": "Freigabe sicherheitsrelevanter Planungsinhalte"}];
+const defGrundriss={"img":"","name":""};
+const defTeamkultur={"regeln":["Erreichbarkeit: Alle Beteiligten antworten innerhalb von 24h auf projektrelevante Anfragen","Kommunikation: Kritik immer sachlich und loesungsorientiert, nie persoenlich","Verbindlichkeit: Zugesagte Termine und Lieferungen werden eingehalten oder rechtzeitig kommuniziert","Transparenz: Probleme frueh ansprechen, nicht verschleppen","Feedback: Konstruktiv und zeitnah, nach jedem Meilenstein strukturierte Retro"],"feedbackLog":[{"datum":"","thema":"","erkenntnisse":"","massnahmen":""}],"lessonsLearned":[],"events":[{"datum":"2026-04-20","name":"Kickoff-Workshop","status":"geplant"},{"datum":"2026-07-20","name":"Meilensteinfeier Freigabe Vorplanung","status":"geplant"},{"datum":"2026-08-10","name":"Meilensteinfeier Projektfreigabe","status":"geplant"}],"konflikte":[]};
+//__PROJDATA_END__
+
+// ── STATE ──
+let data=load(SK.data,defData);
+let contacts=load(SK.contacts,defContacts);
+let texts=load(SK.texts,defTexts);
+let risks=load(SK.risks,defRisks);
+let roles=load(SK.roles,defRoles);
+let teamkultur=load(SK.team,defTeamkultur);
+let active="dashboard";
+var viewOnly=window.location.search.indexOf('view=1')>=0;
+if(viewOnly){document.body.classList.add('view-mode');var vb=document.getElementById('view-badge');if(vb)vb.style.display='block';}
+
+// Disable editing functions in view mode
+var _origPrompt=window.prompt;
+if(viewOnly){
+  window.prompt=function(){return null;};
+  window.editPSP=function(){};window.openPSPDetail=function(){};window.startEdit=function(){};
+  window.editContact=function(){};window.editRole=function(){};window.editRisk=function(){};
+  window.editText=function(){};window.addPSPRow=function(){};window.addPSPSub=function(){};
+  window.delPSP=function(){};window.addContact=function(){};window.addRole=function(){};
+  window.addRisk=function(){};window.delRisk=function(){};window.resetAll=function(){};
+  window.editTKRegel=function(){};window.addTKRegel=function(){};window.delTKRegel=function(){};
+  window.editTKEvent=function(){};window.addTKEvent=function(){};window.delTKEvent=function(){};
+  window.editTKFeedback=function(){};window.addTKFeedback=function(){};window.delTKFeedback=function(){};
+  window.editTKLL=function(){};window.addTKLL=function(){};window.delTKLL=function(){};
+  window.editTKKonflikt=function(){};window.addTKKonflikt=function(){};window.delTKKonflikt=function(){};
+}
+if(typeof defGrundriss!=='undefined'&&defGrundriss.img&&!localStorage.getItem('grundriss_img_'+VER)){localStorage.setItem('grundriss_img_'+VER,defGrundriss.img);localStorage.setItem('grundriss_name_'+VER,defGrundriss.name||'');}
+
+function load(k,def){try{const v=localStorage.getItem(k);return v?JSON.parse(v):JSON.parse(JSON.stringify(def));}catch(e){return JSON.parse(JSON.stringify(def));}}
+function save(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function saveAll(){save(SK.data,data);save(SK.contacts,contacts);save(SK.texts,texts);save(SK.risks,risks);save(SK.roles,roles);}
+function fmt(d){if(!d)return"";const p=d.split("-");return p[2]+"."+p[1]+"."+p[0];}
+function esc(s){return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function badge(t,c){return'<span class="badge b-'+c+'">'+t+'</span>';}
+function personForRole(r){const c=contacts.find(x=>x.rolle===r);return c?c.name:"";}
+
+const sects=[
+{group:"Übersicht",items:[{key:"dashboard",label:"Dashboard"}]},
+{group:"Projekt",items:[{key:"info",label:"Projektgrundlagen"},{key:"ziele",label:"Projektziele"},{key:"grundriss",label:"Grundriss"}]},
+{group:"Organisation",items:[{key:"kontakte",label:"Kontaktliste"},{key:"org",label:"Organigramm"},{key:"rollen",label:"Rollensteckbriefe"},{key:"komm",label:"Kommunikationsmatrix"},{key:"kommablauf",label:"Kommunikationsabläufe"}]},
+{group:"Daten",items:[{key:"psp",label:"PSP-Datenbank"},{key:"gantt",label:"Terminplan"},{key:"kosten",label:"Kostenübersicht"},{key:"raci",label:"RACI-Matrix"}]},
+{group:"Steuerung",items:[{key:"risiken",label:"Risiken"},{key:"aenderung",label:"Änderungsmanagement"},{key:"teamkultur",label:"Teamkultur"}]},
+];
+const allSec=sects.flatMap(g=>g.items);
+
+function renderNav(){
+  // Mini metrics
+  var items=data.filter(function(r){return r.parent;});
+  var totalK=items.reduce(function(s,r){return s+r.kosten;},0);
+  var fertig=items.filter(function(r){return r.status==='fertig';}).length;
+  var pct=Math.round(fertig/Math.max(items.length,1)*100);
+  var mEl=document.getElementById("nav-metrics");
+  if(mEl)mEl.innerHTML='<div class="met"><div class="mv">'+items.length+'</div><div class="ml">PAKETE</div></div><div class="met"><div class="mv">'+pct+'%</div><div class="ml">FORTSCHRITT</div></div><div class="met"><div class="mv">'+(totalK>=1000?Math.round(totalK/1000)+'T':totalK)+'\u20ac</div><div class="ml">KOSTEN</div></div>';
+  // Icons per key
+  var ico={
+    dashboard:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="2" width="5" height="5" rx="1"/><rect x="9" y="2" width="5" height="5" rx="1"/><rect x="2" y="9" width="5" height="5" rx="1"/><rect x="9" y="9" width="5" height="5" rx="1"/></svg>',
+    info:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="3" width="12" height="10" rx="1.5"/><line x1="5" y1="7" x2="11" y2="7"/><line x1="5" y1="10" x2="9" y2="10"/></svg>',
+    ziele:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><circle cx="8" cy="8" r="3.5"/><circle cx="8" cy="8" r="1" fill="STC"/></svg>',
+    grundriss:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1"/><line x1="2" y1="9" x2="10" y2="9"/><line x1="10" y1="2" x2="10" y2="9"/><line x1="6" y1="9" x2="6" y2="14"/></svg>',
+    kontakte:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><circle cx="6" cy="5" r="2.5"/><circle cx="11" cy="5" r="2.5"/><path d="M1 13c0-2.5 2-4 5-4s5 1.5 5 4"/></svg>',
+    org:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="5" y="1" width="6" height="4" rx="1"/><rect x="1" y="10" width="5" height="4" rx="1"/><rect x="10" y="10" width="5" height="4" rx="1"/><line x1="8" y1="5" x2="8" y2="8"/><line x1="3.5" y1="8" x2="12.5" y2="8"/><line x1="3.5" y1="8" x2="3.5" y2="10"/><line x1="12.5" y1="8" x2="12.5" y2="10"/></svg>',
+    rollen:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><circle cx="8" cy="5" r="3"/><path d="M3 14c0-3 2-5 5-5s5 2 5 5"/></svg>',
+    komm:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><line x1="2" y1="6" x2="14" y2="6"/><line x1="6" y1="2" x2="6" y2="14"/></svg>',
+    kommablauf:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><path d="M2 4h8M2 8h12M2 12h6"/><circle cx="13" cy="4" r="1.5" fill="STC"/></svg>',
+    psp:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><line x1="5" y1="6" x2="11" y2="6"/><line x1="5" y1="10" x2="11" y2="10"/></svg>',
+    gantt:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="3" width="12" height="11" rx="1.5"/><line x1="2" y1="7" x2="14" y2="7"/><line x1="5" y1="1.5" x2="5" y2="4.5"/><line x1="11" y1="1.5" x2="11" y2="4.5"/><line x1="5" y1="10" x2="5" y2="10.01" stroke-linecap="round" stroke-width="2"/><line x1="8" y1="10" x2="8" y2="10.01" stroke-linecap="round" stroke-width="2"/><line x1="11" y1="10" x2="11" y2="10.01" stroke-linecap="round" stroke-width="2"/></svg>',
+    kosten:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 4v4h4"/></svg>',
+    raci:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><rect x="2" y="2" width="12" height="12" rx="1.5"/><line x1="2" y1="6" x2="14" y2="6"/><line x1="2" y1="10" x2="14" y2="10"/><line x1="6" y1="2" x2="6" y2="14"/><line x1="10" y1="2" x2="10" y2="14"/></svg>',
+    risiken:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><path d="M8 2L14 13H2Z"/><line x1="8" y1="6" x2="8" y2="9"/><circle cx="8" cy="11" r=".5" fill="STC"/></svg>',
+    aenderung:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><path d="M13 8A5 5 0 1 1 8 3"/><path d="M8 3l3 0l0 3"/></svg>',
+    teamkultur:'<svg viewBox="0 0 16 16" fill="none" stroke="STC" stroke-width="1.5"><circle cx="5" cy="5" r="2"/><circle cx="11" cy="5" r="2"/><circle cx="8" cy="11" r="2"/><line x1="6.5" y1="6.5" x2="7" y2="9.5"/><line x1="9.5" y1="6.5" x2="9" y2="9.5"/><line x1="6" y1="5" x2="9" y2="5"/></svg>'
+  };
+  var groupColors={"\u00dcbersicht":"#3b82f6","Projekt":"#6366f1","Organisation":"#10b981","Daten":"#d97706","Steuerung":"#ef4444"};
+  var h="";
+  sects.forEach(function(g){
+    var gc=groupColors[g.group]||"#64748b";
+    h+='<div class="ng">'+g.group+'</div>';
+    g.items.forEach(function(s){
+      var svg=(ico[s.key]||'').replace(/STC/g,gc);
+      h+='<button class="'+(active===s.key?"active":"")+'" onclick="go(\''+s.key+'\')">';
+      h+='<span class="ico" style="background:'+gc+'12">'+svg+'</span>';
+      h+='<span class="nlbl">'+s.label+'</span></button>';
+    });
+  });
+  document.getElementById("nav-buttons").innerHTML=h;
+}
+
+function go(k){active=k;const s=allSec.find(x=>x.key===k);document.getElementById("page-title").textContent=s.label;renderNav();render();}
+function render(){const el=document.getElementById("content");const fn={dashboard:rDash,info:rInfo,ziele:rZiele,grundriss:rGrundriss,kontakte:rKontakte,org:rOrg,rollen:rRollen,komm:rKomm,kommablauf:rKommablauf,psp:rPSP,gantt:rGantt,kosten:rKosten,raci:rRACI,risiken:rRisiken,aenderung:rAenderung,teamkultur:rTeamkultur};el.innerHTML=(fn[active]||rDash)();}
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+function closeModal(){document.getElementById("modal-container").innerHTML="";}
+
+// ── DASHBOARD ──
+function rDash(){
+  const items=data.filter(r=>r.parent);
+  const total=items.reduce((s,r)=>s+r.kosten,0);
+  const offen=items.filter(r=>r.status==="offen").length;
+  const arbeit=items.filter(r=>r.status==="in Arbeit").length;
+  const fertig=items.filter(r=>r.status==="fertig").length;
+  const all=items.length||1;
+  const pct=Math.round(fertig/all*100);
+  const ms=items.filter(r=>r.ms&&r.start).sort((a,b)=>a.start.localeCompare(b.start));
+  const nextMs=ms.find(m=>m.status!=="fertig");
+
+  let h='<div class="kpi">';
+  h+='<div class="kpi-card"><div class="val">'+total.toLocaleString("de-DE")+' €</div><div class="lbl">Gesamtkosten (geschätzt)</div></div>';
+  h+='<div class="kpi-card"><div class="val">'+items.length+'</div><div class="lbl">Arbeitspakete</div></div>';
+  h+='<div class="kpi-card"><div class="val">'+pct+'%</div><div class="lbl">Fortschritt</div></div>';
+  h+='<div class="kpi-card"><div class="val" style="font-size:14px">'+(nextMs?esc(nextMs.name):"–")+'</div><div class="lbl">'+(nextMs?fmt(nextMs.start):"Nächster Meilenstein")+'</div></div>';
+  h+='</div>';
+
+  // Status bar
+  h+='<h3>Status Arbeitspakete</h3>';
+  h+='<div class="stacked-bar">';
+  if(fertig)h+='<div class="stacked-seg" style="width:'+(fertig/all*100)+'%;background:var(--green)">'+fertig+' fertig</div>';
+  if(arbeit)h+='<div class="stacked-seg" style="width:'+(arbeit/all*100)+'%;background:var(--amber)">'+arbeit+' in Arbeit</div>';
+  if(offen)h+='<div class="stacked-seg" style="width:'+(offen/all*100)+'%;background:#94a3b8">'+offen+' offen</div>';
+  h+='</div>';
+  h+='<div style="display:flex;gap:12px;font-size:10px;color:var(--text3);margin-bottom:20px">';
+  h+='<span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:var(--green)"></span>fertig</span>';
+  h+='<span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:var(--amber)"></span>in Arbeit</span>';
+  h+='<span style="display:flex;align-items:center;gap:3px"><span style="width:8px;height:8px;border-radius:2px;background:#94a3b8"></span>offen</span>';
+  h+='</div>';
+
+  // Two columns
+  h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px">';
+
+  // Cost by Bereich
+  h+='<div><h3 style="margin-top:0">Kosten nach Bereich</h3>';
+  const byB={};items.forEach(r=>{byB[r.bereich]=(byB[r.bereich]||0)+r.kosten;});
+  const maxK=Math.max(...Object.values(byB),1);
+  Object.entries(byB).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>{
+    h+='<div class="bar-chart"><div class="row"><span>'+k+'</span><span style="font-weight:600">'+v.toLocaleString("de-DE")+'€</span></div><div class="track"><div class="fill" style="width:'+(v/maxK*100)+'%"></div></div></div>';
+  });
+  h+='</div>';
+
+  // Milestone timeline
+  h+='<div><h3 style="margin-top:0">Meilensteine</h3><div class="ms-timeline">';
+  ms.forEach((m,i)=>{
+    const done=m.status==="fertig";
+    h+='<div class="ms-item"><div class="ms-dot" style="background:'+(done?"var(--green)":"var(--accent)")+'"></div>';
+    h+='<div><div class="ms-date">'+fmt(m.start)+'</div><div class="ms-name" style="'+(done?"text-decoration:line-through;color:var(--text3)":"")+'">'+esc(m.name)+'</div></div></div>';
+    if(i<ms.length-1)h+='<div style="margin-left:4px;width:2px;height:16px;background:var(--border)"></div>';
+  });
+  h+='</div></div>';
+  h+='</div>';
+
+  // Heatmap
+  h+='<h3>Ressourcen-Heatmap (Arbeitspakete pro Person/Monat)</h3>';
+  const pItems=items.filter(r=>r.start&&r.end&&r.person);
+  const personen=[...new Set(pItems.map(r=>r.person))].sort();
+  const months=[];
+  if(pItems.length){
+    const allD=pItems.flatMap(r=>[new Date(r.start),new Date(r.end)]);
+    let cur=new Date(Math.min(...allD));cur.setDate(1);
+    const maxD=new Date(Math.max(...allD));
+    while(cur<=maxD){months.push(new Date(cur));cur=new Date(cur.getFullYear(),cur.getMonth()+1,1);}
+  }
+  h+='<div style="overflow-x:auto"><table><thead><tr><th style="background:var(--row1);color:var(--text)">Person</th>';
+  months.forEach(m=>{h+='<th style="background:var(--row1);color:var(--text3);font-size:10px;text-align:center">'+m.toLocaleDateString("de-DE",{month:"short"})+'</th>';});
+  h+='</tr></thead><tbody>';
+  personen.forEach(p=>{
+    h+='<tr><td style="font-size:11px;white-space:nowrap">'+esc(p)+'</td>';
+    months.forEach(m=>{
+      const mStart=m,mEnd=new Date(m.getFullYear(),m.getMonth()+1,0);
+      const count=pItems.filter(r=>r.person===p&&new Date(r.start)<=mEnd&&new Date(r.end)>=mStart).length;
+      const bg=count===0?"#f9fafb":count===1?"#dbeafe":count===2?"#93c5fd":count>=3?"#3b82f6":"#f9fafb";
+      const col=count>=3?"white":"var(--text)";
+      h+='<td><div class="heatmap-cell" style="background:'+bg+';color:'+col+'">'+count+'</div></td>';
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+
+  // Risk scatter
+  h+='<h3>Risikomatrix</h3>';
+  h+='<div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap">';
+  h+='<div style="position:relative;width:300px;height:300px;border:1px solid var(--border);border-radius:6px;background:white;overflow:hidden">';
+  // Grid
+  for(let x=1;x<=3;x++)for(let y=1;y<=3;y++){
+    const bg=x+y>=5?"#fee2e2":x+y>=4?"#fef3c7":"#dcfce7";
+    h+='<div style="position:absolute;left:'+((x-1)*100)+'px;bottom:'+((y-1)*100)+'px;width:100px;height:100px;background:'+bg+';border:1px solid rgba(0,0,0,.05)"></div>';
+  }
+  // Axis labels
+  h+='<div style="position:absolute;bottom:-18px;left:50%;transform:translateX(-50%);font-size:10px;color:var(--text3)">Auswirkung →</div>';
+  h+='<div style="position:absolute;left:-24px;top:50%;transform:translateY(-50%) rotate(-90deg);font-size:10px;color:var(--text3);white-space:nowrap">Wahrscheinlichkeit →</div>';
+  risks.forEach((r,i)=>{
+    const x=(r.auswirk-1)*100+50;const y=(r.wahrsch-1)*100+50;
+    h+='<div style="position:absolute;left:'+x+'px;bottom:'+y+'px;transform:translate(-50%,-50%);z-index:2" title="'+esc(r.name)+'">';
+    h+='<div style="width:24px;height:24px;border-radius:50%;background:#1e3a5f;color:white;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:600">'+(i+1)+'</div></div>';
+  });
+  h+='</div>';
+  // Legend
+  h+='<div style="font-size:11px;line-height:2">';
+  risks.forEach((r,i)=>{h+='<div><b>'+(i+1)+'</b> '+esc(r.name)+'</div>';});
+  h+='</div></div>';
+
+  return h;
+}
+
+// ── INFO ──
+function rInfo(){
+  let h='<p style="color:var(--text3);font-size:13px;margin-bottom:14px">Stand: April 2026 · LPH 0/1</p>';
+  h+='<table>';
+  [["Projektbezeichnung","AuS – Arbeiten unter Spannung"],["Auftraggeber","Geschäftsführung"],["Projektart","Umnutzung im Bestand"],["Fläche","ca. 600 m²"],["Projektstand","LPH 0"],["Baubeginn","Q1 2027"],["Fertigstellung","Q2 2028"],["Dauer","ca. 2 Jahre"]].forEach((r,i)=>{
+    h+='<tr style="border-bottom:1px solid var(--border)"><td style="padding:8px 10px;font-weight:600;width:30%;background:'+(i%2===0?'var(--row1)':'var(--row2)')+'">'+r[0]+'</td><td style="padding:8px 10px;background:'+(i%2===0?'var(--row1)':'var(--row2)')+'">'+r[1]+'</td></tr>';
+  });
+  h+='</table>';
+  h+='<h3>Projektanlass</h3><p class="editable" onclick="editText(\'anlass\')" style="font-size:13px;line-height:1.7;color:var(--text2);padding:6px">'+esc(texts.anlass)+'</p>';
+  h+='<h3>Genehmigungen</h3><p class="editable" onclick="editText(\'genehmigungen\')" style="font-size:13px;line-height:1.7;color:var(--text2);padding:6px">'+esc(texts.genehmigungen)+'</p>';
+  h+='<h3>Funktionsbereiche</h3><div class="info-grid editable" onclick="editText(\'bereiche\')" style="padding:4px;border-radius:4px">';
+  texts.bereiche.split("|").forEach(r=>{if(r.trim())h+='<div class="info-card">'+esc(r.trim())+'</div>';});
+  h+='</div><p style="font-size:10px;color:var(--text4);margin-top:6px">Klick auf Text oder Karten zum Bearbeiten</p>';
+  return h;
+}
+
+function editText(key){
+  const labels={anlass:"Projektanlass",genehmigungen:"Genehmigungen",bereiche:"Funktionsbereiche (getrennt mit |)",oberziele:"Oberziele (getrennt mit |)",nichtziele:"Nicht-Ziele (getrennt mit |)"};
+  showModal(labels[key]||key,'<label>Text</label><textarea id="mt" rows="6">'+esc(texts[key])+'</textarea>',()=>{texts[key]=document.getElementById("mt").value;save(SK.texts,texts);closeModal();render();showToast('Gespeichert');});
+}
+
+// ── ZIELE ──
+function rZiele(){
+  let h='<h3 style="margin-top:0">Oberziele</h3><div class="editable" onclick="editText(\'oberziele\')" style="padding:6px;border-radius:4px">';
+  texts.oberziele.split("|").forEach(z=>{if(z.trim())h+='<div style="display:flex;gap:8px;margin-bottom:6px;font-size:13px;color:var(--text2)"><span style="color:var(--accent);font-weight:700">—</span>'+esc(z.trim())+'</div>';});
+  h+='</div>';
+  h+='<h3>SMART-Ziele</h3><table>';
+  [["Spezifisch","Umnutzung ca. 600 m² zu AuS-Stätte"],["Messbar","Abnahme aller sicherheitsrelevanten Anlagen"],["Attraktiv","Verbesserung Sicherheit und Ausbildung"],["Realistisch","Innenausbau ohne statische Eingriffe"],["Terminiert","Betriebsaufnahme bis Q2 2028"]].forEach(r=>{
+    h+='<tr style="border-bottom:1px solid var(--border)"><td style="padding:6px 10px;font-weight:600;width:22%;color:var(--accent);font-size:12px">'+r[0]+'</td><td style="padding:6px 10px;font-size:13px">'+r[1]+'</td></tr>';
+  });
+  h+='</table>';
+  h+='<h3>Nicht-Ziele</h3><div class="editable" onclick="editText(\'nichtziele\')" style="padding:6px;border-radius:4px">';
+  texts.nichtziele.split("|").forEach(z=>{if(z.trim())h+='<div style="display:flex;gap:8px;margin-bottom:5px;font-size:13px;color:var(--text3)"><span style="color:var(--red);font-weight:700">✕</span>'+esc(z.trim())+'</div>';});
+  h+='</div>';
+  return h;
+}
+
+// ── KONTAKTE ──
+function rKontakte(){
+  let h='<p style="font-size:12px;color:var(--text3);margin-bottom:12px">Stammdaten aller Projektbeteiligten. Änderungen wirken sich auf Organigramm und Kommunikationsmatrix aus.</p>';
+  h+='<div style="overflow-x:auto"><table><thead><tr class="tbl-head"><th>Name</th><th>Rolle</th><th>Organisation</th><th>Telefon</th><th>E-Mail</th><th>Typ</th><th>Berichtet an</th><th>Stellvertr.</th><th></th></tr></thead><tbody>';
+  contacts.forEach(c=>{
+    h+='<tr class="psp-row" style="border-bottom:1px solid var(--border)">';
+    h+='<td style="font-weight:500">'+esc(c.name)+'</td>';
+    h+='<td>'+esc(c.rolle)+'</td>';
+    h+='<td style="font-size:11px">'+esc(c.org)+'</td>';
+    h+='<td style="font-size:11px">'+esc(c.tel)+'</td>';
+    h+='<td style="font-size:11px">'+esc(c.email)+'</td>';
+    h+='<td>'+badge(c.typ,c.typ==="intern"?"blue":"purple")+'</td>';
+    h+='<td style="font-size:11px">'+esc(c.reportsTo)+'</td>';
+    h+='<td style="font-size:11px;color:var(--accent)">'+esc(c.stellvertreter||'')+'</td>';
+    h+='<td><button class="btn btn-sm" onclick="editContact('+c.id+')">Bearbeiten</button></td>';
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<button class="btn" onclick="addContact()">Kontakt hinzufügen</button>';
+  return h;
+}
+
+function editContact(id){
+  const c=contacts.find(x=>x.id===id);if(!c)return;
+  const rollenOpts=contacts.filter(x=>x.id!==id).map(x=>'<option value="'+esc(x.rolle)+'" '+(c.reportsTo===x.rolle?"selected":"")+'>'+esc(x.rolle)+' ('+esc(x.name)+')</option>').join("");
+  const infOpts=contacts.filter(x=>x.id!==id).map(x=>{const chk=c.informedBy&&c.informedBy.includes(x.rolle)?"checked":"";return'<label style="display:block;font-weight:400;font-size:11px;margin:2px 0"><input type="checkbox" value="'+esc(x.rolle)+'" '+chk+' class="inf-cb"> '+esc(x.rolle)+' ('+esc(x.name)+')</label>';}).join("");
+  const body='<label>Name</label><input id="mc-name" value="'+esc(c.name)+'">'+
+    '<label>Rolle</label><input id="mc-rolle" value="'+esc(c.rolle)+'">'+
+    '<label>Organisation</label><input id="mc-org" value="'+esc(c.org)+'">'+
+    '<label>Telefon</label><input id="mc-tel" value="'+esc(c.tel)+'">'+
+    '<label>E-Mail</label><input id="mc-email" value="'+esc(c.email)+'">'+
+    '<label>Typ</label><select id="mc-typ"><option value="intern" '+(c.typ==="intern"?"selected":"")+'>intern</option><option value="extern" '+(c.typ==="extern"?"selected":"")+'>extern</option></select>'+
+    '<label>Stellvertreter</label><input id="mc-stv" value="'+esc(c.stellvertreter||'')+'">'+'<label>Berichtet an</label><select id="mc-reports"><option value="">– keine –</option>'+rollenOpts+'</select>'+
+    '<label>Wird informiert von</label><div id="mc-inf">'+infOpts+'</div>';
+  showModal("Kontakt bearbeiten",body,()=>{
+    c.name=document.getElementById("mc-name").value;c.rolle=document.getElementById("mc-rolle").value;
+    c.org=document.getElementById("mc-org").value;c.tel=document.getElementById("mc-tel").value;
+    c.email=document.getElementById("mc-email").value;c.typ=document.getElementById("mc-typ").value;
+    c.stellvertreter=document.getElementById("mc-stv").value;
+    c.reportsTo=document.getElementById("mc-reports").value;
+    c.informedBy=[...document.querySelectorAll(".inf-cb:checked")].map(x=>x.value);
+    save(SK.contacts,contacts);closeModal();render();showToast('Kontakt gespeichert');
+  },id!==1?()=>{if(confirm("Kontakt löschen?")){contacts=contacts.filter(x=>x.id!==id);save(SK.contacts,contacts);closeModal();render();}}:null);
+}
+
+function addContact(){
+  const newId=contacts.length?Math.max(...contacts.map(c=>c.id))+1:1;
+  contacts.push({id:newId,name:"Neue Person",rolle:"Neue Rolle",org:"",tel:"",email:"",typ:"extern",reportsTo:"Projektleitung",informedBy:[]});
+  save(SK.contacts,contacts);render();showToast('Kontakt hinzugefuegt');
+}
+
+// ── ORGANIGRAMM ──
+function rOrg(){
+  let h='<p style="font-size:12px;color:var(--text3);margin-bottom:16px">Generiert sich dynamisch aus der Kontaktliste. Aendere dort Hierarchien, um das Organigramm anzupassen.</p>';
+  const topNodes=contacts.filter(c=>!c.reportsTo);
+  const stabNodes=topNodes.filter(c=>c.rolle.toLowerCase().includes("betriebsrat")||c.rolle.toLowerCase().includes("stab"));
+  const realTop=topNodes.filter(c=>!stabNodes.includes(c));
+  function getChildren(rolle){return contacts.filter(c=>c.reportsTo===rolle);}
+  const BW=152,BH=58,GX=16,GY=62,PAD=30;
+  const colInt="#dbeafe",colIntB="#3b82f6",colExt="#fef3c7",colExtB="#d97706";
+  const colTop="#eef2ff",colTopB="#3b82f6",colL="#94a3b8";
+  function layoutTree(ct,x,y){
+    var children=getChildren(ct.rolle);
+    var isE=ct.typ==="extern";
+    var isTop=realTop.includes(ct);
+    var fill=isTop?colTop:isE?colExt:colInt;
+    var stroke=isTop?colTopB:isE?colExtB:colIntB;
+    if(!children.length){return{nodes:[{x:x,y:y,w:BW,h:BH,name:ct.name,rolle:ct.rolle,org:ct.org||"",fill:fill,stroke:stroke,isExt:isE}],lines:[],width:BW,height:BH,cx:x+BW/2};}
+    var cls=[],ctw=0;
+    children.forEach(function(ch,i){var cl=layoutTree(ch,0,0);cls.push(cl);ctw+=cl.width;if(i<children.length-1)ctw+=GX;});
+    var tw=Math.max(BW,ctw);
+    var px=x+(tw-BW)/2,pcx=px+BW/2,cy=y+BH+GY;
+    var curX=x+(tw-ctw)/2;
+    var ns=[{x:px,y:y,w:BW,h:BH,name:ct.name,rolle:ct.rolle,org:ct.org||"",fill:fill,stroke:stroke,isExt:isE}];
+    var ls=[];
+    var jy=y+BH+GY/2;
+    ls.push({x1:pcx,y1:y+BH,x2:pcx,y2:jy,d:false});
+    var cxs=[];
+    cls.forEach(function(cl,i){
+      var ox=curX,oy=cy;
+      cl.nodes.forEach(function(n){ns.push({x:n.x+ox,y:n.y+oy,w:n.w,h:n.h,name:n.name,rolle:n.rolle,org:n.org,fill:n.fill,stroke:n.stroke,isExt:n.isExt,isStab:n.isStab});});
+      cl.lines.forEach(function(l){ls.push({x1:l.x1+ox,y1:l.y1+oy,x2:l.x2+ox,y2:l.y2+oy,d:l.d});});
+      var ccx=cl.cx+ox;cxs.push(ccx);
+      ls.push({x1:ccx,y1:jy,x2:ccx,y2:oy,d:false});
+      curX+=cl.width+GX;
+    });
+    if(cxs.length>1)ls.push({x1:Math.min.apply(null,cxs),y1:jy,x2:Math.max.apply(null,cxs),y2:jy,d:false});
+    var mxh=0;cls.forEach(function(c){if(c.height>mxh)mxh=c.height;});
+    return{nodes:ns,lines:ls,width:tw,height:cy-y+mxh,cx:pcx};
+  }
+  var aN=[],aL=[],mW=0,mH=0;
+  if(realTop.length>=1){
+    var lay=layoutTree(realTop[0],PAD,PAD);
+    aN=lay.nodes;aL=lay.lines;mW=lay.width+PAD*2;mH=lay.height+PAD*2;
+    stabNodes.forEach(function(sn){
+      var tn=aN[0];var sx=tn.x+tn.w+50;var sy=tn.y;
+      aN.push({x:sx,y:sy,w:BW,h:BH,name:sn.name,rolle:sn.rolle,org:sn.org||"",fill:"#f3f4f6",stroke:"#6b7280",isExt:false,isStab:true});
+      aL.push({x1:tn.x+tn.w,y1:tn.y+BH/2,x2:sx,y2:sy+BH/2,d:true});
+      mW=Math.max(mW,sx+BW+PAD);
+    });
+    for(var ti=1;ti<realTop.length;ti++){
+      var lay2=layoutTree(realTop[ti],PAD,mH+GY);
+      lay2.nodes.forEach(function(n){aN.push(n);});lay2.lines.forEach(function(l){aL.push(l);});
+      mW=Math.max(mW,lay2.width+PAD*2);mH=mH+GY+lay2.height;
+    }
+  }
+  aN.forEach(function(n){mH=Math.max(mH,n.y+n.h+32+PAD);mW=Math.max(mW,n.x+n.w+PAD);});
+  h+='<div style="overflow-x:auto">';
+  h+='<svg width="100%" viewBox="0 0 '+mW+' '+mH+'" style="max-width:'+mW+'px;min-width:600px">';
+  aL.forEach(function(l){h+='<line x1="'+l.x1+'" y1="'+l.y1+'" x2="'+l.x2+'" y2="'+l.y2+'" stroke="'+colL+'" stroke-width="1.5"'+(l.d?' stroke-dasharray="6 4"':'')+'/>';});
+  aN.forEach(function(n){
+    h+='<rect x="'+n.x+'" y="'+n.y+'" width="'+n.w+'" height="'+n.h+'" rx="6" fill="'+n.fill+'" stroke="'+n.stroke+'" stroke-width="'+(n.isStab?"1":"1.5")+'"/>';
+    if(n.isExt)h+='<rect x="'+n.x+'" y="'+(n.y+4)+'" width="3" height="'+(n.h-8)+'" rx="1.5" fill="'+colExtB+'"/>';
+    h+='<text x="'+(n.x+n.w/2)+'" y="'+(n.y+20)+'" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="12" font-weight="600" fill="#0f172a">'+esc(n.name)+'</text>';
+    h+='<text x="'+(n.x+n.w/2)+'" y="'+(n.y+34)+'" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="10" fill="#64748b">'+esc(n.rolle)+'</text>';
+    if(n.org)h+='<text x="'+(n.x+n.w/2)+'" y="'+(n.y+47)+'" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="9" fill="#94a3b8">'+esc(n.org)+'</text>';
+    if(n.isStab)h+='<text x="'+(n.x+n.w/2)+'" y="'+(n.y-5)+'" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="9" fill="#6b7280" font-style="italic">Stabsstelle</text>';
+    // Stellvertreter sub-node
+    var ctMatch=contacts.find(function(c){return c.rolle===n.rolle;});
+    if(ctMatch&&ctMatch.stellvertreter){
+      var svY=n.y+n.h+4;
+      h+='<line x1="'+(n.x+n.w/2)+'" y1="'+(n.y+n.h)+'" x2="'+(n.x+n.w/2)+'" y2="'+svY+'" stroke="#94a3b8" stroke-width="1" stroke-dasharray="3 2"/>';
+      h+='<rect x="'+(n.x+10)+'" y="'+svY+'" width="'+(n.w-20)+'" height="22" rx="4" fill="#f8fafc" stroke="#cbd5e1" stroke-width="0.5"/>';
+      h+='<text x="'+(n.x+n.w/2)+'" y="'+(svY+14)+'" text-anchor="middle" font-family="Segoe UI,system-ui,sans-serif" font-size="9" fill="#64748b">Stv: '+esc(ctMatch.stellvertreter)+'</text>';
+    }
+  });
+  h+='</svg></div>';
+  h+='<div style="display:flex;gap:16px;margin-top:14px;font-size:11px;color:var(--text3);flex-wrap:wrap">';
+  h+='<span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:12px;border-radius:3px;background:'+colInt+';border:1px solid '+colIntB+'"></span>Intern</span>';
+  h+='<span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:12px;border-radius:3px;background:'+colExt+';border:1px solid '+colExtB+';border-left:3px solid '+colExtB+'"></span>Extern</span>';
+  h+='<span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:12px;border-radius:3px;background:#f3f4f6;border:1px solid #6b7280"></span>Stabsstelle</span>';
+  h+='<span style="display:flex;align-items:center;gap:5px"><span style="width:16px;height:8px;border-radius:2px;background:#f8fafc;border:1px solid #cbd5e1"></span>Stellvertreter</span>';
+  h+='<span style="display:flex;align-items:center;gap:5px"><svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#94a3b8" stroke-width="1.5"/></svg>Linie</span>';
+  h+='<span style="display:flex;align-items:center;gap:5px"><svg width="20" height="10"><line x1="0" y1="5" x2="20" y2="5" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="4 3"/></svg>Stab</span>';
+  h+='</div>';
+  return h;
+}
+
+// ── ROLLEN ──
+function rRollen(){
+  let h='<p style="font-size:12px;color:var(--text3);margin-bottom:14px">Klicke auf einen Steckbrief zum Bearbeiten.</p>';
+  roles.forEach((rd,i)=>{
+    const p=personForRole(rd.rolle);
+    const count=data.filter(r=>r.parent&&r.verantw===rd.rolle).length;
+    h+='<div class="role-card editable" onclick="editRole('+i+')">';
+    h+='<h4>'+esc(rd.rolle)+'</h4>';
+    h+='<div class="rp">'+esc(p||"– nicht zugeordnet –")+' · '+count+' AP</div>';
+    h+='<div class="rd"><b>Aufgaben:</b> '+esc(rd.aufgaben)+'</div>';
+    h+='<div class="rd"><b>Kompetenzen:</b> '+esc(rd.kompetenzen)+'</div>';
+    h+='<div class="rd"><b>Verantwortung:</b> '+esc(rd.verantwortung)+'</div>';
+    h+='<div class="rd"><b>Entscheidung:</b> '+esc(rd.entscheidung)+'</div>';
+    h+='</div>';
+  });
+  h+='<button class="btn" onclick="addRole()">Rolle hinzufügen</button>';
+  return h;
+}
+
+function editRole(i){
+  const r=roles[i];
+  const body='<label>Rolle</label><input id="mr-rolle" value="'+esc(r.rolle)+'">'+
+    '<label>Aufgaben</label><textarea id="mr-aufg" rows="3">'+esc(r.aufgaben)+'</textarea>'+
+    '<label>Kompetenzen</label><input id="mr-komp" value="'+esc(r.kompetenzen)+'">'+
+    '<label>Verantwortung</label><input id="mr-verant" value="'+esc(r.verantwortung)+'">'+
+    '<label>Entscheidungsbefugnis</label><input id="mr-ent" value="'+esc(r.entscheidung)+'">';
+  showModal("Rollensteckbrief bearbeiten",body,()=>{
+    r.rolle=document.getElementById("mr-rolle").value;r.aufgaben=document.getElementById("mr-aufg").value;
+    r.kompetenzen=document.getElementById("mr-komp").value;r.verantwortung=document.getElementById("mr-verant").value;
+    r.entscheidung=document.getElementById("mr-ent").value;
+    save(SK.roles,roles);closeModal();render();showToast('Rolle gespeichert');
+  },()=>{if(confirm("Rolle löschen?")){roles.splice(i,1);save(SK.roles,roles);closeModal();render();}});
+}
+
+function addRole(){roles.push({rolle:"Neue Rolle",aufgaben:"",kompetenzen:"",verantwortung:"",entscheidung:""});save(SK.roles,roles);render();}
+
+// ── KOMMUNIKATIONSMATRIX ──
+function rKomm(){
+  const rollen=contacts.map(c=>c.rolle);
+  const matrix={};rollen.forEach(a=>{matrix[a]={};rollen.forEach(b=>{matrix[a][b]="";});});
+  // From contacts: reportsTo + informedBy
+  contacts.forEach(c=>{
+    if(c.reportsTo&&matrix[c.rolle]&&matrix[c.rolle][c.reportsTo]!==undefined)matrix[c.rolle][c.reportsTo]="berichtet";
+    if(c.reportsTo&&matrix[c.reportsTo]&&matrix[c.reportsTo][c.rolle]!==undefined)matrix[c.reportsTo][c.rolle]="steuert";
+    (c.informedBy||[]).forEach(from=>{if(matrix[from]&&matrix[from][c.rolle]!==undefined)matrix[from][c.rolle]="informiert";});
+  });
+  // From RACI
+  data.filter(r=>r.parent).forEach(row=>{
+    if(row.rR&&row.rC&&matrix[row.rR]&&matrix[row.rR][row.rC]!==undefined&&!matrix[row.rR][row.rC])matrix[row.rR][row.rC]="konsultiert";
+  });
+
+  let h='<p style="font-size:12px;color:var(--text3);margin-bottom:12px">Abgeleitet aus Kontaktliste (Berichtet an, Wird informiert von) und RACI-Zuordnungen.</p>';
+  h+='<div style="overflow-x:auto"><table style="min-width:600px"><thead><tr class="tbl-head"><th style="min-width:120px">Von \\ An</th>';
+  rollen.forEach(r=>{h+='<th style="writing-mode:vertical-rl;height:90px;font-size:9px;text-align:center;padding:4px 2px;white-space:nowrap">'+esc(r)+'</th>';});
+  h+='</tr></thead><tbody>';
+  rollen.forEach((from,i)=>{
+    const c=contacts.find(x=>x.rolle===from);
+    h+='<tr style="border-bottom:1px solid var(--border)"><td style="font-size:11px;font-weight:600;background:var(--row1);padding:4px 6px">'+esc(from)+'<br><span style="font-weight:400;color:var(--text3);font-size:10px">'+esc(c?c.name:"")+'</span></td>';
+    rollen.forEach(to=>{
+      if(from===to){h+='<td class="comm-cell" style="background:#e2e8f0">—</td>';}
+      else{const val=matrix[from]?.[to]||"";h+='<td class="comm-cell '+(val?"comm-yes":"comm-no")+'">'+(val||"·")+'</td>';}
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<div style="margin-top:12px;font-size:11px;display:flex;gap:10px;flex-wrap:wrap">';
+  h+=badge("berichtet","blue")+" R → A &nbsp;";
+  h+=badge("steuert","red")+" A → R &nbsp;";
+  h+=badge("konsultiert","amber")+" R → C &nbsp;";
+  h+=badge("informiert","gray")+" → I";
+  h+='</div>';
+  return h;
+}
+
+// ── PSP ──
+function rPSP(){
+  const fields=[{k:"psp",l:"PSP",w:"38px"},{k:"name",l:"Bezeichnung",w:"130px"},{k:"aufgaben",l:"Aufgaben",w:"120px"},{k:"person",l:"Verantwortl.",w:"85px"},{k:"ressource",l:"Ressource",w:"85px"},{k:"start",l:"Start",w:"68px"},{k:"end",l:"Ende",w:"68px"},{k:"dauer",l:"Tage",w:"30px"},{k:"aufwand_h",l:"Std.",w:"32px"},{k:"kosten",l:"\u20ac",w:"48px"},{k:"status",l:"Status",w:"52px"},{k:"ergebnis",l:"Ergebnis",w:"95px"}];
+  let h='<p style="font-size:11px;color:var(--text3);margin-bottom:10px">Zelle klicken = Einzelwert bearbeiten. PSP-Nr. klicken = Detailansicht. Aenderungen werden automatisch gespeichert.</p>';
+  h+='<div style="overflow-x:auto"><table style="min-width:1000px"><thead><tr class="tbl-head">';
+  fields.forEach(f=>{h+='<th style="width:'+f.w+'">'+f.l+'</th>';});
+  h+='<th style="width:30px"></th>';
+  h+='</tr></thead><tbody>';
+  data.forEach((row,i)=>{
+    const isP=!row.parent;
+    h+='<tr class="psp-row'+(isP?' psp-parent':'')+'" style="border-bottom:1px solid var(--border);background:'+(isP?'#eef2ff':row.kritisch?'#fef2f2':i%2===0?'var(--row1)':'var(--row2)')+'">';
+    fields.forEach(f=>{
+      let val=f.k==="kosten"?(row.kosten>0?row.kosten.toLocaleString("de-DE"):"\u2013"):f.k==="status"?badge(row.status,row.status==="fertig"?"green":row.status==="in Arbeit"?"amber":"gray"):f.k==="start"||f.k==="end"?fmt(row[f.k]):f.k==="dauer"?(row.dauer||"\u2013"):f.k==="aufwand_h"?(row.aufwand_h>0?row.aufwand_h:"\u2013"):esc(row[f.k]||"\u2013");
+      let pl=f.k==="name"&&row.parent?"padding-left:14px;":"";
+      let click=f.k==="psp"?"openPSPDetail('"+row.id+"')":"editPSP('"+row.id+"','"+f.k+"')";
+      let style=pl+(f.k==="psp"?"color:var(--accent);font-weight:600;text-decoration:underline;":"")+(f.k==="ergebnis"||f.k==="beteiligte"||f.k==="aufgaben"?"font-size:10px;color:var(--text3);":"");
+      h+='<td style="'+style+'" onclick="'+click+'">'+val+'</td>';
+    });
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delPSP(\''+row.id+'\')" title="Zeile loeschen">\u00d7</button></td>';
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+  h+='<div class="btn-row">';
+  h+='<button class="btn" onclick="addPSPRow(\'\')">Hauptgruppe hinzuf\u00fcgen</button>';
+  h+='<button class="btn" onclick="addPSPSub()">Arbeitspaket hinzuf\u00fcgen</button>';
+  h+='<span style="border-left:1px solid var(--border);height:24px;margin:0 4px"></span>';
+  h+='<button class="btn btn-sec" onclick="exportCSV()">CSV (Airtable)</button>';
+  h+='<button class="btn btn-sec" onclick="exportMSP()">MS Project (.xml)</button>';
+  h+='<span style="border-left:1px solid var(--border);height:24px;margin:0 4px"></span>';
+  h+='<span style="display:flex;align-items:center;gap:4px;font-size:10px;color:var(--text3)"><span style="width:12px;height:12px;background:#fef2f2;border:1px solid #fca5a5;border-radius:2px"></span>Kritischer Pfad</span>';
+  h+='<span style="border-left:1px solid var(--border);height:24px;margin:0 4px"></span>';
+  h+='<button class="btn btn-danger" onclick="resetAll()">Zur\u00fccksetzen</button>';
+  h+='</div>';
+  return h;
+}
+
+function addPSPRow(parentId){
+  const existing=data.map(r=>r.psp).filter(p=>!p.includes(".")).map(Number).filter(n=>!isNaN(n));
+  const nextNum=existing.length?Math.max(...existing)+1:1;
+  const newId=String(nextNum);
+  data.push({id:newId,psp:newId,name:"Neue Hauptgruppe",parent:"",lph:"",bereich:"",verantw:"",person:"",ext:"intern",start:"",end:"",dauer:"",vorg:"",kosten:0,rR:"",rA:"",rC:"",rI:"",status:"offen",ms:false,note:"",ziele:"",aufgaben:"",beteiligte:"",ergebnis:"",ressource:"",aufwand_h:0,auslastung:0});
+  save(SK.data,data);render();showToast("Hauptgruppe "+newId+" hinzugefuegt");
+}
+
+function addPSPSub(){
+  const parents=data.filter(r=>!r.parent);
+  if(!parents.length){addPSPRow("");return;}
+  let opts='';parents.forEach(p=>{opts+='<option value="'+p.id+'">'+p.psp+' – '+esc(p.name)+'</option>';});
+  showModal("Arbeitspaket hinzufuegen",'<label>Uebergeordnete Gruppe</label><select id="ap-parent">'+opts+'</select><label>Bezeichnung</label><input id="ap-name" value="Neues Arbeitspaket">',function(){
+    const pid=document.getElementById("ap-parent").value;
+    const pName=document.getElementById("ap-name").value;
+    const siblings=data.filter(r=>r.parent===pid);
+    const nums=siblings.map(r=>{const parts=r.psp.split(".");return parts.length>1?Number(parts[parts.length-1]):0;}).filter(n=>!isNaN(n));
+    const nextSub=nums.length?Math.max(...nums)+1:1;
+    const newPsp=pid+"."+nextSub;
+    data.push({id:newPsp,psp:newPsp,name:pName,parent:pid,lph:"",bereich:"",verantw:"",person:"",ext:"intern",start:"",end:"",dauer:"",vorg:"",kosten:0,rR:"",rA:"",rC:"",rI:"",status:"offen",ms:false,note:"",ziele:"",aufgaben:"",beteiligte:"",ergebnis:"",ressource:"",aufwand_h:0,auslastung:0});
+    save(SK.data,data);closeModal();render();showToast("AP "+newPsp+" hinzugefuegt");
+  });
+}
+
+function delPSP(id){
+  const row=data.find(r=>r.id===id);if(!row)return;
+  const children=data.filter(r=>r.parent===id);
+  const msg=children.length?"Gruppe "+row.psp+" und "+children.length+" Unterpunkte loeschen?":"AP "+row.psp+" loeschen?";
+  if(!confirm(msg))return;
+  const toRemove=new Set([id,...children.map(c=>c.id)]);
+  data=data.filter(r=>!toRemove.has(r.id));
+  save(SK.data,data);render();showToast("Geloescht");
+}
+
+function openPSPDetail(id){
+  const row=data.find(r=>r.id===id);if(!row)return;
+  const body='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+    '<div><label>PSP-Nr.</label><input id="pd-psp" value="'+esc(row.psp)+'"></div>'+
+    '<div><label>Status</label><select id="pd-status"><option value="offen" '+(row.status==="offen"?"selected":"")+'>offen</option><option value="in Arbeit" '+(row.status==="in Arbeit"?"selected":"")+'>in Arbeit</option><option value="fertig" '+(row.status==="fertig"?"selected":"")+'>fertig</option></select></div>'+
+    '</div>'+
+    '<label>Bezeichnung</label><input id="pd-name" value="'+esc(row.name)+'">'+
+    '<label>Ziele</label><textarea id="pd-ziele" rows="2">'+esc(row.ziele||"")+'</textarea>'+
+    '<label>Aufgaben</label><textarea id="pd-aufgaben" rows="2">'+esc(row.aufgaben||"")+'</textarea>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+    '<div><label>Verantwortliche Person</label><input id="pd-person" value="'+esc(row.person)+'"></div>'+
+    '<div><label>Rolle</label><input id="pd-verantw" value="'+esc(row.verantw)+'"></div>'+
+    '</div>'+
+    '<label>Beteiligte Personen</label><input id="pd-bet" value="'+esc(row.beteiligte||"")+'">'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">'+
+    '<div><label>Start (YYYY-MM-DD)</label><input id="pd-start" value="'+esc(row.start)+'"></div>'+
+    '<div><label>Ende (YYYY-MM-DD)</label><input id="pd-end" value="'+esc(row.end)+'"></div>'+
+    '<div><label>Dauer (AT)</label><input id="pd-dauer" value="'+esc(row.dauer)+'"></div>'+
+    '</div>'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">'+
+    '<div><label>Kosten (EUR)</label><input id="pd-kosten" type="number" value="'+row.kosten+'"></div>'+
+    '<div><label>Vorgaenger</label><input id="pd-vorg" value="'+esc(row.vorg)+'"></div>'+
+    '</div>'+
+    '<label>Fertiges Dokument / Ergebnis</label><input id="pd-ergebnis" value="'+esc(row.ergebnis||"")+'">'+
+    '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">'+
+    '<div><label>Ressource</label><input id="pd-res" value="'+esc(row.ressource||"")+'"></div>'+
+    '<div><label>Aufwand (Std.)</label><input id="pd-aufwand" type="number" value="'+(row.aufwand_h||0)+'"></div>'+
+    '<div><label>Auslastung (%)</label><input id="pd-ausl" type="number" min="0" max="100" value="'+(row.auslastung||0)+'"></div>'+
+    '</div>'+
+    '<label>Anmerkungen</label><textarea id="pd-note" rows="2">'+esc(row.note||"")+'</textarea>';
+  showModal("AP "+row.psp+" \u2013 "+esc(row.name),body,function(){
+    row.psp=document.getElementById("pd-psp").value;
+    row.name=document.getElementById("pd-name").value;
+    row.ziele=document.getElementById("pd-ziele").value;
+    row.aufgaben=document.getElementById("pd-aufgaben").value;
+    row.person=document.getElementById("pd-person").value;
+    row.verantw=document.getElementById("pd-verantw").value;
+    row.beteiligte=document.getElementById("pd-bet").value;
+    row.start=document.getElementById("pd-start").value;
+    row.end=document.getElementById("pd-end").value;
+    row.dauer=document.getElementById("pd-dauer").value;
+    row.kosten=Number(document.getElementById("pd-kosten").value)||0;
+    row.vorg=document.getElementById("pd-vorg").value;
+    row.ergebnis=document.getElementById("pd-ergebnis").value;
+    row.ressource=document.getElementById("pd-res").value;
+    row.aufwand_h=Number(document.getElementById("pd-aufwand").value)||0;
+    row.auslastung=Number(document.getElementById("pd-ausl").value)||0;
+    row.note=document.getElementById("pd-note").value;
+    row.status=document.getElementById("pd-status").value;
+    save(SK.data,data);closeModal();render();showToast('Arbeitspaket gespeichert');
+  });
+}
+
+function editPSP(id,field){
+  const row=data.find(r=>r.id===id);if(!row)return;
+  const val=field==="kosten"?String(row.kosten):row[field]||"";
+  const labels={psp:"PSP-Nr.:",name:"Bezeichnung:",verantw:"Rolle:",person:"Person:",start:"Start (YYYY-MM-DD):",end:"Ende (YYYY-MM-DD):",kosten:"Kosten (Zahl):",status:"Status (offen / in Arbeit / fertig):",aufgaben:"Aufgaben:",beteiligte:"Beteiligte:",ergebnis:"Ergebnis:",ressource:"Ressource:",aufwand_h:"Aufwand (Std.):",auslastung:"Auslastung (0-100):"};
+  const nv=prompt(labels[field]||field,val);if(nv===null)return;
+  if(field==="kosten"||field==="aufwand_h"||field==="auslastung")row[field]=Number(nv)||0;else row[field]=nv;
+  save(SK.data,data);render();showToast('Gespeichert');
+}
+
+function exportCSV(){
+  const sep=";";
+  const h=["PSP-Nr.","Bezeichnung","Ziele","Aufgaben","Rolle","Verantwortliche Person","Beteiligte Personen","Leistungsphase","Gewerk/Bereich","Intern/Extern","Start","Ende","Dauer (AT)","Vorgaenger","Kosten (EUR)","Ressource","Aufwand (Std.)","Auslastung (%)","RACI-R","RACI-A","RACI-C","RACI-I","Status","Meilenstein","Ergebnis/Dokument","Anmerkungen"];
+  function csvVal(v){v=String(v==null?"":v);if(v.indexOf(sep)>=0||v.indexOf('"')>=0||v.indexOf('\n')>=0)return'"'+v.replace(/"/g,'""')+'"';return v;}
+  let csv=h.join(sep)+"\n";
+  data.forEach(r=>{csv+=[r.psp,r.name,r.ziele||"",r.aufgaben||"",r.verantw,r.person,r.beteiligte||"",r.lph,r.bereich,r.ext,fmt(r.start),fmt(r.end),r.dauer,r.vorg,r.kosten,r.ressource||"",r.aufwand_h||0,r.auslastung||0,r.rR,r.rA,r.rC,r.rI,r.status,r.ms?"ja":"nein",r.ergebnis||"",r.note].map(csvVal).join(sep)+"\n";});
+  const b=new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="psp_airtable_export.csv";a.click();
+  showToast("CSV fuer Airtable exportiert");
+}
+
+function exportMSP(){
+  var x='<?xml version="1.0" encoding="UTF-8" standalone="yes"?>\n';
+  x+='<Project xmlns="http://schemas.microsoft.com/project">\n';
+  x+='<Name>AuS Nutzungsaenderung</Name>\n';
+  x+='<Title>PSP AuS - Arbeiten unter Spannung</Title>\n';
+  x+='<ScheduleFromStart>1</ScheduleFromStart>\n';
+  x+='<StartDate>2026-04-01T08:00:00</StartDate>\n';
+  x+='<CalendarUID>1</CalendarUID>\n';
+  x+='<MinutesPerDay>480</MinutesPerDay>\n';
+  x+='<MinutesPerWeek>2400</MinutesPerWeek>\n';
+  x+='<DaysPerMonth>20</DaysPerMonth>\n';
+  x+='<CurrencySymbol>EUR</CurrencySymbol>\n';
+  x+='<CurrencySymbolPosition>3</CurrencySymbolPosition>\n';
+  // Calendar
+  x+='<Calendars><Calendar><UID>1</UID><Name>Standard</Name><IsBaseCalendar>1</IsBaseCalendar>';
+  x+='<WeekDays>';
+  [1,7].forEach(function(d){x+='<WeekDay><DayType>'+d+'</DayType><DayWorking>0</DayWorking></WeekDay>';});
+  [2,3,4,5,6].forEach(function(d){x+='<WeekDay><DayType>'+d+'</DayType><DayWorking>1</DayWorking><WorkingTimes><WorkingTime><FromTime>08:00:00</FromTime><ToTime>12:00:00</ToTime></WorkingTime><WorkingTime><FromTime>13:00:00</FromTime><ToTime>17:00:00</ToTime></WorkingTime></WorkingTimes></WeekDay>';});
+  x+='</WeekDays></Calendar></Calendars>\n';
+  // Resources
+  var resMap={};var resUid=1;
+  data.forEach(function(r){
+    var rn=r.ressource||r.person||"";
+    if(rn&&!resMap[rn]){resMap[rn]=resUid++;};
+  });
+  x+='<Resources>\n';
+  x+='<Resource><UID>0</UID><ID>0</ID><Name></Name></Resource>\n';
+  Object.keys(resMap).forEach(function(name){
+    x+='<Resource><UID>'+resMap[name]+'</UID><ID>'+resMap[name]+'</ID><Name>'+esc(name)+'</Name><Type>1</Type><CalendarUID>1</CalendarUID></Resource>\n';
+  });
+  x+='</Resources>\n';
+  // Tasks
+  x+='<Tasks>\n';
+  x+='<Task><UID>0</UID><ID>0</ID><Name>AuS Nutzungsaenderung</Name><OutlineLevel>0</OutlineLevel><Type>1</Type><IsNull>0</IsNull></Task>\n';
+  var assignments=[];
+  data.forEach(function(r,i){
+    var uid=i+1;var id=i+1;
+    var level=r.parent?2:1;
+    var isSummary=!r.parent?1:0;
+    var durDays=parseInt(r.dauer)||0;
+    var durHours=durDays*8;
+    var durISO="PT"+durHours+"H0M0S";
+    var startDT=r.start?(r.start+"T08:00:00"):"";
+    var endDT=r.end?(r.end+"T17:00:00"):"";
+    var ms=r.ms?1:0;
+    x+='<Task>\n';
+    x+='<UID>'+uid+'</UID><ID>'+id+'</ID>\n';
+    x+='<Name>'+esc(r.name)+'</Name>\n';
+    x+='<OutlineLevel>'+level+'</OutlineLevel>\n';
+    x+='<WBS>'+esc(r.psp)+'</WBS>\n';
+    x+='<WBSLevel>'+esc(r.psp)+'</WBSLevel>\n';
+    if(isSummary)x+='<Summary>1</Summary>\n';
+    if(startDT)x+='<Start>'+startDT+'</Start>\n';
+    if(endDT)x+='<Finish>'+endDT+'</Finish>\n';
+    x+='<Duration>'+durISO+'</Duration>\n';
+    x+='<DurationFormat>7</DurationFormat>\n';
+    if(ms&&durDays===0)x+='<Milestone>1</Milestone>\n';
+    if(r.kosten>0)x+='<Cost>'+r.kosten+'</Cost>\n';
+    if(r.note)x+='<Notes>'+esc(r.note)+'</Notes>\n';
+    x+='<FixedCostAccrual>3</FixedCostAccrual>\n';
+    x+='<ConstraintType>0</ConstraintType>\n';
+    x+='<CalendarUID>-1</CalendarUID>\n';
+    // Predecessors
+    if(r.vorg){
+      var predIdx=data.findIndex(function(p){return p.psp===r.vorg;});
+      if(predIdx>=0){
+        x+='<PredecessorLink><PredecessorUID>'+(predIdx+1)+'</PredecessorUID><Type>1</Type></PredecessorLink>\n';
+      }
+    }
+    x+='</Task>\n';
+    // Assignment
+    var resName=r.ressource||r.person||"";
+    if(resName&&resMap[resName]){
+      var workHours=r.aufwand_h||durDays*8;
+      assignments.push({taskUid:uid,resUid:resMap[resName],work:"PT"+workHours+"H0M0S",start:startDT,end:endDT});
+    }
+  });
+  x+='</Tasks>\n';
+  // Assignments
+  x+='<Assignments>\n';
+  assignments.forEach(function(a,i){
+    x+='<Assignment><UID>'+i+'</UID><TaskUID>'+a.taskUid+'</TaskUID><ResourceUID>'+a.resUid+'</ResourceUID>';
+    if(a.work)x+='<Work>'+a.work+'</Work>';
+    if(a.start)x+='<Start>'+a.start+'</Start>';
+    if(a.end)x+='<Finish>'+a.end+'</Finish>';
+    x+='</Assignment>\n';
+  });
+  x+='</Assignments>\n';
+  x+='</Project>';
+  var b=new Blob([x],{type:"application/xml;charset=utf-8"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="psp_aus_projekt.xml";a.click();
+  showToast("MS Project XML exportiert - Doppelklick zum Oeffnen in MS Project");
+}
+
+function exportFullHTML(){
+  var scriptEl=document.querySelector('script');
+  var scriptSrc=scriptEl.textContent;
+  var startMark='//__PROJDATA_START__';
+  var endMark='//__PROJDATA_END__';
+  var si=scriptSrc.indexOf(startMark);
+  var ei=scriptSrc.indexOf(endMark);
+  if(si<0||ei<0){showToast('Fehler: Datenmarkierungen nicht gefunden');return;}
+  var newData='\nconst defData='+JSON.stringify(data)+';\n\n';
+  newData+='const defContacts='+JSON.stringify(contacts)+';\n\n';
+  newData+='const defTexts='+JSON.stringify(texts)+';\n\n';
+  newData+='const defRisks='+JSON.stringify(risks)+';\n\n';
+  newData+='const defRoles='+JSON.stringify(roles)+';\n';
+  var grImg=localStorage.getItem('grundriss_img_'+VER)||'';
+  var grName=localStorage.getItem('grundriss_name_'+VER)||'';
+  newData+='const defGrundriss='+JSON.stringify({img:grImg,name:grName})+';\n';
+  newData+='const defTeamkultur='+JSON.stringify(teamkultur)+';\n';
+  var newScript=scriptSrc.substring(0,si+startMark.length)+newData+scriptSrc.substring(ei);
+  var styleEl=document.querySelector('style');
+  var h='<!DOCTYPE html>\n<html lang="de">\n<head>\n';
+  h+='<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n';
+  h+='<title>Projekthandbuch – AuS Nutzungsänderung</title>\n';
+  h+='<style>\n'+styleEl.textContent+'\n</style>\n</head>\n<body>\n';
+  h+='<div id="view-badge" class="view-badge" style="display:none">Ansichtsmodus</div>\n';
+  h+='<nav>\n<div class="brand">\n<h1>Arbeiten unter Spannung</h1>\n<p>Projekthandbuch</p>\n<small>600 m² → Schulungszentrum</small>\n<div class="metrics" id="nav-metrics"></div>\n</div>\n';
+  h+='<div id="nav-buttons"></div>\n';
+  h+='<div class="hint">Daten werden lokal gespeichert. Texte und Tabellen sind editierbar.</div>\n';
+  h+='<div class="nav-foot"><button class="nb1" onclick="exportFullHTML()">HTML speichern</button><button class="nb2" onclick="exportPDF()">PDF export</button></div>\n';
+  h+='</nav>\n<main>\n<h2 id="page-title"></h2>\n<div class="bar"></div>\n';
+  h+='<div id="content"></div>\n<div id="modal-container"></div>\n';
+  h+='<div id="toast" class="toast"></div>\n</main>\n';
+  h+='<scr'+'ipt>\n'+newScript+'\n</scr'+'ipt>\n</body>\n</html>';
+  var blob=new Blob([h],{type:'text/html;charset=utf-8'});
+  var a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  var d=new Date();
+  var ts=d.getFullYear()+''+(d.getMonth()+1<10?'0':'')+(d.getMonth()+1)+(d.getDate()<10?'0':'')+d.getDate();
+  a.download='Projekthandbuch_Arbeiten_unter_Spannung_'+ts+'.html';
+  a.click();
+  showToast('HTML mit allen Daten exportiert');
+}
+
+function exportPDF(){
+  var today=new Date();
+  var dd=today.getDate(),mm=today.getMonth()+1,yy=today.getFullYear();
+  var dateStr=(dd<10?'0':'')+dd+'.'+(mm<10?'0':'')+mm+'.'+yy;
+  var items=data.filter(function(r){return r.parent;});
+  var totalK=items.reduce(function(s,r){return s+r.kosten;},0);
+  var wLbl=['','gering','mittel','hoch'];
+
+  var css='@page{size:A4;margin:0}';
+  css+='body{margin:20mm 18mm 25mm 18mm;font-family:Segoe UI,Arial,sans-serif;font-size:10pt;color:#1a1a1a;line-height:1.5}';
+  css+='h1{font-size:20pt;color:#1e3a5f;margin:0 0 6pt;font-weight:700}';
+  css+='h2{font-size:14pt;color:#1e3a5f;margin:20pt 0 8pt;padding-bottom:4pt;border-bottom:1.5pt solid #3b82f6;page-break-after:avoid}';
+  css+='h3{font-size:11pt;color:#334155;margin:14pt 0 6pt;font-weight:600;page-break-after:avoid}';
+  css+='p{margin:0 0 6pt}';
+  css+='table{width:100%;border-collapse:collapse;margin:6pt 0 12pt;font-size:9pt}';
+  css+='th{background:#1e3a5f;color:white;padding:5pt 6pt;text-align:left;font-weight:500;font-size:8.5pt}';
+  css+='td{padding:4pt 6pt;border-bottom:0.5pt solid #e2e8f0;vertical-align:top}';
+  css+='tr:nth-child(even) td{background:#f8fafc}';
+  css+='.cover{display:flex;flex-direction:column;justify-content:center;align-items:center;height:calc(100vh - 45mm);text-align:center;page-break-after:always}';
+  css+='.cover h1{font-size:28pt;margin-bottom:8pt}';
+  css+='.cover .sub{font-size:14pt;color:#64748b;margin-bottom:4pt}';
+  css+='.cover .meta{font-size:10pt;color:#94a3b8;margin-top:30pt}';
+  css+='.toc{page-break-after:always}';
+  css+='.toc a{color:#1e3a5f;text-decoration:none}';
+  css+='.toc li{margin:4pt 0;font-size:10.5pt}';
+  css+='.section{page-break-before:always}';
+  css+='.section:first-of-type{page-break-before:auto}';
+  css+='.badge{padding:1pt 6pt;border-radius:3pt;font-size:8pt;font-weight:500;display:inline-block}';
+  css+='.b-r{background:#fee2e2;color:#991b1b}.b-a{background:#fef3c7;color:#92400e}.b-g{background:#dcfce7;color:#166534}.b-gr{background:#f3f4f6;color:#374151}.b-b{background:#dbeafe;color:#1e40af}.b-p{background:#ede9fe;color:#5b21b6}';
+  css+='.kpi-row{display:flex;gap:12pt;margin:8pt 0 14pt}';
+  css+='.kpi-box{flex:1;border:1pt solid #e2e8f0;border-radius:6pt;padding:10pt;text-align:center}';
+  css+='.kpi-box .v{font-size:16pt;font-weight:700;color:#1e3a5f}';
+  css+='.kpi-box .l{font-size:8pt;color:#64748b;margin-top:2pt}';
+  css+='.role-box{border:1pt solid #e2e8f0;border-radius:6pt;padding:10pt;margin:6pt 0;page-break-inside:avoid}';
+  css+='.role-box h4{font-size:10.5pt;margin:0 0 2pt;color:#1e3a5f}';
+  css+='.role-box .rp{font-size:9pt;color:#3b82f6;margin-bottom:6pt}';
+  css+='.role-box .rd{font-size:9pt;color:#334155;margin:3pt 0;line-height:1.4}';
+  css+='.grid2{display:grid;grid-template-columns:1fr 1fr;gap:6pt;margin:6pt 0}';
+  css+='.grid2 .item{padding:6pt 10pt;background:#f1f5f9;border-radius:4pt;font-size:9pt;border-left:2.5pt solid #3b82f6}';
+  css+='.footer{position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:7.5pt;color:#94a3b8;padding:4pt}';
+  css+='@media print{.no-print{display:none}}';
+
+  var h='<!DOCTYPE html><html lang="de"><head><meta charset="UTF-8"><title>Projekthandbuch AuS</title><style>'+css+'</style></head><body>';
+
+  // Cover
+  h+='<div class="cover">';
+  h+='<div style="font-size:11pt;color:#3b82f6;letter-spacing:2pt;margin-bottom:20pt">PROJEKTHANDBUCH</div>';
+  h+='<h1>AuS – Arbeiten unter Spannung</h1>';
+  h+='<div class="sub">Nutzungsänderung ehemalige Druckerei</div>';
+  h+='<div class="sub" style="font-size:11pt">ca. 600 m² Schulungs- und Übungsstätte</div>';
+  h+='<div class="meta">Stand: '+dateStr+'</div>';
+  h+='<div class="meta">Leistungsphase 0 – 2 | Grundlagenermittlung und Vorplanung</div>';
+  h+='</div>';
+
+  // TOC
+  h+='<div class="toc">';
+  h+='<h2 style="border:none">Inhaltsverzeichnis</h2><ol style="font-size:10.5pt;line-height:2">';
+  ['Projektgrundlagen','Projektziele','Projektorganisation','Kontaktliste','Rollensteckbriefe','Kommunikationsmatrix','Projektstrukturplan (PSP)','Terminübersicht','Kostenübersicht','RACI-Matrix','Risikomanagement'].forEach(function(t){h+='<li>'+t+'</li>';});
+  h+='</ol></div>';
+
+  // 1 Projektgrundlagen
+  h+='<div class="section">';
+  h+='<h2>1 Projektgrundlagen</h2>';
+  h+='<table><tbody>';
+  [['Projektbezeichnung','AuS – Arbeiten unter Spannung (Nutzungsänderung)'],['Auftraggeber','Geschäftsführung / Unternehmensleitung'],['Projektart','Bau- und Umnutzungsprojekt im Bestand'],['Fläche','ca. 600 m² (ehemalige Druckerei)'],['Projektstand','Grundlagenermittlung / LPH 0'],['Baubeginn (geplant)','Q1 2027'],['Fertigstellung (geplant)','Q2 2028'],['Gesamtdauer','ca. 2 Jahre']].forEach(function(r){h+='<tr><td style="font-weight:600;width:35%">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+  h+='</tbody></table>';
+  h+='<h3>Projektanlass</h3><p>'+esc(texts.anlass)+'</p>';
+  h+='<h3>Genehmigungen</h3><p>'+esc(texts.genehmigungen)+'</p>';
+  h+='<h3>Geplante Funktionsbereiche</h3><div class="grid2">';
+  texts.bereiche.split('|').forEach(function(b){if(b.trim())h+='<div class="item">'+esc(b.trim())+'</div>';});
+  h+='</div></div>';
+
+  // 2 Projektziele
+  h+='<div class="section">';
+  h+='<h2>2 Projektziele</h2>';
+  h+='<h3>Oberziele</h3>';
+  texts.oberziele.split('|').forEach(function(z){if(z.trim())h+='<p style="padding-left:12pt">— '+esc(z.trim())+'</p>';});
+  h+='<h3>SMART-Ziele</h3><table><tbody>';
+  [['Spezifisch','Umnutzung ca. 600 m² zu AuS-Schulungs- und Übungsstätte'],['Messbar','Fertigstellung gemäß genehmigter Planung, Abnahme aller sicherheitsrelevanten Anlagen'],['Attraktiv','Verbesserung von Sicherheit, Ausbildung und Zukunftsfähigkeit'],['Realistisch','Innenausbau ohne statische Eingriffe'],['Terminiert','Betriebsaufnahme bis Q2 2028']].forEach(function(r){h+='<tr><td style="font-weight:600;width:22%;color:#1e3a5f">'+r[0]+'</td><td>'+r[1]+'</td></tr>';});
+  h+='</tbody></table>';
+  h+='<h3>Nicht-Ziele</h3>';
+  texts.nichtziele.split('|').forEach(function(z){if(z.trim())h+='<p style="padding-left:12pt;color:#64748b">✕ '+esc(z.trim())+'</p>';});
+  h+='</div>';
+
+  // 3 Organisation
+  h+='<div class="section">';
+  h+='<h2>3 Projektorganisation</h2>';
+  h+='<p>Stabsprojektorganisation – Entscheidungsbefugnis beim Bauherrn, operative Steuerung bei der Projektleitung.</p>';
+  h+='<h3>Interne Projektbeteiligte</h3><table><thead><tr><th>Rolle</th><th>Person</th><th>Organisation</th><th>Einfluss</th></tr></thead><tbody>';
+  contacts.filter(function(c){return c.typ==='intern';}).forEach(function(c){h+='<tr><td style="font-weight:600">'+esc(c.rolle)+'</td><td>'+esc(c.name)+'</td><td>'+esc(c.org)+'</td><td>'+esc(c.reportsTo?'berichtet an '+c.reportsTo:'Oberste Ebene')+'</td></tr>';});
+  h+='</tbody></table>';
+  h+='<h3>Externe Projektbeteiligte</h3><table><thead><tr><th>Rolle</th><th>Person</th><th>Organisation</th><th>Berichtet an</th></tr></thead><tbody>';
+  contacts.filter(function(c){return c.typ==='extern';}).forEach(function(c){h+='<tr><td style="font-weight:600">'+esc(c.rolle)+'</td><td>'+esc(c.name)+'</td><td>'+esc(c.org)+'</td><td>'+esc(c.reportsTo)+'</td></tr>';});
+  h+='</tbody></table></div>';
+
+  // 4 Kontaktliste
+  h+='<div class="section">';
+  h+='<h2>4 Kontaktliste</h2>';
+  h+='<table><thead><tr><th>Name</th><th>Rolle</th><th>Organisation</th><th>Telefon</th><th>E-Mail</th><th>Typ</th></tr></thead><tbody>';
+  contacts.forEach(function(c){h+='<tr><td style="font-weight:500">'+esc(c.name)+'</td><td>'+esc(c.rolle)+'</td><td>'+esc(c.org)+'</td><td>'+esc(c.tel)+'</td><td>'+esc(c.email)+'</td><td><span class="badge '+(c.typ==='intern'?'b-b':'b-p')+'">'+c.typ+'</span></td></tr>';});
+  h+='</tbody></table></div>';
+
+  // 5 Rollensteckbriefe
+  h+='<div class="section">';
+  h+='<h2>5 Rollensteckbriefe</h2>';
+  roles.forEach(function(rd){
+    var p=contacts.find(function(c){return c.rolle===rd.rolle;});
+    var cnt=data.filter(function(r){return r.parent&&r.verantw===rd.rolle;}).length;
+    h+='<div class="role-box"><h4>'+esc(rd.rolle)+'</h4>';
+    h+='<div class="rp">'+esc(p?p.name:'–')+' · '+cnt+' Arbeitspakete</div>';
+    h+='<div class="rd"><b>Aufgaben:</b> '+esc(rd.aufgaben)+'</div>';
+    h+='<div class="rd"><b>Kompetenzen:</b> '+esc(rd.kompetenzen)+'</div>';
+    h+='<div class="rd"><b>Verantwortung:</b> '+esc(rd.verantwortung)+'</div>';
+    h+='<div class="rd"><b>Entscheidungsbefugnis:</b> '+esc(rd.entscheidung)+'</div>';
+    h+='</div>';
+  });
+  h+='</div>';
+
+  // 6 Kommunikationsmatrix
+  h+='<div class="section">';
+  h+='<h2>6 Kommunikationsmatrix</h2>';
+  h+='<p>Abgeleitet aus Kontaktliste und RACI-Zuordnungen.</p>';
+  var rollen=contacts.map(function(c){return c.rolle;});
+  var matrix={};rollen.forEach(function(a){matrix[a]={};rollen.forEach(function(b){matrix[a][b]='';});});
+  contacts.forEach(function(c){
+    if(c.reportsTo&&matrix[c.rolle]&&matrix[c.rolle][c.reportsTo]!==undefined)matrix[c.rolle][c.reportsTo]='ber.';
+    if(c.reportsTo&&matrix[c.reportsTo]&&matrix[c.reportsTo][c.rolle]!==undefined)matrix[c.reportsTo][c.rolle]='steu.';
+    (c.informedBy||[]).forEach(function(from){if(matrix[from]&&matrix[from][c.rolle]!==undefined)matrix[from][c.rolle]='inf.';});
+  });
+  data.filter(function(r){return r.parent;}).forEach(function(row){
+    if(row.rR&&row.rC&&matrix[row.rR]&&matrix[row.rR][row.rC]!==undefined&&!matrix[row.rR][row.rC])matrix[row.rR][row.rC]='kons.';
+  });
+  h+='<table style="font-size:7.5pt"><thead><tr><th style="min-width:80pt">Von / An</th>';
+  rollen.forEach(function(r){h+='<th style="text-align:center;padding:3pt;font-size:7pt">'+esc(r).substring(0,15)+'</th>';});
+  h+='</tr></thead><tbody>';
+  rollen.forEach(function(from){
+    h+='<tr><td style="font-weight:600;font-size:7.5pt">'+esc(from)+'</td>';
+    rollen.forEach(function(to){
+      if(from===to)h+='<td style="text-align:center;background:#e2e8f0">—</td>';
+      else{var v=matrix[from]&&matrix[from][to]?matrix[from][to]:'';h+='<td style="text-align:center;font-size:7pt;'+(v?'background:#dcfce7;font-weight:600':'')+'">'+(v||'·')+'</td>';}
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table>';
+  h+='<p style="font-size:8pt;color:#64748b;margin-top:4pt">ber. = berichtet | steu. = steuert | kons. = konsultiert | inf. = informiert</p>';
+  h+='</div>';
+
+  // 7 PSP
+  h+='<div class="section">';
+  h+='<h2>7 Projektstrukturplan (PSP)</h2>';
+  h+='<div class="kpi-row">';
+  h+='<div class="kpi-box"><div class="v">'+items.length+'</div><div class="l">Arbeitspakete</div></div>';
+  var fertig=items.filter(function(r){return r.status==='fertig';}).length;
+  h+='<div class="kpi-box"><div class="v">'+Math.round(fertig/Math.max(items.length,1)*100)+'%</div><div class="l">Fortschritt</div></div>';
+  h+='<div class="kpi-box"><div class="v">'+totalK.toLocaleString('de-DE')+' \u20ac</div><div class="l">Gesamtkosten</div></div>';
+  var totalH=items.reduce(function(s,r){return s+(r.aufwand_h||0);},0);
+  h+='<div class="kpi-box"><div class="v">'+totalH+'h</div><div class="l">Gesamtaufwand</div></div>';
+  h+='</div>';
+  h+='<table style="font-size:8pt"><thead><tr><th>PSP</th><th>Bezeichnung</th><th>Aufgaben</th><th>Verantw.</th><th>Start</th><th>Ende</th><th>Tage</th><th>Std.</th><th>\u20ac</th><th>Status</th><th>Ergebnis</th></tr></thead><tbody>';
+  data.forEach(function(r){
+    var isP=!r.parent;
+    var bg=isP?'background:#eef2ff;font-weight:600':'';
+    h+='<tr style="'+bg+'"><td>'+esc(r.psp)+'</td>';
+    h+='<td style="'+(r.parent?'padding-left:10pt':'')+'">'+esc(r.name)+'</td>';
+    h+='<td style="font-size:7.5pt;color:#64748b">'+esc(r.aufgaben||'')+'</td>';
+    h+='<td>'+esc(r.person||'')+'</td>';
+    h+='<td>'+fmt(r.start)+'</td><td>'+fmt(r.end)+'</td>';
+    h+='<td style="text-align:center">'+(r.dauer||'')+'</td>';
+    h+='<td style="text-align:center">'+(r.aufwand_h||'')+'</td>';
+    h+='<td style="text-align:right">'+(r.kosten>0?r.kosten.toLocaleString('de-DE'):'')+'</td>';
+    var sc=r.status==='fertig'?'b-g':r.status==='in Arbeit'?'b-a':'b-gr';
+    h+='<td><span class="badge '+sc+'">'+r.status+'</span></td>';
+    h+='<td style="font-size:7.5pt;color:#64748b">'+esc(r.ergebnis||'')+'</td>';
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+
+  // 8 Terminübersicht
+  h+='<div class="section">';
+  h+='<h2>8 Terminübersicht</h2>';
+  h+='<h3>Meilensteine</h3><table><thead><tr><th>PSP</th><th>Meilenstein</th><th>Termin</th><th>Status</th></tr></thead><tbody>';
+  data.filter(function(r){return r.ms&&r.start;}).sort(function(a,b){return a.start.localeCompare(b.start);}).forEach(function(r){
+    h+='<tr><td>'+esc(r.psp)+'</td><td style="font-weight:500">'+esc(r.name)+'</td><td>'+fmt(r.start)+'</td><td><span class="badge '+(r.status==='fertig'?'b-g':'b-gr')+'">'+r.status+'</span></td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<h3>Alle Vorgänge</h3><table><thead><tr><th>PSP</th><th>Vorgang</th><th>Start</th><th>Ende</th><th>Dauer</th><th>Vorgänger</th><th>Verantwortlich</th></tr></thead><tbody>';
+  items.filter(function(r){return r.start;}).sort(function(a,b){return a.start.localeCompare(b.start);}).forEach(function(r){
+    h+='<tr><td>'+esc(r.psp)+'</td><td>'+esc(r.name)+'</td><td>'+fmt(r.start)+'</td><td>'+fmt(r.end)+'</td><td style="text-align:center">'+(r.dauer||'')+'</td><td>'+esc(r.vorg||'')+'</td><td>'+esc(r.person||'')+'</td></tr>';
+  });
+  h+='</tbody></table></div>';
+
+  // 9 Kostenübersicht
+  h+='<div class="section">';
+  h+='<h2>9 Kostenübersicht</h2>';
+  h+='<div class="kpi-row"><div class="kpi-box"><div class="v">'+totalK.toLocaleString('de-DE')+' \u20ac</div><div class="l">Gesamtkosten (geschätzt)</div></div></div>';
+  h+='<h3>Kosten nach Bereich</h3><table><thead><tr><th>Bereich</th><th style="text-align:right">Kosten</th><th style="text-align:right">Anteil</th></tr></thead><tbody>';
+  var byB={};items.forEach(function(r){byB[r.bereich]=(byB[r.bereich]||0)+r.kosten;});
+  Object.keys(byB).filter(function(k){return byB[k]>0;}).sort(function(a,b){return byB[b]-byB[a];}).forEach(function(k){
+    h+='<tr><td>'+esc(k)+'</td><td style="text-align:right;font-weight:600">'+byB[k].toLocaleString('de-DE')+' \u20ac</td><td style="text-align:right">'+Math.round(byB[k]/Math.max(totalK,1)*100)+'%</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<h3>Einzelpositionen</h3><table><thead><tr><th>PSP</th><th>Bezeichnung</th><th>Verantwortlich</th><th style="text-align:right">Kosten</th></tr></thead><tbody>';
+  items.filter(function(r){return r.kosten>0;}).sort(function(a,b){return b.kosten-a.kosten;}).forEach(function(r){
+    h+='<tr><td>'+esc(r.psp)+'</td><td>'+esc(r.name)+'</td><td>'+esc(r.person||'')+'</td><td style="text-align:right;font-weight:600">'+r.kosten.toLocaleString('de-DE')+' \u20ac</td></tr>';
+  });
+  h+='<tr style="border-top:2pt solid #1e3a5f"><td colspan="3" style="font-weight:700">Gesamt</td><td style="text-align:right;font-weight:700">'+totalK.toLocaleString('de-DE')+' \u20ac</td></tr>';
+  h+='</tbody></table></div>';
+
+  // 10 RACI
+  h+='<div class="section">';
+  h+='<h2>10 RACI-Matrix</h2>';
+  h+='<p style="font-size:8.5pt"><b style="color:#2563eb">R</b> = Responsible | <b style="color:#dc2626">A</b> = Accountable | <b style="color:#d97706">C</b> = Consulted | <b style="color:#6b7280">I</b> = Informed</p>';
+  var raciItems=data.filter(function(r){return r.parent&&(r.rR||r.rA||r.rC||r.rI);});
+  var rs=new Set();raciItems.forEach(function(r){[r.rR,r.rA,r.rC,r.rI].filter(Boolean).forEach(function(v){rs.add(v);});});
+  var rr=Array.from(rs).sort();
+  h+='<table style="font-size:7.5pt"><thead><tr><th style="min-width:100pt">Arbeitspaket</th>';
+  rr.forEach(function(r){h+='<th style="text-align:center;padding:3pt;font-size:7pt">'+esc(r).substring(0,15)+'</th>';});
+  h+='</tr></thead><tbody>';
+  raciItems.forEach(function(row){
+    h+='<tr><td><span style="color:#94a3b8">'+row.psp+' </span>'+esc(row.name)+'</td>';
+    rr.forEach(function(role){
+      var l=row.rR===role?'R':row.rA===role?'A':row.rC===role?'C':row.rI===role?'I':'';
+      var col=l==='R'?'#2563eb':l==='A'?'#dc2626':l==='C'?'#d97706':'#6b7280';
+      h+='<td style="text-align:center;font-weight:'+(l?'700':'400')+';color:'+(l?col:'#e2e8f0')+'">'+(l||'·')+'</td>';
+    });
+    h+='</tr>';
+  });
+  h+='</tbody></table></div>';
+
+  // 11 Risiken
+  h+='<div class="section">';
+  h+='<h2>11 Risikomanagement</h2>';
+  h+='<table><thead><tr><th>Risiko</th><th>Wahrscheinlichkeit</th><th>Auswirkung</th><th>Gegenmaßnahme</th></tr></thead><tbody>';
+  risks.forEach(function(r){
+    var wc=r.wahrsch>=3?'b-r':r.wahrsch>=2?'b-a':'b-g';
+    var ac=r.auswirk>=3?'b-r':r.auswirk>=2?'b-a':'b-g';
+    h+='<tr><td>'+esc(r.name)+'</td><td><span class="badge '+wc+'">'+(wLbl[r.wahrsch]||'')+'</span></td><td><span class="badge '+ac+'">'+(wLbl[r.auswirk]||'')+'</span></td><td>'+esc(r.massnahme)+'</td></tr>';
+  });
+  h+='</tbody></table></div>';
+
+  // Footer
+  h+='<div class="footer">Projekthandbuch AuS – Nutzungsänderung | Stand: '+dateStr+' | Erstellt aus dem digitalen Projekthandbuch</div>';
+
+  // Print button
+  h+='<div class="no-print" style="position:fixed;top:12px;right:12px;z-index:99">';
+  h+='<button onclick="window.print()" style="padding:10px 24px;background:#1e3a5f;color:white;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit">Als PDF speichern</button>';
+  h+='<button onclick="window.close()" style="padding:10px 16px;background:#64748b;color:white;border:none;border-radius:6px;cursor:pointer;font-size:13px;font-family:inherit;margin-left:6px">Schließen</button>';
+  h+='</div>';
+
+  h+='</body></html>';
+
+  var w=window.open('','_blank');
+  if(w){w.document.write(h);w.document.close();}
+  else{showToast('Pop-up blockiert – bitte Pop-ups erlauben');}
+}
+
+function resetAll(){if(confirm("ALLE Daten auf Ursprung zurücksetzen?")){Object.values(SK).forEach(k=>localStorage.removeItem(k));data=JSON.parse(JSON.stringify(defData));contacts=JSON.parse(JSON.stringify(defContacts));texts=JSON.parse(JSON.stringify(defTexts));risks=JSON.parse(JSON.stringify(defRisks));roles=JSON.parse(JSON.stringify(defRoles));teamkultur=JSON.parse(JSON.stringify(defTeamkultur));render();}}
+
+// ── GANTT ──
+function rGantt(){
+  var items=data.filter(function(r){return r.start&&r.end&&r.parent;});
+  if(!items.length)return'<p>Keine Daten.</p>';
+  var dates=items.flatMap(function(r){return[new Date(r.start),new Date(r.end)];});
+  var minD=new Date(Math.min.apply(null,dates)),maxD=new Date(Math.max.apply(null,dates));
+  var td=Math.max(1,(maxD-minD)/864e5);
+
+  // View state
+  if(!window._ganttView)window._ganttView='detail';
+  var view=window._ganttView;
+
+  var h='<div style="display:flex;gap:6px;margin-bottom:14px;align-items:center">';
+  h+='<button class="btn btn-sm'+(view==='detail'?' ':' btn-sec ')+'" onclick="window._ganttView=\'detail\';render()">Detailansicht</button>';
+  h+='<button class="btn btn-sm'+(view==='uebersicht'?' ':' btn-sec ')+'" onclick="window._ganttView=\'uebersicht\';render()">Gruppenansicht</button>';
+  h+='<span style="font-size:10px;color:var(--text3);margin-left:8px">'+(view==='detail'?'Alle Arbeitspakete einzeln':'Gruppiert nach PSP-Hauptgruppen')+'</span>';
+  h+='</div>';
+
+  // Month headers
+  var months=[];
+  var cur=new Date(minD.getFullYear(),minD.getMonth(),1);
+  while(cur<=maxD){months.push(new Date(cur));cur=new Date(cur.getFullYear(),cur.getMonth()+1,1);}
+
+  var labelW=220;
+  var rowH=view==='detail'?28:56;
+
+  h+='<div style="overflow-x:auto"><div style="min-width:850px">';
+
+  // Month header bar
+  h+='<div style="display:flex;margin-left:'+labelW+'px;border-bottom:2px solid var(--border);margin-bottom:2px">';
+  months.forEach(function(m){
+    var mEnd=new Date(m.getFullYear(),m.getMonth()+1,0);
+    var mDays=(Math.min(mEnd,maxD)-Math.max(m,minD))/864e5;
+    h+='<div style="width:'+(mDays/td*100)+'%;font-size:11px;color:var(--text2);padding:6px 0;font-weight:600;border-left:1px solid var(--border)">'+m.toLocaleDateString("de-DE",{month:"long",year:"numeric"})+'</div>';
+  });
+  h+='</div>';
+
+  // Week gridlines (subtle)
+  h+='<div style="position:relative">';
+
+  if(view==='detail'){
+    // ── DETAIL VIEW ──
+    var groups=[];var groupMap={};
+    data.forEach(function(r){
+      if(!r.parent){groups.push({id:r.psp,name:r.name,items:[]});}
+    });
+    items.forEach(function(r){
+      var gid=r.psp.split('.')[0];
+      var g=groups.find(function(x){return x.id===gid;});
+      if(g)g.items.push(r);
+    });
+
+    groups.forEach(function(g){
+      if(!g.items.length)return;
+      // Group header
+      h+='<div style="display:flex;align-items:center;height:32px;background:#f1f5f9;border-bottom:1px solid var(--border);margin-top:6px">';
+      h+='<div style="width:'+labelW+'px;flex-shrink:0;font-size:12px;font-weight:700;color:var(--text);padding:0 8px">'+esc(g.id)+' '+esc(g.name)+'</div>';
+      h+='<div style="flex:1;position:relative;height:100%">';
+      // Group span bar (light background)
+      var gStarts=g.items.map(function(r){return new Date(r.start);});
+      var gEnds=g.items.map(function(r){return new Date(r.end);});
+      var gLeft=(Math.min.apply(null,gStarts)-minD)/864e5/td*100;
+      var gRight=(Math.max.apply(null,gEnds)-minD)/864e5/td*100;
+      h+='<div style="position:absolute;left:'+gLeft+'%;width:'+(gRight-gLeft)+'%;height:100%;background:rgba(59,130,246,0.06);border-left:2px solid var(--accent);border-right:2px solid var(--accent)"></div>';
+      h+='</div></div>';
+
+      // Items
+      g.items.forEach(function(row){
+        var s=new Date(row.start),e=new Date(row.end);
+        var left=(s-minD)/864e5/td*100;
+        var width=Math.max(0.8,(e-s)/864e5/td*100);
+        var isKrit=row.kritisch;
+        var color=isKrit?'#dc2626':row.lph.includes("0")?"#6366f1":row.lph.includes("1")?"#3b82f6":"#10b981";
+        var barStyle='left:'+left+'%;width:'+width+'%;background:'+color+';';
+        if(isKrit)barStyle+='box-shadow:0 0 0 2px rgba(220,38,38,0.3);';
+        if(row.ms&&(!row.dauer||row.dauer==='0'||row.dauer==='1'))barStyle+='width:12px;border-radius:2px;background:'+color+';';
+
+        h+='<div style="display:flex;align-items:center;height:'+rowH+'px;border-bottom:1px solid rgba(226,232,240,0.5)">';
+        h+='<div style="width:'+labelW+'px;flex-shrink:0;font-size:11px;color:'+(isKrit?'var(--red)':'var(--text2)')+';padding:0 8px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:'+(isKrit?'600':'400')+'">';
+        h+='<span style="color:var(--text4);margin-right:3px;font-weight:400">'+row.psp+'</span>'+esc(row.name);
+        if(isKrit)h+=' <span style="font-size:8px;color:var(--red);vertical-align:middle">●</span>';
+        h+='</div>';
+        h+='<div style="flex:1;position:relative;height:100%;display:flex;align-items:center">';
+        h+='<div style="position:absolute;'+barStyle+'height:'+(rowH-10)+'px;border-radius:3px;display:flex;align-items:center;padding-left:4px;font-size:9px;color:white;font-weight:500;overflow:hidden;white-space:nowrap">';
+        h+=(row.ms?'◆ ':'')+(width>10?fmt(row.start)+' – '+fmt(row.end):'');
+        h+='</div>';
+        // Dependency arrow hint
+        if(row.vorg){
+          var pred=items.find(function(p){return p.psp===row.vorg;});
+          if(pred){
+            var predEnd=(new Date(pred.end)-minD)/864e5/td*100;
+            if(predEnd<left){
+              h+='<div style="position:absolute;left:'+(predEnd)+'%;width:'+(left-predEnd)+'%;height:1px;top:50%;border-top:1px '+(isKrit?'solid var(--red)':'dashed var(--text4)')+'"></div>';
+            }
+          }
+        }
+        h+='</div></div>';
+      });
+    });
+
+  } else {
+    // ── OVERVIEW VIEW ──
+    var groups2=[];
+    data.forEach(function(r){
+      if(!r.parent){
+        var gItems=items.filter(function(x){return x.psp.split('.')[0]===r.psp;});
+        if(gItems.length)groups2.push({id:r.psp,name:r.name,items:gItems});
+      }
+    });
+
+    groups2.forEach(function(g){
+      var gStarts=g.items.map(function(r){return new Date(r.start);});
+      var gEnds=g.items.map(function(r){return new Date(r.end);});
+      var gStart=new Date(Math.min.apply(null,gStarts));
+      var gEnd=new Date(Math.max.apply(null,gEnds));
+      var left=(gStart-minD)/864e5/td*100;
+      var width=Math.max(1,(gEnd-gStart)/864e5/td*100);
+      var hasKrit=g.items.some(function(r){return r.kritisch;});
+      var ms=g.items.filter(function(r){return r.ms;});
+      var totalK=g.items.reduce(function(s,r){return s+r.kosten;},0);
+      var color=hasKrit?'#dc2626':'#3b82f6';
+
+      h+='<div style="display:flex;align-items:center;height:'+rowH+'px;border-bottom:1px solid var(--border);background:'+(hasKrit?'#fef2f2':'white')+'">';
+      h+='<div style="width:'+labelW+'px;flex-shrink:0;padding:0 8px">';
+      h+='<div style="font-size:12px;font-weight:700;color:var(--text)">'+esc(g.id)+' '+esc(g.name)+'</div>';
+      h+='<div style="font-size:9px;color:var(--text3)">'+g.items.length+' AP · '+fmt(gStart.toISOString().split("T")[0])+' – '+fmt(gEnd.toISOString().split("T")[0])+(totalK>0?' · '+totalK.toLocaleString("de-DE")+'€':'')+'</div>';
+      h+='</div>';
+      h+='<div style="flex:1;position:relative;height:100%;display:flex;align-items:center;overflow:hidden">';
+      // Main group bar
+      h+='<div style="position:absolute;left:'+left+'%;width:'+width+'%;height:28px;background:'+color+';opacity:0.12;border-radius:4px;top:6px"></div>';
+      h+='<div style="position:absolute;left:'+left+'%;width:'+width+'%;height:4px;background:'+color+';border-radius:2px;top:18px"></div>';
+      // Milestone diamonds
+      ms.forEach(function(m){
+        var mLeft=(new Date(m.start)-minD)/864e5/td*100;
+        h+='<div style="position:absolute;left:'+mLeft+'%;width:10px;height:10px;background:'+color+';transform:rotate(45deg) translateX(-50%);top:13px;border-radius:1px" title="'+esc(m.name)+' ('+fmt(m.start)+')"></div>';
+      });
+      // Individual items as thin bars
+      g.items.forEach(function(row){
+        var s=new Date(row.start),e=new Date(row.end);
+        var iLeft=(s-minD)/864e5/td*100;
+        var iWidth=Math.max(0.5,(e-s)/864e5/td*100);
+        var iColor=row.kritisch?'#dc2626':row.lph.includes("0")?"#6366f1":row.lph.includes("1")?"#3b82f6":"#10b981";
+        h+='<div style="position:absolute;left:'+iLeft+'%;width:'+iWidth+'%;height:5px;background:'+iColor+';border-radius:1px;top:38px;opacity:0.6" title="'+row.psp+' '+esc(row.name)+'"></div>';
+      });
+      h+='</div></div>';
+    });
+  }
+
+  h+='</div>';
+
+  // Legend
+  h+='</div></div>';
+  h+='<div style="display:flex;gap:14px;margin-top:16px;padding:10px 0;flex-wrap:wrap;font-size:11px;color:var(--text3);border-top:1px solid var(--border)">';
+  h+='<span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:8px;background:#6366f1;border-radius:2px"></span>LPH 0</span>';
+  h+='<span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:8px;background:#3b82f6;border-radius:2px"></span>LPH 1</span>';
+  h+='<span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:8px;background:#10b981;border-radius:2px"></span>LPH 2</span>';
+  h+='<span style="display:flex;align-items:center;gap:4px"><span style="width:14px;height:8px;background:#dc2626;border-radius:2px;box-shadow:0 0 0 2px rgba(220,38,38,0.3)"></span>Kritischer Pfad</span>';
+  h+='<span style="display:flex;align-items:center;gap:4px"><span style="width:8px;height:8px;background:#1e3a5f;transform:rotate(45deg);border-radius:1px"></span> Meilenstein</span>';
+  h+='</div>';
+  return h;
+}
+
+// ── KOSTEN ──
+function rKosten(){
+  const items=data.filter(r=>r.parent);const total=items.reduce((s,r)=>s+r.kosten,0);
+  const byB={};items.forEach(r=>{byB[r.bereich]=(byB[r.bereich]||0)+r.kosten;});const maxK=Math.max(...Object.values(byB),1);
+  let h='<div class="kpi" style="grid-template-columns:1fr 1fr 1fr"><div class="kpi-card"><div class="val">'+total.toLocaleString("de-DE")+' €</div><div class="lbl">Gesamt</div></div>';
+  const byL={};items.forEach(r=>{byL[r.lph]=(byL[r.lph]||0)+r.kosten;});
+  Object.entries(byL).filter(([,v])=>v>0).forEach(([k,v])=>{h+='<div class="kpi-card"><div class="val" style="font-size:18px;color:var(--text)">'+v.toLocaleString("de-DE")+' €</div><div class="lbl">'+k+'</div></div>';});
+  h+='</div><h3>Nach Bereich</h3>';
+  Object.entries(byB).filter(([,v])=>v>0).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>{h+='<div class="bar-chart"><div class="row"><span>'+k+'</span><span style="font-weight:600">'+v.toLocaleString("de-DE")+' €</span></div><div class="track"><div class="fill" style="width:'+(v/maxK*100)+'%"></div></div></div>';});
+  h+='<h3>Einzelpositionen</h3><table><thead><tr style="background:#f1f5f9"><th style="color:var(--text3)">PSP</th><th style="color:var(--text3)">Bezeichnung</th><th style="color:var(--text3)">Person</th><th style="color:var(--text3);text-align:right">Kosten</th></tr></thead><tbody>';
+  items.filter(r=>r.kosten>0).sort((a,b)=>b.kosten-a.kosten).forEach(r=>{h+='<tr style="border-bottom:1px solid #f1f5f9"><td style="color:var(--text4)">'+r.psp+'</td><td>'+esc(r.name)+'</td><td style="font-size:11px">'+esc(r.person)+'</td><td style="font-weight:600;text-align:right">'+r.kosten.toLocaleString("de-DE")+' €</td></tr>';});
+  h+='</tbody></table>';return h;
+}
+
+// ── RACI ──
+function rRACI(){
+  const items=data.filter(r=>r.parent&&(r.rR||r.rA||r.rC||r.rI));const rs=new Set();
+  items.forEach(r=>{[r.rR,r.rA,r.rC,r.rI].filter(Boolean).forEach(v=>rs.add(v));});const rr=[...rs].sort();
+  let h='<div style="display:flex;gap:12px;margin-bottom:10px;font-size:11px"><span><b class="r-R">R</b> Responsible</span><span><b class="r-A">A</b> Accountable</span><span><b class="r-C">C</b> Consulted</span><span><b class="r-I">I</b> Informed</span></div>';
+  h+='<div style="overflow-x:auto"><table style="min-width:600px"><thead><tr class="tbl-head"><th style="min-width:160px">Arbeitspaket</th>';
+  rr.forEach(r=>{h+='<th style="writing-mode:vertical-rl;height:90px;font-size:9px;text-align:center;padding:6px 3px;white-space:nowrap">'+esc(r)+'</th>';});
+  h+='</tr></thead><tbody>';
+  items.forEach((row,i)=>{h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td style="font-size:11px"><span style="color:var(--text4);margin-right:3px">'+row.psp+'</span>'+esc(row.name)+'</td>';
+    rr.forEach(role=>{let l=row.rR===role?"R":row.rA===role?"A":row.rC===role?"C":row.rI===role?"I":"";h+='<td style="text-align:center">'+(l?'<span class="raci-letter r-'+l+'">'+l+'</span>':'')+'</td>';});
+    h+='</tr>';});
+  h+='</tbody></table></div>';return h;
+}
+
+// ── RISIKEN ──
+function rRisiken(){
+  const wLbl=["","gering","mittel","hoch"];
+  let h='<p style="font-size:12px;color:var(--text3);margin-bottom:10px">Klick auf eine Zeile zum Bearbeiten. 1=gering, 2=mittel, 3=hoch.</p>';
+  h+='<table><thead><tr class="tbl-head"><th>Risiko</th><th>Wahrscheinl.</th><th>Auswirkung</th><th>Gegenmaßnahme</th><th></th></tr></thead><tbody>';
+  risks.forEach((r,i)=>{
+    const wc=r.wahrsch>=3?"red":r.wahrsch>=2?"amber":"green";
+    const ac=r.auswirk>=3?"red":r.auswirk>=2?"amber":"green";
+    h+='<tr class="psp-row" style="border-bottom:1px solid var(--border)" onclick="editRisk('+i+')">';
+    h+='<td>'+esc(r.name)+'</td><td>'+badge(wLbl[r.wahrsch]||r.wahrsch,wc)+'</td><td>'+badge(wLbl[r.auswirk]||r.auswirk,ac)+'</td><td style="font-size:11px">'+esc(r.massnahme)+'</td>';
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delRisk('+i+')">×</button></td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<button class="btn" onclick="addRisk()">Risiko hinzufügen</button>';
+  return h;
+}
+
+function editRisk(i){
+  const r=risks[i];
+  const body='<label>Risiko</label><input id="rr-name" value="'+esc(r.name)+'">'+
+    '<label>Wahrscheinlichkeit (1-3)</label><select id="rr-w"><option value="1" '+(r.wahrsch===1?"selected":"")+'>1 – gering</option><option value="2" '+(r.wahrsch===2?"selected":"")+'>2 – mittel</option><option value="3" '+(r.wahrsch===3?"selected":"")+'>3 – hoch</option></select>'+
+    '<label>Auswirkung (1-3)</label><select id="rr-a"><option value="1" '+(r.auswirk===1?"selected":"")+'>1 – gering</option><option value="2" '+(r.auswirk===2?"selected":"")+'>2 – mittel</option><option value="3" '+(r.auswirk===3?"selected":"")+'>3 – hoch</option></select>'+
+    '<label>Gegenmaßnahme</label><textarea id="rr-m" rows="2">'+esc(r.massnahme)+'</textarea>';
+  showModal("Risiko bearbeiten",body,()=>{
+    r.name=document.getElementById("rr-name").value;r.wahrsch=Number(document.getElementById("rr-w").value);
+    r.auswirk=Number(document.getElementById("rr-a").value);r.massnahme=document.getElementById("rr-m").value;
+    save(SK.risks,risks);closeModal();render();showToast('Risiko gespeichert');
+  });
+}
+function addRisk(){risks.push({id:risks.length+1,name:"Neues Risiko",wahrsch:1,auswirk:1,massnahme:""});save(SK.risks,risks);render();}
+function delRisk(i){if(confirm("Risiko löschen?")){risks.splice(i,1);save(SK.risks,risks);render();}}
+
+// ── GRUNDRISS ──
+function rGrundriss(){
+  var h='<p style="font-size:13px;color:var(--text3);margin-bottom:16px">Grundriss oder Planunterlagen als Bild (PNG, JPG) oder PDF einbetten. Wird lokal im Browser gespeichert.</p>';
+  var imgData=localStorage.getItem('grundriss_img_'+VER);
+  var imgName=localStorage.getItem('grundriss_name_'+VER)||'';
+  if(imgData){
+    h+='<div style="margin-bottom:12px;padding:10px;background:white;border:1px solid var(--border);border-radius:6px">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">';
+    h+='<span style="font-size:12px;font-weight:600">'+esc(imgName)+'</span>';
+    h+='<button class="btn btn-sm btn-danger" onclick="removeGrundriss()">Entfernen</button></div>';
+    if(imgData.indexOf('data:application/pdf')===0){
+      h+='<iframe src="'+imgData+'" style="width:100%;height:600px;border:1px solid var(--border);border-radius:4px"></iframe>';
+    } else {
+      h+='<img src="'+imgData+'" style="max-width:100%;border:1px solid var(--border);border-radius:4px">';
+    }
+    h+='</div>';
+  }
+  h+='<div id="grundriss-drop" style="border:2px dashed var(--border);border-radius:8px;padding:40px;text-align:center;cursor:pointer;background:white" onclick="document.getElementById(\'grundriss-input\').click()" ondragover="event.preventDefault();this.style.borderColor=\'#3b82f6\'" ondragleave="this.style.borderColor=\'#e2e8f0\'" ondrop="handleGrDrop(event)">';
+  h+='<div style="font-size:14px;color:var(--text2);margin-bottom:4px">'+(imgData?'Neues Bild hochladen':'Bild hier ablegen oder klicken')+'</div>';
+  h+='<div style="font-size:11px;color:var(--text4)">PNG, JPG oder PDF</div>';
+  h+='<input type="file" id="grundriss-input" accept="image/png,image/jpeg,application/pdf" style="display:none" onchange="handleGrFile(this.files[0])">';
+  h+='</div>';
+  h+='<h3 style="margin-top:20px">Anleitung</h3>';
+  h+='<div style="font-size:13px;color:var(--text2);line-height:1.8">';
+  h+='1. Grundriss als PNG, JPG oder PDF exportieren (z.B. aus CAD, Allplan, Revit)<br>';
+  h+='2. Datei hierher ziehen oder auf die Box klicken<br>';
+  h+='3. Das Bild wird lokal gespeichert und erscheint oben<br>';
+  h+='4. Bei "Projekt als HTML speichern" wird das Bild mit eingebettet</div>';
+  return h;
+}
+function handleGrFile(file){
+  if(!file)return;
+  if(file.size>5*1024*1024){showToast('Datei zu gross (max 5 MB)');return;}
+  var reader=new FileReader();
+  reader.onload=function(e){localStorage.setItem('grundriss_img_'+VER,e.target.result);localStorage.setItem('grundriss_name_'+VER,file.name);showToast('Grundriss gespeichert');render();};
+  reader.readAsDataURL(file);
+}
+function handleGrDrop(e){e.preventDefault();e.currentTarget.style.borderColor='#e2e8f0';var f=e.dataTransfer.files[0];if(f)handleGrFile(f);}
+function removeGrundriss(){if(confirm('Grundriss entfernen?')){localStorage.removeItem('grundriss_img_'+VER);localStorage.removeItem('grundriss_name_'+VER);showToast('Grundriss entfernt');render();}}
+
+// ── KOMMUNIKATIONSABLÄUFE ──
+function rKommablauf(){
+  var h='<p style="font-size:13px;color:var(--text3);margin-bottom:16px">Definierte Kommunikationswege und -ablaeufe im Projekt.</p>';
+  h+='<h3 style="margin-top:0">Regelmaessige Besprechungen</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Besprechung</th><th>Turnus</th><th>Teilnehmer</th><th>Verantwortlich</th><th>Ergebnis</th></tr></thead><tbody>';
+  [["Lenkungsausschuss","monatlich","Bauherr, Projektleitung, Fachabt. AuS","Projektleitung","Entscheidungsprotokoll"],["Planerbesprechung","14-taegig","Projektleitung, Architekt, TGA, Brandschutz","Projektleitung","Besprechungsprotokoll"],["Nutzerbesprechung","nach Bedarf","Projektleitung, Fachabt. AuS, Arbeitssicherheit","Fachabt. AuS","Anforderungsprotokoll"],["Arbeitssicherheits-Review","monatlich","Arbeitssicherheit, Fachabt. AuS, Projektleitung","Arbeitssicherheit","Pruefprotokoll"],["Statusbericht Bauherr","monatlich","Projektleitung, Bauherr","Projektleitung","Statusbericht"]].forEach(function(b,i){
+    h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td style="font-weight:500">'+b[0]+'</td><td>'+badge(b[1],b[1]==="monatlich"?"blue":b[1]==="14-taegig"?"amber":"gray")+'</td><td style="font-size:11px">'+b[2]+'</td><td>'+b[3]+'</td><td style="font-size:11px">'+b[4]+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<h3>Informationsfluesse</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Von</th><th>An</th><th>Inhalt</th><th>Kanal</th><th>Frequenz</th></tr></thead><tbody>';
+  [["Projektleitung","Bauherr","Statusberichte, Entscheidungsvorlagen","E-Mail + Praesentation","monatlich"],["Planer","Projektleitung","Planungsstaende, Fachbeitraege","Cloud + Planerbesprechung","14-taegig"],["Fachabt. AuS","Projektleitung","Nutzeranforderungen, Aenderungen","E-Mail + Nutzerbesprechung","nach Bedarf"],["Arbeitssicherheit","Alle Planer","Sicherheitsvorgaben, Freigaben","Dokumentenumlauf","bei Aenderungen"],["Projektleitung","Betriebsrat","Fortschritt, Aenderungen","E-Mail / persoenlich","quartalweise"]].forEach(function(f,i){
+    h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td style="font-weight:500;font-size:12px">'+f[0]+'</td><td style="font-size:12px">'+f[1]+'</td><td style="font-size:11px">'+f[2]+'</td><td style="font-size:11px">'+f[3]+'</td><td>'+badge(f[4],"gray")+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<h3>Eskalationsstufen</h3><div style="max-width:500px">';
+  [["1","Klaerung auf Arbeitsebene","Betroffene Planer / Fachbereiche","2 AT","var(--green)"],["2","Eskalation an Projektleitung","Projektleitung entscheidet","3 AT","var(--amber)"],["3","Eskalation an Bauherrn","Bauherr / Lenkungsausschuss","5 AT","var(--red)"]].forEach(function(e,i){
+    h+='<div style="display:flex;gap:12px;align-items:flex-start"><div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">';
+    h+='<div style="width:28px;height:28px;border-radius:50%;background:'+e[4]+';color:white;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700">'+e[0]+'</div>';
+    if(i<2)h+='<div style="width:2px;height:20px;background:var(--border)"></div>';
+    h+='</div><div style="padding-bottom:12px"><div style="font-weight:600;font-size:13px">'+e[1]+'</div><div style="font-size:11px;color:var(--text3)">'+e[2]+' · Frist: '+e[3]+'</div></div></div>';
+  });
+  h+='</div>';
+  h+='<h3>Empfohlene Kommunikationstools</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Zweck</th><th>Tool</th><th>Einsatz</th><th>Zugang</th></tr></thead><tbody>';
+  [["Tagesgeschaeft + Schnellabstimmung","Microsoft Teams","Chat, Videocalls, Bildschirmfreigabe, kurze Abstimmungen","Alle Projektbeteiligten"],["Dokumentenablage + Kollaboration","Microsoft SharePoint / OneDrive","Zentrale Ablage, Versionierung, gemeinsames Bearbeiten","Alle intern + externe mit Gastzugang"],["Planverteilung + BIM","ALLPLAN Bimplus / CDE","Modell- und Planaustausch, Prueflaeufe, IFC-Koordination","Planer + Projektleitung"],["Aufgabenmanagement","Microsoft Planner / Lists","Massnahmentracking, Pendenzen aus Protokollen","Projektleitung + Fachplaner"],["Formale Korrespondenz","E-Mail (Outlook)","Offizielle Schreiben, Behoerdenverkehr, Vertraege","Alle"]].forEach(function(t,i){
+    h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td style="font-weight:500">'+t[0]+'</td><td style="font-weight:600;color:var(--accent)">'+t[1]+'</td><td style="font-size:11px">'+t[2]+'</td><td style="font-size:11px">'+t[3]+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<div style="margin-top:8px;padding:10px;background:#eef2ff;border-radius:6px;border-left:3px solid var(--accent);font-size:12px;color:var(--text2)"><b>Empfehlung:</b> Microsoft Teams als zentrale Plattform. Alle Besprechungen dort, Protokolle als Aufgaben in Planner, Dokumente in SharePoint. Externe Planer erhalten Gastzugang. Vorteil: alles in einem Oekosystem, keine Medienbrueche.</div>';
+  h+='<h3>Protokollpflicht</h3><div style="font-size:13px;color:var(--text2);line-height:1.8">Alle Besprechungen werden protokolliert. Protokolle innerhalb 2 AT verteilt. Entscheidungen erhalten Verantwortlichen und Frist. Widerspruch innerhalb 3 AT schriftlich, sonst gilt als genehmigt.</div>';
+  return h;
+}
+
+// ── ÄNDERUNGSMANAGEMENT ──
+function rAenderung(){
+  var h='<p style="font-size:13px;color:var(--text3);margin-bottom:16px">Strukturiertes Vorgehen fuer Entscheidungen und Aenderungen im Projekt.</p>';
+  h+='<h3 style="margin-top:0">Entscheidungsmanagement</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Kategorie</th><th>Entscheidungstraeger</th><th>Beispiele</th><th>Frist</th></tr></thead><tbody>';
+  [["Strategisch","Bauherr (Dr. Schreiber)","Budgetfreigabe, Projektabbruch","10 AT","red"],["Planerisch","Projektleitung (Berger)","Planungsfreigaben, Vergaben","5 AT","amber"],["Fachlich","Jeweiliger Fachplaner","Technische Details, Materialwahl","3 AT","gray"],["Sicherheit","Arbeitssicherheit (Roth)","Not-Aus, PSA-Bereiche","Sofort / 2 AT","red"]].forEach(function(e,i){
+    h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td>'+badge(e[0],e[4])+'</td><td style="font-weight:500">'+e[1]+'</td><td style="font-size:11px">'+e[2]+'</td><td>'+badge(e[3],"gray")+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<h3>Aenderungsprozess</h3><div style="max-width:600px">';
+  [["1","Aenderungsantrag stellen","Formular: Beschreibung, Begruendung, Dringlichkeit. Jeder Beteiligte kann einreichen.","#6366f1"],["2","Auswirkungsanalyse","Projektleitung prueft Auswirkungen auf Kosten, Termine, Qualitaet, Sicherheit.","#3b82f6"],["3","Bewertung und Empfehlung","Entscheidungsvorlage mit Optionen. Kategorisierung: geringfuegig / wesentlich / kritisch.","#10b981"],["4","Entscheidung","Geringfuegig: Projektleitung. Wesentlich: Bauherr. Kritisch: Arbeitssicherheit hat Veto.","#d97706"],["5","Umsetzung und Dokumentation","In Planung einarbeiten, Version hochzaehlen, alle informieren, Aenderungsprotokoll fuehren.","#dc2626"]].forEach(function(s,i){
+    h+='<div style="display:flex;gap:12px;align-items:flex-start"><div style="display:flex;flex-direction:column;align-items:center;flex-shrink:0">';
+    h+='<div style="width:32px;height:32px;border-radius:6px;background:'+s[3]+';color:white;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700">'+s[0]+'</div>';
+    if(i<4)h+='<div style="width:2px;height:24px;background:var(--border)"></div>';
+    h+='</div><div style="padding-bottom:16px"><div style="font-weight:600;font-size:13px">'+s[1]+'</div><div style="font-size:12px;color:var(--text2);margin-top:3px;line-height:1.5">'+s[2]+'</div></div></div>';
+  });
+  h+='</div>';
+  h+='<h3>Aenderungskategorien</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Kategorie</th><th>Kriterien</th><th>Entscheidung</th><th>Dokumentation</th></tr></thead><tbody>';
+  [["Geringfuegig","Keine Kosten-/Terminauswirkung","Projektleitung","Aenderungsvermerk","green"],["Wesentlich","Kosten >1.000EUR oder >5 AT Verschiebung","Bauherr","Formaler Antrag + Genehmigung","amber"],["Kritisch","Sicherheitsrelevant oder Budget >10%","Bauherr + Arbeitssicherheit","Antrag + Gefaehrdungsbeurteilung","red"]].forEach(function(k,i){
+    h+='<tr style="border-bottom:1px solid var(--border);background:'+(i%2===0?'var(--row1)':'var(--row2)')+'"><td>'+badge(k[0],k[4])+'</td><td style="font-size:12px">'+k[1]+'</td><td style="font-size:12px">'+k[2]+'</td><td style="font-size:11px">'+k[3]+'</td></tr>';
+  });
+  h+='</tbody></table>';
+  return h;
+}
+
+// ── TEAMKULTUR ──
+function rTeamkultur(){
+  var tk=teamkultur;
+  var h='<p style="font-size:13px;color:var(--text3);margin-bottom:16px">Weiche Erfolgsfaktoren: Zusammenarbeit, Feedback, Lernen, Feiern. Alle Inhalte sind editierbar.</p>';
+
+  // Zusammenarbeitsregeln
+  h+='<h3 style="margin-top:0">Zusammenarbeitsregeln</h3>';
+  h+='<div style="margin-bottom:12px">';
+  (tk.regeln||[]).forEach(function(r,i){
+    h+='<div style="display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;padding:8px 10px;background:white;border:0.5px solid var(--border);border-radius:6px;cursor:pointer" onclick="editTKRegel('+i+')">';
+    h+='<span style="color:var(--accent);font-weight:600;flex-shrink:0">'+(i+1)+'.</span>';
+    h+='<span style="font-size:12px;color:var(--text2);flex:1">'+esc(r)+'</span>';
+    h+='<button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delTKRegel('+i+')" style="flex-shrink:0">\u00d7</button>';
+    h+='</div>';
+  });
+  h+='<button class="btn btn-sm" onclick="addTKRegel()">Regel hinzuf\u00fcgen</button>';
+  h+='</div>';
+
+  // Team-Events
+  h+='<h3>Team-Events und Meilensteinfeiern</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Datum</th><th>Event</th><th>Status</th><th></th></tr></thead><tbody>';
+  (tk.events||[]).forEach(function(ev,i){
+    var sc=ev.status==='durchgef\u00fchrt'?'green':ev.status==='geplant'?'blue':'gray';
+    h+='<tr style="border-bottom:1px solid var(--border)" class="psp-row" onclick="editTKEvent('+i+')">';
+    h+='<td style="font-weight:500">'+esc(ev.datum)+'</td><td>'+esc(ev.name)+'</td>';
+    h+='<td>'+badge(ev.status,sc)+'</td>';
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delTKEvent('+i+')">\u00d7</button></td></tr>';
+  });
+  h+='</tbody></table>';
+  h+='<button class="btn btn-sm" onclick="addTKEvent()">Event hinzuf\u00fcgen</button>';
+
+  // Feedback-Log
+  h+='<h3>Feedback-Log</h3>';
+  h+='<p style="font-size:11px;color:var(--text3);margin-bottom:8px">Retros und Feedback-Runden dokumentieren.</p>';
+  h+='<table><thead><tr class="tbl-head"><th>Datum</th><th>Thema / Anlass</th><th>Erkenntnisse</th><th>Massnahmen</th><th></th></tr></thead><tbody>';
+  var hasEntries=false;
+  (tk.feedbackLog||[]).forEach(function(fb,i){
+    if(!fb.datum&&!fb.thema)return;
+    hasEntries=true;
+    h+='<tr style="border-bottom:1px solid var(--border)" class="psp-row" onclick="editTKFeedback('+i+')">';
+    h+='<td style="font-weight:500;font-size:12px">'+esc(fb.datum)+'</td><td style="font-size:12px">'+esc(fb.thema)+'</td>';
+    h+='<td style="font-size:11px;color:var(--text2)">'+esc(fb.erkenntnisse)+'</td>';
+    h+='<td style="font-size:11px;color:var(--text2)">'+esc(fb.massnahmen)+'</td>';
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delTKFeedback('+i+')">\u00d7</button></td></tr>';
+  });
+  if(!hasEntries)h+='<tr><td colspan="5" style="text-align:center;color:var(--text4);font-style:italic;padding:16px">Noch keine Feedback-Runden dokumentiert</td></tr>';
+  h+='</tbody></table>';
+  h+='<button class="btn btn-sm" onclick="addTKFeedback()">Feedback-Runde erfassen</button>';
+
+  // Lessons Learned
+  h+='<h3>Lessons Learned</h3>';
+  h+='<p style="font-size:11px;color:var(--text3);margin-bottom:8px">Nach jedem Meilenstein: Was lief gut? Was nicht? Was aendern wir?</p>';
+  h+='<table><thead><tr class="tbl-head"><th>Meilenstein</th><th>Was lief gut</th><th>Was lief schlecht</th><th>Was aendern wir</th><th></th></tr></thead><tbody>';
+  var hasLL=false;
+  (tk.lessonsLearned||[]).forEach(function(ll,i){
+    hasLL=true;
+    h+='<tr style="border-bottom:1px solid var(--border)" class="psp-row" onclick="editTKLL('+i+')">';
+    h+='<td style="font-weight:500;font-size:12px">'+esc(ll.meilenstein)+'</td>';
+    h+='<td style="font-size:11px;color:var(--green)">'+esc(ll.gut)+'</td>';
+    h+='<td style="font-size:11px;color:var(--red)">'+esc(ll.schlecht)+'</td>';
+    h+='<td style="font-size:11px;color:var(--accent)">'+esc(ll.aendern)+'</td>';
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delTKLL('+i+')">\u00d7</button></td></tr>';
+  });
+  if(!hasLL)h+='<tr><td colspan="5" style="text-align:center;color:var(--text4);font-style:italic;padding:16px">Noch keine Lessons Learned erfasst</td></tr>';
+  h+='</tbody></table>';
+  h+='<button class="btn btn-sm" onclick="addTKLL()">Lessons Learned erfassen</button>';
+
+  // Konflikte
+  h+='<h3>Konfliktstatus</h3>';
+  h+='<table><thead><tr class="tbl-head"><th>Datum</th><th>Beschreibung</th><th>Beteiligte</th><th>Status</th><th></th></tr></thead><tbody>';
+  var hasK=false;
+  (tk.konflikte||[]).forEach(function(k,i){
+    hasK=true;
+    var sc=k.status==='geloest'?'green':k.status==='offen'?'red':'amber';
+    h+='<tr style="border-bottom:1px solid var(--border)" class="psp-row" onclick="editTKKonflikt('+i+')">';
+    h+='<td style="font-size:12px">'+esc(k.datum)+'</td><td style="font-size:12px">'+esc(k.beschreibung)+'</td>';
+    h+='<td style="font-size:11px">'+esc(k.beteiligte)+'</td><td>'+badge(k.status,sc)+'</td>';
+    h+='<td><button class="btn btn-sm btn-danger" onclick="event.stopPropagation();delTKKonflikt('+i+')">\u00d7</button></td></tr>';
+  });
+  if(!hasK)h+='<tr><td colspan="5" style="text-align:center;color:var(--text4);font-style:italic;padding:16px">Keine offenen Konflikte</td></tr>';
+  h+='</tbody></table>';
+  h+='<button class="btn btn-sm" onclick="addTKKonflikt()">Konflikt erfassen</button>';
+
+  return h;
+}
+function saveTK(){save(SK.team,teamkultur);showToast('Gespeichert');}
+
+// Regeln
+function editTKRegel(i){var nv=prompt('Regel bearbeiten:',teamkultur.regeln[i]);if(nv!==null){teamkultur.regeln[i]=nv;saveTK();render();}}
+function addTKRegel(){teamkultur.regeln.push('Neue Regel');saveTK();render();}
+function delTKRegel(i){teamkultur.regeln.splice(i,1);saveTK();render();}
+
+// Events
+function editTKEvent(i){var ev=teamkultur.events[i];showModal('Event bearbeiten','<label>Datum</label><input id="te-d" value="'+esc(ev.datum)+'"><label>Name</label><input id="te-n" value="'+esc(ev.name)+'"><label>Status</label><select id="te-s"><option value="geplant" '+(ev.status==='geplant'?'selected':'')+'>geplant</option><option value="durchgef\u00fchrt" '+(ev.status==='durchgef\u00fchrt'?'selected':'')+'>durchgef\u00fchrt</option><option value="abgesagt" '+(ev.status==='abgesagt'?'selected':'')+'>abgesagt</option></select>',function(){ev.datum=document.getElementById('te-d').value;ev.name=document.getElementById('te-n').value;ev.status=document.getElementById('te-s').value;saveTK();closeModal();render();});}
+function addTKEvent(){teamkultur.events.push({datum:'',name:'Neues Event',status:'geplant'});saveTK();render();}
+function delTKEvent(i){teamkultur.events.splice(i,1);saveTK();render();}
+
+// Feedback
+function editTKFeedback(i){var fb=teamkultur.feedbackLog[i];showModal('Feedback-Runde bearbeiten','<label>Datum</label><input id="tf-d" value="'+esc(fb.datum)+'"><label>Thema / Anlass</label><input id="tf-t" value="'+esc(fb.thema)+'"><label>Erkenntnisse</label><textarea id="tf-e" rows="3">'+esc(fb.erkenntnisse)+'</textarea><label>Massnahmen</label><textarea id="tf-m" rows="2">'+esc(fb.massnahmen)+'</textarea>',function(){fb.datum=document.getElementById('tf-d').value;fb.thema=document.getElementById('tf-t').value;fb.erkenntnisse=document.getElementById('tf-e').value;fb.massnahmen=document.getElementById('tf-m').value;saveTK();closeModal();render();});}
+function addTKFeedback(){teamkultur.feedbackLog.push({datum:'',thema:'',erkenntnisse:'',massnahmen:''});saveTK();render();editTKFeedback(teamkultur.feedbackLog.length-1);}
+function delTKFeedback(i){teamkultur.feedbackLog.splice(i,1);saveTK();render();}
+
+// Lessons Learned
+function editTKLL(i){var ll=teamkultur.lessonsLearned[i];showModal('Lessons Learned bearbeiten','<label>Meilenstein</label><input id="tl-m" value="'+esc(ll.meilenstein)+'"><label>Was lief gut</label><textarea id="tl-g" rows="2">'+esc(ll.gut)+'</textarea><label>Was lief schlecht</label><textarea id="tl-s" rows="2">'+esc(ll.schlecht)+'</textarea><label>Was aendern wir</label><textarea id="tl-a" rows="2">'+esc(ll.aendern)+'</textarea>',function(){ll.meilenstein=document.getElementById('tl-m').value;ll.gut=document.getElementById('tl-g').value;ll.schlecht=document.getElementById('tl-s').value;ll.aendern=document.getElementById('tl-a').value;saveTK();closeModal();render();});}
+function addTKLL(){teamkultur.lessonsLearned.push({meilenstein:'',gut:'',schlecht:'',aendern:''});saveTK();render();editTKLL(teamkultur.lessonsLearned.length-1);}
+function delTKLL(i){teamkultur.lessonsLearned.splice(i,1);saveTK();render();}
+
+// Konflikte
+function editTKKonflikt(i){var k=teamkultur.konflikte[i];showModal('Konflikt bearbeiten','<label>Datum</label><input id="tk-d" value="'+esc(k.datum)+'"><label>Beschreibung</label><textarea id="tk-b" rows="2">'+esc(k.beschreibung)+'</textarea><label>Beteiligte</label><input id="tk-p" value="'+esc(k.beteiligte)+'"><label>Status</label><select id="tk-s"><option value="offen" '+(k.status==='offen'?'selected':'')+'>offen</option><option value="in Klaerung" '+(k.status==='in Klaerung'?'selected':'')+'>in Klaerung</option><option value="geloest" '+(k.status==='geloest'?'selected':'')+'>geloest</option></select>',function(){k.datum=document.getElementById('tk-d').value;k.beschreibung=document.getElementById('tk-b').value;k.beteiligte=document.getElementById('tk-p').value;k.status=document.getElementById('tk-s').value;saveTK();closeModal();render();});}
+function addTKKonflikt(){teamkultur.konflikte.push({datum:'',beschreibung:'',beteiligte:'',status:'offen'});saveTK();render();editTKKonflikt(teamkultur.konflikte.length-1);}
+function delTKKonflikt(i){teamkultur.konflikte.splice(i,1);saveTK();render();}
+
+// ── MODAL ──
+function showModal(title,body,onSave,onDelete){
+  let h='<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal">';
+  h+='<h3>'+title+'</h3>'+body;
+  h+='<div style="margin-top:16px;display:flex;gap:6px">';
+  h+='<button class="btn" onclick="__modalSave()">Speichern</button>';
+  h+='<button class="btn btn-sec" onclick="closeModal()">Abbrechen</button>';
+  if(onDelete)h+='<button class="btn btn-danger" onclick="__modalDel()" style="margin-left:auto">Löschen</button>';
+  h+='</div></div></div>';
+  document.getElementById("modal-container").innerHTML=h;
+  window.__modalSave=onSave;
+  window.__modalDel=onDelete||function(){};
+}
+
+go("dashboard");
+</script>
+</body>
+</html>
